@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <div class="navigation"></div>
-    <div class="system-out"></div>
-    <div class="body">
-      <router-view/>
-    </div>
-    <div class="footer">Copyright by Dontsov DA, 2020</div>
+      <div class="navigation">
+        <app-navigation></app-navigation>
+      </div>
+      <div class="system-out"></div>
+      <div class="body">
+        <router-view/>
+      </div>
+      <div class="footer">Copyright by Dontsov DA, 2020</div>
   </div>
 </template>
 
 <script>
+import AppNavigation from '@/views/app-navigation';
 export default {
-  
+  components: {
+    AppNavigation,
+  },
 }
 </script>
 
@@ -24,11 +29,11 @@ export default {
     max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid black;
+    // border: 1px solid black;
 
     .navigation {
       grid-area: navigation;
-      border: 1px solid black;
+      // border: 1px solid black;
     }
     .system-out {
       grid-area: system-out;
