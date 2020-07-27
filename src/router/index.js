@@ -9,6 +9,11 @@ Vue.use(VueRouter)
     name: 'Main',
     component: () => import('../views/main.vue')
   },
+  {
+    path: '/catalog/document-input',
+    name: 'DocumentInput',
+    component: () => import('../views/catalog/document-input.vue')
+  },
 ]
 
 const router = new VueRouter({

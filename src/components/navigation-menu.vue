@@ -71,11 +71,12 @@ export default {
   }
   .menu-drop {
     width: 260px;
-    height: auto;
-    border: 1px solid grey;
+    height: 0px;
+    border: 0px solid grey;
     border-radius: 3px;
     background-color: white;
     opacity: 0;
+    overflow: hidden;
     transition: opacity 0.3s;
 
     &-list {
@@ -102,5 +103,7 @@ export default {
 
   .menu:hover .menu-drop {
     opacity: 1;
+    height: auto;
+    border: 1px solid grey;
   }
 </style>
