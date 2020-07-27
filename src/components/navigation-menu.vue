@@ -36,7 +36,9 @@ export default {
     axios
       .post(pathBackend + 'index.php', null, {params: {function: 'getMenu'}})
       .then((response) => {this.arrMenu = response.data;})
-      
+      .catch(() => {
+        this.arrMenu = [{CNAME: 'Входящие документы', CURL: '/catalog/document-input'}]
+      })
   },
 }
 </script>
