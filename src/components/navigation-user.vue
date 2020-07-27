@@ -1,13 +1,24 @@
 <template>
   <div class="user">
     <img class="user__images" src="@/assets/img/user.png">
-    <div class="user__text">Донцов Денис Адександрович</div>
+    <div class="user__text">{{ userSecurity }}</div>
   </div>  
 </template>
 
 <script>
 export default {
   name: 'NavigationUser',
+  data: function() {
+    return {
+      userSecurity: 'Гость',
+    }
+  },
+  created: function() {
+    let axios = require('axios').default;
+    axios
+      .post(pathBackend + 'index.php', null, {params: {function: 'getUser'}})
+      .then((response) => { this.userSecurity = response.data[0].CNAME; })
+  }
 }
 </script>
 

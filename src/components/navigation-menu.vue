@@ -1,6 +1,5 @@
 <template>
   <div class="menu">
-    
     <div class="menu-button">
       <img class="menu-button__images" src="@/assets/img/menu.png">
       <div class="menu-button__text">Menu</div>

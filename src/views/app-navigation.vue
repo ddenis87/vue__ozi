@@ -1,6 +1,9 @@
 <template>
-  <div class="content">
+  <div class="app-navigation">
     <navigation-menu></navigation-menu>
+    <div class="app-navigation__items">
+      <h3 class="app-navigation__title">Отдел по защите информации - Амурская область</h3>
+    </div>
     <navigation-user></navigation-user>
   </div>
 </template>
@@ -18,11 +21,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .content {
+  .app-navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 100%;
+    &__title {
+      color: darkcyan;
+      font-weight: normal;
+    }
   }
 </style>
