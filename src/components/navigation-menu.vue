@@ -9,7 +9,14 @@
         <template v-for="(rowMenu, index) in arrMenu">
           <li class="menu-drop-list__items" 
               :key="index"
-              :class="{'menu-drop-list__items_title' : (rowMenu.CURL) ? false : true}">{{ rowMenu.CNAME }}</li>
+              :class="{'menu-drop-list__items_title' : (rowMenu.CURL) ? false : true}">
+          <template v-if="rowMenu.CURL">
+            <router-link :to="rowMenu.CURL" class="menu-drop-list__link">{{ rowMenu.CNAME }}</router-link>
+          </template>
+          <template v-else>
+            {{ rowMenu.CNAME }}
+          </template>
+          </li>
         </template>
       </ul>
     </div>
@@ -80,9 +87,16 @@ export default {
         padding: 3px;
         padding-left: 10px;
         border-bottom: 1px solid grey;
+        cursor: pointer;
+        transition: padding-left 0.3s;
       }
+      
       &__items:last-child { border: 0px; }
-      &__items_title { padding-left: 3px; font-weight: bold;  }
+      &__items:hover { text-decoration: none; color: black; padding-left: 20px;}
+      &__items_title { padding-left: 3px; font-weight: bold; cursor: default; }
+      &__items_title:hover { padding-left: 3px; }
+      &__link { text-decoration: none; color: black; }
+      
     }
   }
 
