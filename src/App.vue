@@ -1,13 +1,17 @@
 <template>
-  <div id="app">
-      <div class="navigation">
+  <div id="app" class="app">
+      <div class="app__navigation">
         <app-navigation></app-navigation>
       </div>
-      <div class="system-out"></div>
-      <div class="body">
+      <div class="app__system-out">
+        Systemout
+      </div>
+      <div class="app__body">
         <router-view/>
       </div>
-      <div class="footer">Copyright by Dontsov DA, 2020</div>
+      <div class="app__footer">
+        Copyright by Dontsov DA, 2020
+      </div>
   </div>
 </template>
 
@@ -21,31 +25,40 @@ export default {
 </script>
 
 <style lang="scss">
-  #app {
+  .app {
     display: grid;
-    grid-template-areas: "navigation" "system-out" "body" "footer";
-    grid-template-rows: 60px 20px auto 20px;
+    grid-template-areas: "app__navigation" "app__system-out" "app__body" "app__footer";
+    grid-template-rows: auto auto auto auto;
     grid-template-columns: 1fr;
     max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
-    // border: 1px solid black;
 
-    .navigation {
-      grid-area: navigation;
-      // border: 1px solid black;
+    &__navigation {
+      grid-area: app__navigation;
     }
-    .system-out {
-      grid-area: system-out;
-      border: 1px solid black;
+    &__system-out {
+      grid-area: app__system-out;
+      margin-bottom: 5px;
+      padding: 3px;
+      border-top: 1px solid grey;
+      border-bottom: 1px solid grey;
     }
-    .body {
-      grid-area: body;
-      border: 1px solid black;
+    &__body {
+      grid-area: app__body;
+      padding: 5px;
     }
-    .footer {
-      grid-area: footer;
-      border: 1px solid black;
+    &__footer {
+      grid-area: app__footer;
+      margin-top: 5px;
+      padding: 3px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top: 1px solid grey;
+      border-bottom: 1px solid grey;
+      color: grey;
+      font-size: 0.8em;
     }
   }
 </style>
