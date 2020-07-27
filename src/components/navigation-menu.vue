@@ -7,9 +7,11 @@
     </div>
     <div class="menu-drop">
       <ul class="menu-drop-list">
-        <li class="menu-drop-list__item">Catalog</li>
-        <li class="menu-drop-list__item">Journal</li>
-        <li class="menu-drop-list__item">Consolidation</li>
+        <template v-for="(rowMenu, index) in arrMenu">
+          <li class="menu-drop-list__items" 
+              :key="index"
+              :class="{'menu-drop-list__items_title' : (rowMenu.CURL) ? false : true}">{{ rowMenu.CNAME }}</li>
+        </template>
       </ul>
     </div>
   </div>  
@@ -18,6 +20,18 @@
 <script>
 export default {
   name: 'NavigationMenu',
+  data: function() {
+    return {
+      arrMenu: Array,
+    }
+  },
+  created: function() {
+    let axios = require('axios').default;
+    axios
+      .post(pathBackend + 'index.php', null, {params: {function: 'getMenu'}})
+      .then((response) => {this.arrMenu = response.data;})
+      
+  },
 }
 </script>
 
@@ -38,7 +52,7 @@ export default {
     padding: 3px 10px;
     border: 1px solid gray;
     background-color: lightgreen;
-    border-radius: 5px;
+    border-radius: 3px;
     box-sizing: border-box;
     cursor: pointer;
     &__text {
@@ -50,13 +64,27 @@ export default {
     }
   }
   .menu-drop {
-    width: 200px;
+    width: 260px;
     height: auto;
     border: 1px solid grey;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: white;
     opacity: 0;
-    transition: opacity 0.3s ;
+    transition: opacity 0.3s;
+
+    &-list {
+      margin: 0px;
+      padding: 0px;
+
+      &__items {
+        list-style: none;
+        padding: 3px;
+        padding-left: 10px;
+        border-bottom: 1px solid grey;
+      }
+      &__items:last-child { border: 0px; }
+      &__items_title { padding-left: 3px; font-weight: bold;  }
+    }
   }
 
   .menu:hover .menu-drop {
