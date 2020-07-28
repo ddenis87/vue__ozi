@@ -4,7 +4,7 @@
         <app-navigation></app-navigation>
       </div>
       <div class="app__system-out">
-        Systemout
+        <system-out></system-out>
       </div>
       <div class="app__body">
         <router-view/>
@@ -17,9 +17,10 @@
 
 <script>
 import AppNavigation from '@/views/app-navigation';
+import SystemOut from '@/views/app-system-out';
 export default {
   components: {
-    AppNavigation,
+    AppNavigation, SystemOut,
   },
 }
 </script>
@@ -34,13 +35,14 @@ export default {
     margin-left: auto;
     margin-right: auto;
 
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+
     &__navigation {
       grid-area: app__navigation;
     }
     &__system-out {
       grid-area: app__system-out;
-      margin-bottom: 5px;
-      padding: 3px;
       border-top: 1px solid grey;
       border-bottom: 1px solid grey;
     }
