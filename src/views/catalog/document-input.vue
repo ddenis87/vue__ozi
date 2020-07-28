@@ -8,8 +8,15 @@
       <div class="catalog-grid__list">
         <register :arrList="arrList"
                   @disableItem="disableItem"
-                  @deleteItem="deleteItem"></register>
+                  @deleteItem="confirmDelete"></register>
       </div>
+    </div>
+    <div class="confirm" :class="{'confirm_display' : isConfirm}">
+      <confirm @confirmCancel="deleteCancel" @confirmOk="deleteOk">
+        <template v-slot:action>{{ objConfirmSlot.action }}</template>  
+        <template v-slot:list>{{ objConfirmSlot.list }}</template>  
+        <template v-slot:effect>{{ objConfirmSlot.effect }}</template>  
+      </confirm>
     </div>
   </div>
 </template>
@@ -17,16 +24,20 @@
 <script>
 import Addition from '@/components/catalog/addition';
 import Register from '@/components/catalog/register';
+import Confirm from '@/components/catalog/confirm';
 
 export default {
   name: 'DocumentInput',
   components: {
-    Addition, Register,
+    Addition, Register, Confirm,
   },
   data: function() {
     return {
       arrList: Array,
+      objDelete: {},
       modifyRezult: '',
+      objConfirmSlot: {action: '', list: '', effect: '', clear: () => {this.action = ''; this.list = ''; this.effect = ''}},
+      isConfirm: false,
     }
   },
   created: function() {
@@ -51,12 +62,26 @@ export default {
       this.modifyItem(objParams);
     },
 
-    deleteItem: function(row) {
-      let objParams = {
+    confirmDelete: function(row) {
+      this.objDelete = {
         function: 'deleteDocumentInput',
         iid: row.CID,
       }
-      //this.modifyItem(objParams);
+      this.objConfirmSlot.action = 'Вы собираетесь удалить следующие документы:';
+      this.objConfirmSlot.list = '"' + row.CNAME + '"';
+      this.objConfirmSlot.effect = 'Данное действие нельзя отменить.';
+      this.isConfirm = true;
+    },
+    deleteCancel: function() {
+      this.isConfirm = false;
+      this.objDelete = {};
+      this.objConfirmSlot.clear();
+    },
+    deleteOk: function() {
+      this.modifyItem(this.objDelete);
+      this.isConfirm = false;
+      this.objDelete = {};
+      this.objConfirmSlot.clear();
     },
     
     modifyItem: function(objParams) {
@@ -65,7 +90,6 @@ export default {
         .post(pathBackend + 'index.php', null, {params: objParams})
         .then((response) => {
           this.modifyRezult = response.data;
-          console.log(this.modifyRezult);
           this.getList();
         })
     },
@@ -83,9 +107,22 @@ export default {
 
 <style lang="scss" scoped>
   .catalog {
+    position: relative;
     &__title {
       margin: 0px;
       color: teal;
+    }
+
+    .confirm {
+      position: fixed;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      &_display { display: flex; }
     }
   }
   .catalog-grid {

@@ -32,6 +32,7 @@ export default {
         return;
       } else {
         this.$emit('addItem', this.inputText, this.inputConfirm);
+        this.inputText = '';
       }
     }
   }
