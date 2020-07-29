@@ -27,6 +27,9 @@ export default {
       isFixed: false,
     }
   },
+  created: function() {
+    window.addEventListener('scroll', this.scrollPage);
+  },
   methods: {
     scrollPage: function() {
       console.log(window.scrollY);
@@ -41,10 +44,11 @@ export default {
 </script>
 
 <style lang="scss">
+  body {margin-top: 0px;}
   .app {
     display: grid;
     grid-template-areas: "app__navigation" "app__system-out" "app__body" "app__footer";
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: 60px auto auto auto;
     grid-template-columns: 1fr;
     max-width: 1280px;
     margin-left: auto;
@@ -55,20 +59,26 @@ export default {
 
     &__navigation {
       grid-area: app__navigation;
-      z-index: 999;
-    }
-    &__navigation--fixed {
       position: fixed;
+      max-width: 1280px;
+      width: 100%;
+      background-color: white;
+      border: 1px solid white;
+      z-index: 100;
     }
+
     &__system-out {
       grid-area: app__system-out;
+      position: fixed;
+      max-width: 1280px;
+      width: 100%;
+      top: 61px;
       border-top: 1px solid grey;
       border-bottom: 1px solid grey;
+      background-color: white;
+      z-index: 99;
     }
-    &__system-out--fixed {
-      position: fixed;
-      box-shadow: 0px 1px 10px grey;
-    }
+
     &__body {
       grid-area: app__body;
       padding: 5px;

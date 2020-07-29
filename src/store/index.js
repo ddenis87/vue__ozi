@@ -15,10 +15,13 @@ export default new Vuex.Store({
     systemoutState(state, systemoutProps) { 
       state.systemout.text = systemoutProps.text; 
       state.systemout.status = systemoutProps.status; 
-      setTimeout(() => {
-        state.systemout.text = '';
-        state.systemout.status = 'default'
-      }, 5000);
+      console.log(systemoutProps.status);
+      if (systemoutProps.status != 'information') {
+        setTimeout(() => {
+          state.systemout.text = '';
+          state.systemout.status = 'default'
+        }, 5000);
+      }
     },
   },
   actions: {
