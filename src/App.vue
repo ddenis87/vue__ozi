@@ -1,9 +1,9 @@
 <template>
-  <div id="app" class="app">
-      <div class="app__navigation">
+  <div id="app" class="app" @scroll="scrollPage">
+      <div class="app__navigation" :class="{'app__navigation--fixed' : isFixed}">
         <app-navigation></app-navigation>
       </div>
-      <div class="app__system-out">
+      <div class="app__system-out" :class="{'app__system-out--fixed' : isFixed}">
         <system-out></system-out>
       </div>
       <div class="app__body">
@@ -22,6 +22,21 @@ export default {
   components: {
     AppNavigation, SystemOut,
   },
+  data: function() {
+    return {
+      isFixed: false,
+    }
+  },
+  methods: {
+    scrollPage: function() {
+      console.log(window.scrollY);
+      if (window.scrollY == 0) {
+        this.isFixed = false;
+      } else {
+        this.isFixed = true;
+      }
+    }
+  }
 }
 </script>
 
@@ -42,10 +57,17 @@ export default {
       grid-area: app__navigation;
       z-index: 999;
     }
+    &__navigation--fixed {
+      position: fixed;
+    }
     &__system-out {
       grid-area: app__system-out;
       border-top: 1px solid grey;
       border-bottom: 1px solid grey;
+    }
+    &__system-out--fixed {
+      position: fixed;
+      box-shadow: 0px 1px 10px grey;
     }
     &__body {
       grid-area: app__body;
