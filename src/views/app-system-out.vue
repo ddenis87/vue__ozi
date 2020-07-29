@@ -10,10 +10,10 @@ export default {
   name: 'SystemOut',
   computed: {
     systemText() {
-      return this.$store.state.objSystemout.text;
+      return this.$store.state.systemout.text;
     },
     state() {
-      return 'system-out__' + this.$store.state.objSystemout.state;
+      return 'system-out__' + this.$store.state.systemout.status;
     }
   } 
 }

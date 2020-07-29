@@ -5,12 +5,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    objSystemout: {
+    systemout: {
       text: 'Hello', 
-      state: 'default'
+      status: 'default',
+      
     }
   },
   mutations: {
+    systemoutState(state, systemoutProps) { 
+      state.systemout.text = systemoutProps.text; 
+      state.systemout.status = systemoutProps.status; 
+      setTimeout(() => {
+        state.systemout.text = '';
+        state.systemout.status = 'default'
+      }, 5000);
+    },
   },
   actions: {
   },

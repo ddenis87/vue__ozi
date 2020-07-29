@@ -5,7 +5,7 @@
         <th class="table-title__col table-title__col_width-index">№ п/п</th>
         <th class="table-title__col">Наименование</th>
         <th class="table-title__col table-title__col_width-prop">Верификация</th>
-        <th class="table-title__col table-title__col_width-prop">Активна</th>
+        <th class="table-title__col table-title__col_width-prop">Доступна</th>
         <th class="table-title__col table-title__col_width-prop">Действия</th>
       </tr>
       <tr class="table-body"><td class="table-body__col" colspan="5"><hr class="table-body__col_separator"></td></tr>

@@ -42,6 +42,7 @@ export default {
   },
   created: function() {
     this.getList();
+    // this.$store.commit('systemoutState', {text: 'Warning', status: 'warning'});
   },
   methods: {
     addItem: function(inputText, inputConfirm) {
@@ -50,7 +51,7 @@ export default {
         iname: inputText,
         iconfirm: (inputConfirm) ? 1 : 0,
       }
-      this.modifyItem(objParams);
+      this.modifyItem(objParams, this.systemoutState, {text: 'Документ успешно добавлен', status: 'successfully'});
     },
     
     disableItem: function(row) {
@@ -59,7 +60,7 @@ export default {
         iid: row.CID,
         ivisible: (row.CVISIBLE == '1') ? '0' : '1',
       }
-      this.modifyItem(objParams);
+      this.modifyItem(objParams, this.systemoutState, {text: (objParams.ivisible == '1') ? 'Документ доступен для добавления' : 'Документ не доступен для добавления', status: 'successfully'});
     },
 
     confirmDelete: function(row) {
@@ -67,7 +68,8 @@ export default {
         function: 'deleteDocumentInput',
         iid: row.CID,
       }
-      this.objConfirmSlot.action = 'Вы собираетесь удалить следующие документы:';
+      this.systemoutState('Ожидание подтверждения действия...', 'information');
+      this.objConfirmSlot.action = 'Вы собираетесь удалить следующий документ:';
       this.objConfirmSlot.list = '"' + row.CNAME + '"';
       this.objConfirmSlot.effect = 'Данное действие нельзя отменить.';
       this.isConfirm = true;
@@ -76,21 +78,31 @@ export default {
       this.isConfirm = false;
       this.objDelete = {};
       this.objConfirmSlot.clear();
+      this.systemoutState('Действие отменено', 'warning');
     },
     deleteOk: function() {
       this.modifyItem(this.objDelete);
       this.isConfirm = false;
       this.objDelete = {};
       this.objConfirmSlot.clear();
+      this.systemoutState('Документ успешно удален', 'successfully');
     },
     
-    modifyItem: function(objParams) {
+    systemoutState: function(text, status) {
+      this.$store.commit('systemoutState', {
+        text: text, 
+        status: status,
+      })
+    },
+
+    modifyItem: function(objParams, cbSysteoutState, cbSystemoutProps) {
       let axios = require('axios').default;
       axios
         .post(pathBackend + 'index.php', null, {params: objParams})
         .then((response) => {
           this.modifyRezult = response.data;
           this.getList();
+          cbSysteoutState(cbSystemoutProps.text, cbSystemoutProps.status);
         })
     },
 

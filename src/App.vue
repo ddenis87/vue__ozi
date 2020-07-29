@@ -40,6 +40,7 @@ export default {
 
     &__navigation {
       grid-area: app__navigation;
+      z-index: 999;
     }
     &__system-out {
       grid-area: app__system-out;
