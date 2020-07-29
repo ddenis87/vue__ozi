@@ -70,8 +70,8 @@ export default {
       }
       this.systemoutState('Ожидание подтверждения действия...', 'information');
       this.objConfirmSlot.action = 'Вы собираетесь удалить следующий документ:';
-      this.objConfirmSlot.list = '"' + row.CNAME + '"';
-      this.objConfirmSlot.effect = 'Данное действие нельзя отменить.';
+      this.objConfirmSlot.list = '- "' + row.CNAME + '"';
+      // this.objConfirmSlot.effect = 'Данное действие нельзя отменить.';
       this.isConfirm = true;
     },
     deleteCancel: function() {
