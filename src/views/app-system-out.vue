@@ -34,7 +34,7 @@ export default {
     }
     &__warning {
       color: white;
-      background-color: firebrick;
+      background-color: rgb(209, 76, 76);
     }
     &__information {
       color: teal;
