@@ -6,7 +6,7 @@
         <search></search>
       </div>
       <div class="user-grid__list">
-
+        <register></register>
       </div>
     </div>
   </div>
@@ -14,11 +14,12 @@
 
 <script>
 import Search from '@/components/user/search'
+import Register from '@/components/user/register'
 
 export default {
   name: 'User',  
   components: {
-    Search,
+    Search, Register,
   }
 }
 </script>
