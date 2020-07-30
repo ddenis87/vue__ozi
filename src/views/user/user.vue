@@ -3,7 +3,7 @@
     <h3 class="user__title">Журналы - Пользователи</h3>
     <div class="user-grid">
       <div class="user-grid__control">
-
+        <search></search>
       </div>
       <div class="user-grid__list">
 
@@ -13,8 +13,13 @@
 </template>
 
 <script>
+import Search from '@/components/user/search'
+
 export default {
   name: 'User',  
+  components: {
+    Search,
+  }
 }
 </script>
 
