@@ -12,9 +12,9 @@
       <template v-for="(row, index) in arrList">
       <tr class="table-body" :key="index">
         <td class="table-body__col table-body__col_center">{{ index + 1 }}</td>
-        <td class="table-body__col">{{  }}</td>
-        <td class="table-body__col">{{  }}</td>
-        <td class="table-body__col">{{  }}</td>
+        <td class="table-body__col">{{ row.VFIO }}</td>
+        <td class="table-body__col">{{ row.VPOST }}</td>
+        <td class="table-body__col">{{ row.VDISTRICT }}</td>
         <td class="table-body__col">{{  }}</td>
       </tr>
       <tr class="table-body" :key="index + 1000"><td class="table-body__col" colspan="5"><hr class="table-body__col_separator"></td></tr>
@@ -27,7 +27,7 @@
 export default {
   name: 'Register',
   props: {
-    arrList: [],
+    arrList: {default: []},
   }
 }
 </script>

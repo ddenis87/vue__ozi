@@ -1,11 +1,12 @@
 <template>
   <div class="search">
     <div class="search__text">Поиск пользователей</div>
-    <input class="search__input" 
+    <input class="search__input " 
            type="text" 
-           placeholder="Укажите фамилию полностью или ее часть" 
-           :class="{'addition__input_validate' : (isValidate)}"/>
-    <button class="search__button">Найти</button>
+           placeholder="Укажите фамилию полностью или ее часть"
+           v-model="inputText" 
+           :class="{'search__input_validate' : isValidate}"/>
+    <button class="search__button" @click="searchUser">Найти</button>
   </div>
 </template>
 
@@ -14,7 +15,20 @@ export default {
   name: 'Search',
   data: function() {
     return {
+      inputText: '',
       isValidate: false,
+      
+    }
+  },
+  methods: {
+    searchUser: function() {
+      if (!this.inputText) {
+        this.isValidate = true;
+        return;
+      } else {
+        this.$emit('searchUser', this.inputText);
+        this.inputText = '';
+      }
     }
   }
 }
