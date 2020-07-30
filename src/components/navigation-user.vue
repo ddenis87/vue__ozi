@@ -16,7 +16,7 @@ export default {
   created: function() {
     let axios = require('axios').default;
     axios
-      .post(pathBackend + 'index.php', null, {params: {function: 'getUser'}})
+      .post(pathBackend + 'index.php', null, {params: {function: 'getUserSecurity'}})
       .then((response) => { this.userSecurity = response.data[0].CNAME; })
   }
 }
