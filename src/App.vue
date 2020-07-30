@@ -44,8 +44,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+  @import url('/fonts?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;1,300;1,500;1,700&display=swap');
   body {margin-top: 0px; overflow-y: scroll;}
+
   .app {
     display: grid;
     grid-template-areas: "app__navigation" "app__system-out" "app__body" "app__footer";
@@ -54,8 +55,7 @@ export default {
     max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
-
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
 
     &__navigation {
