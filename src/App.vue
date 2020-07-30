@@ -44,7 +44,8 @@ export default {
 </script>
 
 <style lang="scss">
-  body {margin-top: 0px;}
+
+  body {margin-top: 0px; overflow-y: scroll;}
   .app {
     display: grid;
     grid-template-areas: "app__navigation" "app__system-out" "app__body" "app__footer";
