@@ -39,7 +39,7 @@ export default {
   .register-table {
     width: 100%;
     border-spacing: 0px;
-    font-size: 0.8em;
+    font-size: 0.9em;
 
     .table-title {
       &__col:first-child { border: 0px; }
@@ -49,6 +49,15 @@ export default {
         &_width {
           &-index { width: 50px; }
         }
+      }
+    }
+    .table-body {
+      &__col:first-child { border: 0px; }
+      &__col {
+        border-left: 1px solid grey;
+        padding: 3px;
+        &_center { text-align: center; }
+        &_separator {margin: 0px;}
       }
     }
   }
