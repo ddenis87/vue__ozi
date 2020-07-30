@@ -48,7 +48,7 @@ export default {
   .app {
     display: grid;
     grid-template-areas: "app__navigation" "app__system-out" "app__body" "app__footer";
-    grid-template-rows: 60px auto auto auto;
+    grid-template-rows: 60px 40px auto auto;
     grid-template-columns: 1fr;
     max-width: 1280px;
     margin-left: auto;
