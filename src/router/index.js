@@ -14,6 +14,11 @@ Vue.use(VueRouter)
     name: 'DocumentInput',
     component: () => import('../views/catalog/document-input.vue')
   },
+  {
+    path: '/user/user',
+    name: 'DocumentInput',
+    component: () => import('../views/user/user.vue')
+  },
 ]
 
 const router = new VueRouter({
