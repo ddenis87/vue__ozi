@@ -1,6 +1,8 @@
 <template>
   <div class="">
-    <list-select selectWidth='300'></list-select>
+    <list-select selectWidth='300' selectFunction="getSelectDistrict"></list-select>
+    <list-select selectWidth='300' selectFunction="getSelectDepartment"></list-select>
+    <list-select selectWidth='300' selectFunction="getSelectPost"></list-select>
   </div>
 </template>
 

@@ -1,7 +1,10 @@
 <template>
-  <div class="list-select" :style="{'width': fieldWidth}">
-    <select class="list-select__select" :value="selectChecked">
-      <option class="list-select__option" value="">КС в Мазановском районе</option>
+  <div class="list-select" :style="{'width': selectWidth}">
+    <select class="list-select__select" 
+            v-model="selectChecked"
+            :disabled="p_selectDisabled"
+            @change="() => {$emit('change',this.selectChecked)}">
+      <option class="list-select__option" value=""></option>
       <option class="list-select__option" 
               v-for="(row, index) in arrList" 
               :key="index" :value="row.CID">{{ row.CNAME }}</option>
@@ -13,26 +16,26 @@
 export default {
   name: 'ListSelect',
   props: {
-    selectFunction: '',
-    selectWidth: '',
-    selectDisable: false,
-    selectChecked: '',
-    arrList: [],
+    p_selectFunction: '',
+    p_selectWidth: '',
+    p_selectDisabled: false,
+    p_selectChecked: '',
   },
   computed: {
-    fieldWidth() {return this.selectWidth + 'px';}
+    selectWidth() {return this.p_selectWidth + 'px';},
   },
   data: function() {
     return {
-      selectInput: '',
+      selectChecked: this.p_selectChecked,
       arrList: [],
     }
   },
   created: function() {
     let axios = require('axios').default;
     axios
-      .post(pathBackend + 'index.php', null, {params: {function: this.selectFunction}})
+      .post(pathBackend + 'index.php', null, {params: {function: this.p_selectFunction}})
       .then((response) => {this.arrList = response.data})
+      .catch(this.arrList = [{NAME: 'Ошибка получения данных с сервера.'}])
   },
 }
 </script>
