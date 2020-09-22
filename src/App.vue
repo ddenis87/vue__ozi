@@ -1,100 +1,73 @@
 <template>
-  <div id="app" class="app" @scroll="scrollPage">
-      <div class="app__navigation" :class="{'app__navigation--fixed' : isFixed}">
-        <app-navigation></app-navigation>
-      </div>
-      <div class="app__system-out" :class="{'app__system-out--fixed' : isFixed}">
-        <system-out></system-out>
-      </div>
-      <div class="app__body">
-        <router-view/>
-      </div>
-      <div class="app__footer">
-        Copyright by Dontsov DA, 2020
-      </div>
+  <div id="app" class="app">
+    <div class="app__head">
+      <app-head></app-head>
+    </div>
+    <div class="app__navigation">
+      <app-navigation></app-navigation>
+    </div>
+    <div class="app__system-out">99</div>
+    <div class="app__body">
+      <router-view />
+    </div>
+    <div class="app__footer">
+      <app-footer></app-footer>
+    </div>
   </div>
 </template>
 
 <script>
-import AppNavigation from '@/views/app-navigation';
-import SystemOut from '@/views/app-system-out';
+import appHead from '@/components/app/app__head';
+import appNavigation from '@/components/app/app__navigation';
+import appFooter from '@/components/app/app__footer';
 export default {
   components: {
-    AppNavigation, SystemOut,
+    appHead,
+    appNavigation,
+    appFooter,
   },
-  data: function() {
-    return {
-      isFixed: false,
-    }
-  },
-  created: function() {
-    window.addEventListener('scroll', this.scrollPage);
-  },
-  methods: {
-    scrollPage: function() {
-      console.log(window.scrollY);
-      if (window.scrollY == 0) {
-        this.isFixed = false;
-      } else {
-        this.isFixed = true;
-      }
-    }
-  }
 }
 </script>
 
 <style lang="scss">
-  @import url('/fonts?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;1,300;1,500;1,700&display=swap');
-  body {margin-top: 0px; overflow-y: scroll;}
+html, body {
+  margin: 0px;
+  padding: 0px;
+}
 
-  .app {
-    display: grid;
-    grid-template-areas: "app__navigation" "app__system-out" "app__body" "app__footer";
-    grid-template-rows: 60px 40px auto auto;
-    grid-template-columns: 1fr;
-    max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-
-    &__navigation {
-      grid-area: app__navigation;
-      position: fixed;
-      max-width: 1280px;
-      width: 100%;
-      background-color: white;
-      border: 1px solid white;
-      z-index: 100;
-    }
-
-    &__system-out {
-      grid-area: app__system-out;
-      position: fixed;
-      max-width: 1280px;
-      width: 100%;
-      top: 61px;
-      border-top: 1px solid grey;
-      border-bottom: 1px solid grey;
-      background-color: white;
-      z-index: 99;
-    }
-
-    &__body {
-      grid-area: app__body;
-      padding: 5px;
-    }
-    &__footer {
-      grid-area: app__footer;
-      margin-top: 5px;
-      padding: 3px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-top: 1px solid grey;
-      border-bottom: 1px solid grey;
-      color: grey;
-      font-size: 0.8em;
-    }
+.app {
+  display: grid;
+  grid-template-areas: "head head" 
+                       "navigation system-out"
+                       "navigation body" 
+                       "footer footer";
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 80px 20px auto 20px;
+  width: 100%;
+  min-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  // border: 1px solid darkgreen;
+  &__head {
+    grid-area: head;
+    // border: 1px solid darkgrey;
   }
+  &__navigation {
+    grid-area: navigation;
+    // border: 1px solid darkred;
+  }
+  &__system-out {
+    grid-area: system-out;
+    border: 1px solid darkorange;
+  }
+  &__body {
+    grid-area: body;
+    min-height: calc(100vh - 120px);
+    border: 1px solid darkblue;
+  }
+  &__footer {
+    grid-area: footer;
+    // border: 1px solid darkcyan;
+  }
+}
 </style>

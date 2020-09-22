@@ -6,18 +6,8 @@ Vue.use(VueRouter)
   const routes = [
   {
     path: '/',
-    name: 'Main',
+    name: 'main',
     component: () => import('../views/main.vue')
-  },
-  {
-    path: '/catalog/document-input',
-    name: 'DocumentInput',
-    component: () => import('../views/catalog/document-input.vue')
-  },
-  {
-    path: '/user/user',
-    name: 'DocumentInput',
-    component: () => import('../views/user/user.vue')
   },
 ]
 
