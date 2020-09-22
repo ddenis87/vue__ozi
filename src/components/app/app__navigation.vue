@@ -2,13 +2,18 @@
   <div class="app-navigation">
     <ul class="navigation">
       <template v-for="(item, index) in listItem">
-        <router-link v-if="item.CURL" :key="index" tag="li" class="navigation__item" :to="item.CURL">
+        <router-link v-if="item.CURL" 
+                     :key="index" 
+                     :to="item.CURL"
+                     tag="li" 
+                     class="navigation__item">
           {{ item.CNAME }}
         </router-link>
-        <li v-else class="navigation__title" :key="index">
+        <li v-else 
+            :key="index"
+            class="navigation__title">
           {{ item.CNAME }}
         </li>
-        
       </template>
     </ul>
   </div>  
@@ -28,6 +33,15 @@ export default {
       .post(pathBackend + 'index.php', null, {params: {function: 'getMenu'}})
       .then(response => {
         this.listItem = response.data;
+      })
+      .catch(() => {
+        this.listItem = [
+          {CURL: '/', CNAME: 'На главную'},
+          {CURL: '', CNAME: 'Документы'},
+          {CURL: '/doc', CNAME: 'Заявки'},
+          {CURL: '/register', CNAME: 'Журнал ViPNet Client'},
+          {CURL: '/generator_pd', CNAME: 'Генератор ПД'},
+        ];
       })
   }
 }

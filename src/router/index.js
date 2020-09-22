@@ -6,8 +6,8 @@ Vue.use(VueRouter)
   const routes = [
   {
     path: '/',
-    name: 'main',
-    component: () => import('../views/main.vue')
+    name: 'ozi',
+    component: () => import('../views/ozi.vue')
   },
 ]
 

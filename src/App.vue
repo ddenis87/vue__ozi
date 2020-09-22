@@ -6,7 +6,9 @@
     <div class="app__navigation">
       <app-navigation></app-navigation>
     </div>
-    <div class="app__system-out">99</div>
+    <div class="app__system-out">
+      <app-system-out></app-system-out>
+    </div>
     <div class="app__body">
       <router-view />
     </div>
@@ -19,17 +21,21 @@
 <script>
 import appHead from '@/components/app/app__head';
 import appNavigation from '@/components/app/app__navigation';
+import appSystemOut from '@/components/app/app__system-out';
 import appFooter from '@/components/app/app__footer';
 export default {
   components: {
     appHead,
     appNavigation,
+    appSystemOut,
     appFooter,
   },
 }
 </script>
 
 <style lang="scss">
+@import 'fonts.scss';
+
 html, body {
   margin: 0px;
   padding: 0px;
@@ -47,18 +53,14 @@ html, body {
   min-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  // border: 1px solid darkgreen;
   &__head {
     grid-area: head;
-    // border: 1px solid darkgrey;
   }
   &__navigation {
     grid-area: navigation;
-    // border: 1px solid darkred;
   }
   &__system-out {
     grid-area: system-out;
-    border: 1px solid darkorange;
   }
   &__body {
     grid-area: body;
@@ -67,7 +69,6 @@ html, body {
   }
   &__footer {
     grid-area: footer;
-    // border: 1px solid darkcyan;
   }
 }
 </style>

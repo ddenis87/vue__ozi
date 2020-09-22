@@ -1,14 +1,12 @@
 <template>
-  <div class="">
-    123
+  <div class="app-systemout">
+    Hello
   </div>
 </template>
 
 <script>
-// import ListSelect from '@/components/list-select';
-
 export default {
-  name: "main",
+  name: 'appSystemOut',
 }
 </script>
 
