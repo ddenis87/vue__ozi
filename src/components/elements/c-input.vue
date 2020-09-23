@@ -33,6 +33,13 @@ export default {
     border: 1px solid grey;
     border-radius: 3px;
     box-sizing: border-box;
+    outline: none;
+    &:focus {
+      box-shadow: 1px 1px 1px lightblue, -1px -1px 1px lightblue;
+    }
+    &_validation {
+      box-shadow: 1px 1px 1px red, -1px -1px 1px red;
+    }
   }
 }
 </style>
