@@ -14,6 +14,11 @@ Vue.use(VueRouter)
     name: 'catalogDepartment',
     component: () => import('../views/catalog/catalog__department.vue')
   },
+  {
+    path: '/person',
+    name: 'person',
+    component: () => import('../views/person/person.vue')
+  },
 ]
 
 const router = new VueRouter({
