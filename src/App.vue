@@ -19,10 +19,13 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 import appHead from '@/components/app/app__head';
 import appNavigation from '@/components/app/app__navigation';
 import appSystemOut from '@/components/app/app__system-out';
 import appFooter from '@/components/app/app__footer';
+
 export default {
   components: {
     appHead,
@@ -30,6 +33,22 @@ export default {
     appSystemOut,
     appFooter,
   },
+  created: function() {
+    axios 
+      .post(pathBackend + 'index.php', null, {params: {function: 'getUserSecurity'}})
+      .then(response => {
+        console.log(response.data);
+        let option = {
+          userId: response.data[0].ID,
+          userIp: response.data[0].CIP,
+          userNameFull: response.data[0].CNAMEFULL,
+          userNameShort: response.data[0].CNAMESHORT,
+          userLevelAccess: response.data[0].CLEVELACCESS
+        }
+        this.$store.commit('setUserProfile', option);
+
+      })
+  }
 }
 </script>
 
@@ -37,6 +56,11 @@ export default {
 @import 'fonts.scss';
 
 html, body {
+  margin: 0px;
+  padding: 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
   margin: 0px;
   padding: 0px;
 }
@@ -65,7 +89,7 @@ html, body {
   &__body {
     grid-area: body;
     min-height: calc(100vh - 120px);
-    border: 1px solid darkblue;
+    // border: 1px solid darkblue;
   }
   &__footer {
     grid-area: footer;

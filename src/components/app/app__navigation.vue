@@ -15,6 +15,9 @@
           {{ item.CNAME }}
         </li>
       </template>
+      <li class="navigation__item" @click="() => {$router.push('/')}">
+        На главную
+      </li>
     </ul>
   </div>  
 </template>
@@ -62,7 +65,7 @@ export default {
       border-top: 1px solid white;
       border-bottom: 1px solid white;
 
-      // font-size: 12px;
+      font-size: 12px;
       font-weight: bold;
       color: darkslateblue;
       text-transform: uppercase;

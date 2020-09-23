@@ -35,7 +35,7 @@ export default {
       return {
         userId: this.$store.state.userProfile.userId,
         userIp: this.$store.state.userProfile.userIp,
-        userFullName: this.$store.state.userProfile.userFullName,
+        userFullName: this.$store.state.userProfile.userNameFull,
       }
     }
   },
