@@ -1,6 +1,7 @@
 <template>
   <div class="c-button">
-    <button class="c-button__button"><slot></slot></button>
+    <button class="c-button__button" 
+            @click="$emit('click')"><slot></slot></button>
   </div>  
 </template>
 
@@ -20,9 +21,9 @@ export default {
 
     font-family: 'Montserrat';
     font-size: 12px;
-    font-weight: bold;
     color: white;
     text-transform: uppercase;
+    outline: none;
     cursor: pointer;
     &:hover {
       background-color: rgb(54, 96, 146, .8);

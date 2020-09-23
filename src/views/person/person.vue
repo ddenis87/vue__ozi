@@ -1,25 +1,23 @@
 <template>
-  <div class="user">
-    <h3 class="user__title">Журналы - Пользователи</h3>
-    <div class="user-grid">
-      <div class="user-grid__control">
-        <search @searchUser="searchUser"></search>
+  <div class="person">
+    <h3 class="person__title">Журналы - Пользователи</h3>
+    <div class="person_body">
+      <div class="person__body-control">
+        <person-control></person-control>
       </div>
-      <div class="user-grid__list">
-        <register :arrList="arrList"></register>
-      </div>
+      <hr class="person__separator"/>
+      <div class="person__body-list"></div>
     </div>
   </div>
 </template>
 
 <script>
-import Search from '@/components/user/search'
-import Register from '@/components/user/register'
+import personControl from '@/components/person/person__control';
 
 export default {
   name: 'User',  
   components: {
-    Search, Register,
+    personControl,
   },
   data: function() {
     return {
@@ -42,23 +40,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .user {
-    &__title {
-      margin: 0px;
-      color: teal;
-    }
+.person {
+  font-family: 'Montserrat';
+  &__title {
+    margin-bottom: 10px;
+    color: darkslategrey;
   }
-
-  .user-grid {
-    display: grid;
-    grid-template-areas: "user-control" "user-list";
-    grid-template-rows: auto auto;
-    grid-template-columns: 1fr;
-    border-top: 2px solid grey;
-    padding-top: 10px;
-
-    &__control {grid-area: user-control;}
-    &__list {grid-area: user-list;}
+  &__separator {
+    margin: 10px 20px;
   }
-
+}
 </style>

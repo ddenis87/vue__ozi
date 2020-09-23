@@ -2,13 +2,20 @@
   <div class="c-input">
     <label class="c-input__title"><slot></slot></label>
     <input class="c-input__input" 
-           type="text" />
+           type="text"
+           :class="{'c-input__input_validation': isEmpty}" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'cInput',  
+  name: 'cInput',
+  props: [
+    'inValidation',
+  ],
+  computed: {
+    isEmpty: function() {return this.inValidation;}
+  },
 }
 </script>
 

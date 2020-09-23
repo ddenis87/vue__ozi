@@ -1,38 +1,51 @@
 <template>
-  <div class="catalog-control">
-    <div class="catalog-control__title">Добавление записи</div>
-    <c-input class="catalog-control__input">Наименование документа</c-input>
+  <div class="person-control">
+    <div class="person-control__title">Поиск пользователей</div>
+    <div class="person-control__box">
+      <c-input class="person-control__input"
+               :inValidation="isEmpty">Укажите фамилию для поиска</c-input>
+      <c-button class="person-control__button-item"
+                @click="personSearch">Найти</c-button>
+      <c-button class="person-control__button-item"
+                @click="personCreate">Создать</c-button>
+    </div>
     
-    <div class="catalog-control__box">
-      <c-checkbox class="catalog-control__checkbox">Требует верификации</c-checkbox>
-      <c-button class="catalog-control__button-item">Добавить</c-button>
-    </div>
-    </div>
+  </div>
 </template>
 
 <script>
 import cInput from '@/components/elements/c-input';
-import cCheckbox from '@/components/elements/c-checkbox';
 import cButton from '@/components/elements/c-button';
 
 export default {
-  name: 'catalog-control',
+  name: 'Search',
   components: {
     cInput,
-    cCheckbox,
     cButton,
   },
   data: function() {
     return {
+      personFa: '',
+      isEmpty: false,
     }
   },
   methods: {
+    personSearch: function() {
+      if (this.personFa == '') {
+        this.isEmpty = true;
+        return;
+      } 
+      $emit('click', this.personFa);
+    },
+    personCreate: function() {
+      this.$router.push('/person-card');
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.catalog-control {
+.person-control {
   width: 100%;
   margin-bottom: 10px;
   padding: 0px 20px;
@@ -44,7 +57,8 @@ export default {
     text-transform: uppercase;
   }
   &__input {
-    margin-bottom: 10px;
+    width: 100%;
+    // margin-bottom: 10px;
   }
   &__box {
     display: flex;
@@ -53,6 +67,7 @@ export default {
   }
   &__button-item {
     width: 150px;
+    margin-left: 10px;
   }
 
 
