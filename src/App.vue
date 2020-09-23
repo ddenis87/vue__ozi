@@ -72,7 +72,7 @@ h1, h2, h3, h4, h5, h6 {
                        "navigation body" 
                        "footer footer";
   grid-template-columns: 250px 1fr;
-  grid-template-rows: 80px 20px auto 20px;
+  grid-template-rows: 80px 25px auto 20px;
   width: 100%;
   min-width: 1280px;
   margin-left: auto;
@@ -85,11 +85,14 @@ h1, h2, h3, h4, h5, h6 {
   }
   &__system-out {
     grid-area: system-out;
+    padding: 3px;
+    border-bottom: 1px solid rgb(54, 96, 146);
+    box-sizing: border-box;
   }
   &__body {
     grid-area: body;
     min-height: calc(100vh - 120px);
-    // border: 1px solid darkblue;
+    box-sizing: border-box;
   }
   &__footer {
     grid-area: footer;
