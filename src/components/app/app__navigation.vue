@@ -39,11 +39,12 @@ export default {
       })
       .catch(() => {
         this.listItem = [
-          {CURL: '/', CNAME: 'На главную'},
-          {CURL: '', CNAME: 'Документы'},
-          {CURL: '/doc', CNAME: 'Заявки'},
-          {CURL: '/register', CNAME: 'Журнал ViPNet Client'},
-          {CURL: '/generator_pd', CNAME: 'Генератор ПД'},
+          // {CURL: '/', CNAME: 'На главную'},
+          {CURL: '', CNAME: 'Справочники'},
+          {CURL: '/catalog__department', CNAME: 'Отделы'},
+          {CURL: '/catalog__document-input', CNAME: 'Входящие документы'},
+          {CURL: '', CNAME: 'Журналы'},
+          {CURL: '/person', CNAME: 'Пользователи'},
         ];
       })
   }
