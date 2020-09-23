@@ -71,7 +71,6 @@ export default {
       text-transform: uppercase;
       cursor: pointer;
       &:hover {
-        // color: lightgray;
         border-top: 1px solid grey;
         border-bottom: 1px solid grey;
         background-image: linear-gradient(90deg, lightgray, white);
@@ -83,10 +82,6 @@ export default {
       color: black;
       list-style: none;
       text-transform: uppercase;
-      // &:hover {
-      //   cursor: default;
-      //   background-image: linear-gradient(90deg, white, white);;
-      // }
     }
   }
 }
