@@ -9,6 +9,11 @@ Vue.use(VueRouter)
     name: 'ozi',
     component: () => import('../views/ozi.vue')
   },
+  {
+    path: '/catalog__department',
+    name: 'catalogDepartment',
+    component: () => import('../views/catalog/catalog__department.vue')
+  },
 ]
 
 const router = new VueRouter({
