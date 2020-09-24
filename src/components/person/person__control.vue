@@ -5,7 +5,7 @@
       <c-input class="person-control__input"
                v-model="personFa"
                :inValidation="isEmpty"
-               @input="() => {isEmpty = false}">Укажите фамилию для поиска</c-input>
+               @input="() => { isEmpty = false; }">Укажите фамилию для поиска</c-input>
       <c-button class="person-control__button-item"
                 @click="personSearch">Найти</c-button>
       <c-button class="person-control__button-item"
@@ -33,7 +33,10 @@ export default {
   },
   methods: {
     personSearch: function() {
-      if (this.personFa == '') {this.isEmpty = true; return;}
+      if (this.personFa == '') {
+        this.isEmpty = true; 
+        return;
+      }
       this.$emit('click', this.personFa);
     },
     personCreate: function() {

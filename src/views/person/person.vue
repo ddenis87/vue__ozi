@@ -3,38 +3,45 @@
     <h3 class="person__title">Журналы - Пользователи</h3>
     <div class="person_body">
       <div class="person__body-control">
-        <person-control></person-control>
+        <person-control @click="personSearch"></person-control>
       </div>
       <hr class="person__separator"/>
-      <div class="person__body-list"></div>
+      <div class="person__body-list">
+        <person-list :listItem="listItem"></person-list>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import personControl from '@/components/person/person__control';
+import personList from '@/components/person/person__list';
 
 export default {
   name: 'User',  
   components: {
     personControl,
+    personList,
   },
   data: function() {
     return {
-      arrList: Array,
+      listItem: Array,
     }
   },
   methods: {
-    searchUser: function(searchText) {
-      console.log(searchText);
-      let axios = require('axios').default;
+    personSearch: function(searchString) {
+      console.log(searchString);
+      let option = {
+        function: 'getPerson',
+        personFa: searchString
+      }
       axios
-        .post(pathBackend + 'index.php', null, {params: {function: 'getUser', userFa: searchText}})
-        .then((response) => {this.arrList = response.data; console.log(this.arrList);})
-      console.log(this.arrList);
+        .post(pathBackend + 'person.php', null, {params: option})
+        .then((response) => {
+          this.listItem = response.data; 
+          console.log(this.listItem);})
     },
-
-
   }
 }
 </script>
