@@ -3,7 +3,9 @@
     <label class="c-input__title"><slot></slot></label>
     <input class="c-input__input" 
            type="text"
-           :class="{'c-input__input_validation': isEmpty}" />
+           :class="{'c-input__input_validation': isEmpty}"
+           v-model="inputValue"
+           @input="setInputValue" />
   </div>
 </template>
 
@@ -11,11 +13,21 @@
 export default {
   name: 'cInput',
   props: [
-    'inValidation',
+    'inValidation'
   ],
   computed: {
-    isEmpty: function() {return this.inValidation;}
+    isEmpty() {return this.inValidation;}
   },
+  data: function() {
+    return {
+      inputValue: '',
+    }
+  },
+  methods: {
+    setInputValue: function() {
+      this.$emit('input', this.inputValue);
+    }
+  }
 }
 </script>
 
