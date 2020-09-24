@@ -4,6 +4,7 @@
     <c-input class="catalog-control__input">Наименование документа</c-input>
     
     <div class="catalog-control__box">
+      <c-checkbox class="catalog-control__checkbox">Требует верификации</c-checkbox>
       <c-button class="catalog-control__button-item">Добавить</c-button>
     </div>
     </div>
@@ -11,12 +12,14 @@
 
 <script>
 import cInput from '@/components/elements/c-input';
+import cCheckbox from '@/components/elements/c-checkbox';
 import cButton from '@/components/elements/c-button';
 
 export default {
   name: 'catalog-control',
   components: {
     cInput,
+    cCheckbox,
     cButton,
   },
   data: function() {
@@ -45,13 +48,13 @@ export default {
   }
   &__box {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
   }
   &__button-item {
     width: 150px;
   }
-  
+
 
   // .confirm {
   //   display: flex;
