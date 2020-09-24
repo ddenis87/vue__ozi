@@ -54,6 +54,7 @@ export default {
 
 <style lang="scss">
 @import 'fonts.scss';
+@import 'variables.scss';
 
 html, body {
   margin: 0px;
@@ -74,7 +75,7 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: 250px 1fr;
   grid-template-rows: 80px 25px auto 20px;
   width: 100%;
-  min-width: 1280px;
+  min-width: $pageMinWidth;
   margin-left: auto;
   margin-right: auto;
   &__head {
@@ -86,7 +87,7 @@ h1, h2, h3, h4, h5, h6 {
   &__system-out {
     grid-area: system-out;
     padding: 3px;
-    border-bottom: 1px solid rgb(54, 96, 146);
+    border-bottom: 1px solid $colorMain;
     box-sizing: border-box;
   }
   &__body {
