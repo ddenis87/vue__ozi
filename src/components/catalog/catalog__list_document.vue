@@ -9,7 +9,7 @@
         <th class="table-title__col table-title__col_width-prop">Действия</th>
       </tr>
       <tr class="table-body"><td class="table-body__col" colspan="5"><hr class="table-body__col_separator"></td></tr>
-      <template v-for="(row, index) in arrList">
+      <template v-for="(row, index) in listItem">
       <tr class="table-body" :key="index">
         <td class="table-body__col table-body__col_center">{{ index + 1 }}</td>
         <td class="table-body__col">{{ row.CNAME }}</td>
@@ -46,7 +46,7 @@
 export default {
   name: 'Register',
   props: {
-    arrList: {
+    listItem: {
       // type: Array,
       default: [
         {CID: '1', CNAME: 'Нет соединения с базой', CCONFIRM: '0', CVISIBLE: '1'},

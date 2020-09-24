@@ -8,7 +8,7 @@
       </div>
       <hr class="catalog__separator"/>
       <div class="catalog__body-list">
-        <catalog-list :arrList="catalogList"></catalog-list>
+        <catalog-list :listItem="listItem"></catalog-list>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@ export default {
   },
   data: function() {
     return {
-      catalogList: Array,
+      listItem: Array,
     }
   },
   created: function() {
@@ -36,7 +36,14 @@ export default {
       .post(pathBackend + 'catalog.php', null, {params: {function: 'getDepartmentList'}})
       .then(response => {
         console.log(response.data);
-        this.catalogList = response.data;
+        this.listItem = response.data;
+      })
+      .catch(() => {
+        this.listItem = [
+          {CID: '1', CNAME: 'Нет соединения с базой', CCONFIRM: '0', CVISIBLE: '1'},
+          {CID: '2', CNAME: 'Или произошла ошибка при получении данных', CCONFIRM: '1', CVISIBLE: '1'},
+          {CID: '3', CNAME: 'А возможно так сошлись звезды', CCONFIRM: '0', CVISIBLE: '0'},
+        ]
       })
   }
 }

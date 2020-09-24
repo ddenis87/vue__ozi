@@ -6,18 +6,18 @@
         <addition @addItem="addItem"></addition>
       </div>
       <div class="catalog-grid__list">
-        <register :arrList="arrList"
+        <register :listItem="listItem"
                   @disableItem="disableItem"
                   @deleteItem="confirmDelete"></register>
       </div>
     </div>
-    <div class="confirm" :class="{'confirm_display' : isConfirm}">
+    <!-- <div class="confirm" :class="{'confirm_display' : isConfirm}">
       <confirm @confirmCancel="deleteCancel" @confirmOk="deleteOk">
         <template v-slot:action>{{ objConfirmSlot.action }}</template>  
         <template v-slot:list>{{ objConfirmSlot.list }}</template>  
         <template v-slot:effect>{{ objConfirmSlot.effect }}</template>  
       </confirm>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
   },
   data: function() {
     return {
-      arrList: Array,
+      listItem: Array,
       objDelete: {},
       modifyRezult: '',
       objConfirmSlot: {action: '', list: '', effect: '', clear: () => {this.action = ''; this.list = ''; this.effect = ''}},
@@ -110,8 +110,14 @@ export default {
       let axios = require('axios').default;
       axios
         .post(pathBackend + 'index.php', null, {params: {function: 'getListDocumentInput'}})
-        .then((response) => {this.arrList = response.data})
-      
+        .then((response) => {this.listItem = response.data})
+        .catch(() => {
+          this.listItem = [
+            {CID: '1', CNAME: 'Нет соединения с базой', CCONFIRM: '0', CVISIBLE: '1'},
+            {CID: '2', CNAME: 'Или произошла ошибка при получении данных', CCONFIRM: '1', CVISIBLE: '1'},
+            {CID: '3', CNAME: 'А возможно так сошлись звезды', CCONFIRM: '0', CVISIBLE: '0'},
+          ];
+        })
     },
   }
 }
