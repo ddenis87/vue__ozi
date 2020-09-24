@@ -40,7 +40,15 @@ export default {
         .post(pathBackend + 'person.php', null, {params: option})
         .then((response) => {
           this.listItem = response.data; 
-          console.log(this.listItem);})
+          console.log(this.listItem);
+        })
+        .catch(() => {
+          this.listItem = [
+            {VFIO: 'Константин Константинович Константинопольский', VPOST: 'Ведущий специалист-эксперт', VDISTRICT: 'КС на правах отдела в Селемджинском районе'},
+            {VFIO: 'Иванов Иван Иванович', VPOST: 'Специалист-эксперт', VDISTRICT: 'УПФР в г.Благовещенске'},
+            // {VFIO: '', VPOST: '', VDISTRICT: ''},
+          ]
+        })
     },
   }
 }
