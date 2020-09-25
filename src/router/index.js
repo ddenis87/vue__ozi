@@ -44,6 +44,11 @@ Vue.use(VueRouter)
     name: 'person',
     component: () => import('../views/person/person.vue')
   },
+  {
+    path: '/person-card',
+    name: 'person-card',
+    component: () => import('../views/person/person-card.vue')
+  },
 ]
 
 const router = new VueRouter({

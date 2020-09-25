@@ -7,7 +7,8 @@
       </div>
       <hr class="person__separator"/>
       <div class="person__body-list">
-        <person-list :listItem="listItem"></person-list>
+        <person-list :listItem="listItem"
+                     @click="personEnter"></person-list>
       </div>
     </div>
   </div>
@@ -44,12 +45,15 @@ export default {
         })
         .catch(() => {
           this.listItem = [
-            {VFIO: 'Константин Константинович Константинопольский', VPOST: 'Ведущий специалист-эксперт', VDISTRICT: 'КС на правах отдела в Селемджинском районе'},
-            {VFIO: 'Иванов Иван Иванович', VPOST: 'Специалист-эксперт', VDISTRICT: 'УПФР в г.Благовещенске'},
+            {ID: '2', VFIO: 'Константин Константинович Константинопольский', VPOST: 'Ведущий специалист-эксперт', VDISTRICT: 'КС на правах отдела в Селемджинском районе'},
+            {ID: '1238', VFIO: 'Иванов Иван Иванович', VPOST: 'Специалист-эксперт', VDISTRICT: 'УПФР в г.Благовещенске'},
             // {VFIO: '', VPOST: '', VDISTRICT: ''},
           ]
         })
     },
+    personEnter: function(personId) {
+      this.$router.push('/person-card?personId=' + personId);
+    }
   }
 }
 </script>
