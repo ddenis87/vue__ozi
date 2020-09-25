@@ -20,7 +20,7 @@
             <td class="catalog-list__table-body_column">{{ item.CNAMEFULL }}</td>
             <td class="catalog-list__table-body_column">{{ item.CNAMESHORT }}</td>
             <td class="catalog-list__table-body_column">{{ item.CIP }}</td>
-            <td class="catalog-list__table-body_column">{{ item.CLEVELACCESS }}</td>
+            <td class="catalog-list__table-body_column">{{ item.CNAMELEVELACCESS }}</td>
             <td class="catalog-list__table-body_column">
               <div class="control">
                 <button class="control__button"

@@ -10,6 +10,11 @@ Vue.use(VueRouter)
     component: () => import('../views/ozi.vue')
   },
   {
+    path: '/catalog__district',
+    name: 'catalogDistrict',
+    component: () => import('../views/catalog/catalog__district.vue')
+  },
+  {
     path: '/catalog__department',
     name: 'catalogDepartment',
     component: () => import('../views/catalog/catalog__department.vue')
@@ -20,11 +25,6 @@ Vue.use(VueRouter)
     component: () => import('../views/catalog/catalog__post.vue')
   },
   {
-    path: '/catalog__district',
-    name: 'catalogDistrict',
-    component: () => import('../views/catalog/catalog__district.vue')
-  },
-  {
     path: '/catalog__document-input',
     name: 'catalogDocumentInput',
     component: () => import('../views/catalog/catalog__document-input.vue')
@@ -33,6 +33,11 @@ Vue.use(VueRouter)
     path: '/catalog__document-output',
     name: 'catalogDocumentOutput',
     component: () => import('../views/catalog/catalog__document-output.vue')
+  },
+  {
+    path: '/catalog__security-admin',
+    name: 'catalogSecurityAdmin',
+    component: () => import('../views/catalog/catalog__security-admin.vue')
   },
   {
     path: '/person',
