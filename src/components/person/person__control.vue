@@ -5,7 +5,8 @@
       <c-input class="person-control__input"
                v-model="personFa"
                :inValidation="isEmpty"
-               @input="() => { isEmpty = false; }">Укажите фамилию для поиска</c-input>
+               @input="() => { isEmpty = false; }"
+               @keydown="inputEnter">Укажите фамилию для поиска</c-input>
       <c-button class="person-control__button-item"
                 @click="personSearch">Найти</c-button>
       <c-button class="person-control__button-item"
@@ -32,6 +33,9 @@ export default {
     }
   },
   methods: {
+    inputEnter: function(key) {
+      if (key == 'Enter') this.personSearch();
+    },
     personSearch: function() {
       if (this.personFa == '') {
         this.isEmpty = true; 
@@ -70,16 +74,5 @@ export default {
     width: 150px;
     margin-left: 10px;
   }
-
-
-  // .confirm {
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: center;
-  //   padding: 3px;
-  //   &__input {cursor: pointer;}
-  //   &__text {padding-left: 3px; cursor: pointer;}
-  //   &_hidden {visibility: hidden;}
-  // }
 }
 </style>
