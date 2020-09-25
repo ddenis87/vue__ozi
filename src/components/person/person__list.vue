@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'Register',
+  name: 'personList',
   props: {
     listItem: {default: []},
   }

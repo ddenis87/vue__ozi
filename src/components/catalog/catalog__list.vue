@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: 'Register',
+  name: 'catalogList',
   props: {
     listItem: {
       default: []

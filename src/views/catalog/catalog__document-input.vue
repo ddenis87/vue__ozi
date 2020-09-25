@@ -22,7 +22,7 @@ import axios from 'axios';
 import catalogControl from '@/components/catalog/catalog__control_document';
 import catalogList from '@/components/catalog/catalog__list_document';
 export default {
-  name: 'DocumentInput',
+  name: 'catalogDocumentInput',
   components: {
     catalogControl,
     catalogList

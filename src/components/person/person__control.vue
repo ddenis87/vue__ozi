@@ -20,7 +20,7 @@ import cInput from '@/components/elements/c-input';
 import cButton from '@/components/elements/c-button';
 
 export default {
-  name: 'Search',
+  name: 'personControl',
   components: {
     cInput,
     cButton,

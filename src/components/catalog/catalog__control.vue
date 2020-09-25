@@ -14,7 +14,7 @@ import cInput from '@/components/elements/c-input';
 import cButton from '@/components/elements/c-button';
 
 export default {
-  name: 'catalog-control',
+  name: 'catalogControl',
   components: {
     cInput,
     cButton,

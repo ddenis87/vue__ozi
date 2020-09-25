@@ -16,7 +16,7 @@ import cCheckbox from '@/components/elements/c-checkbox';
 import cButton from '@/components/elements/c-button';
 
 export default {
-  name: 'catalog-control',
+  name: 'catalogControlDocument',
   components: {
     cInput,
     cCheckbox,

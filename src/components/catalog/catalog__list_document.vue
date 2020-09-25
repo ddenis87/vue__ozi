@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  name: 'Register',
+  name: 'catalogListDocument',
   props: {
     listItem: {
       // type: Array,
