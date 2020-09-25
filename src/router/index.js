@@ -20,6 +20,11 @@ Vue.use(VueRouter)
     component: () => import('../views/catalog/catalog__post.vue')
   },
   {
+    path: '/catalog__document-input',
+    name: 'catalogDocumentInput',
+    component: () => import('../views/catalog/catalog__document-input.vue')
+  },
+  {
     path: '/person',
     name: 'person',
     component: () => import('../views/person/person.vue')

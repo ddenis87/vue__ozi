@@ -34,10 +34,13 @@ export default {
     }
   },
   created: function() {
-    axios
+    this.getListItem();
+  },
+  methods: {
+    getListItem: function() {
+      axios
       .post(pathBackend + 'catalog.php', null, {params: {function: 'getListDepartment'}})
       .then(response => {
-        console.log(response.data);
         this.listItem = response.data;
       })
       .catch(() => {
@@ -47,6 +50,7 @@ export default {
           {CID: '3', CNAME: 'А возможно так сошлись звезды', CCONFIRM: '0', CVISIBLE: '0'},
         ]
       })
+    }
   }
 }
 </script>
