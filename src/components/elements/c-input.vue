@@ -5,7 +5,8 @@
            type="text"
            :class="{'c-input__input_validation': isEmpty}"
            v-model="inputValue"
-           @input="setInputValue" />
+           @input="setInputValue"
+           @keydown="enterInputValue" />
   </div>
 </template>
 
@@ -26,6 +27,9 @@ export default {
   methods: {
     setInputValue: function() {
       this.$emit('input', this.inputValue);
+    },
+    enterInputValue: function(event) {
+      this.$emit('keydown', event.key);
     }
   }
 }
