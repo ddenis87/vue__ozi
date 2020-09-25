@@ -19,8 +19,8 @@
 <script>
 import axios from 'axios';
 
-import catalogControl from '@/components/catalog/catalog__control_document';
-import catalogList from '@/components/catalog/catalog__list_document';
+import catalogControl from '@/components/catalog/catalog__control-document';
+import catalogList from '@/components/catalog/catalog__list-document';
 export default {
   name: 'catalogDocumentOutput',
   components: {
