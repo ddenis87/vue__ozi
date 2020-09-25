@@ -1,7 +1,7 @@
 <template>
   <div class="catalog-control">
     <div class="catalog-control__title">Добавление записи</div>
-    <c-input class="catalog-control__input">Наименование документа</c-input>
+    <c-input class="catalog-control__input"><slot name="titleInput"></slot></c-input>
     
     <div class="catalog-control__box">
       <c-button class="catalog-control__button-item">Добавить</c-button>

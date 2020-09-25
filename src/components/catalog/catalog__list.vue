@@ -43,7 +43,6 @@ export default {
   name: 'Register',
   props: {
     listItem: {
-      // type: Array,
       default: [
         {CID: '1', CNAME: 'Нет соединения с базой', CCONFIRM: '0', CVISIBLE: '1'},
         {CID: '2', CNAME: 'Или произошла ошибка при получении данных', CVISIBLE: '1'},

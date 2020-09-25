@@ -4,7 +4,9 @@
 
     <div class="catalog__body">
       <div class="catalog__body-control">
-        <catalog-control></catalog-control>
+        <catalog-control>
+          <template v-slot:titleInput>Наименование отдела</template>
+        </catalog-control>
       </div>
       <hr class="catalog__separator"/>
       <div class="catalog__body-list">
