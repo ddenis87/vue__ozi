@@ -1,11 +1,11 @@
 <template>
   <div class="catalog">
-    <h3 class="catalog__title">Справочники - Отделы</h3>
+    <h3 class="catalog__title">Справочники - Должности</h3>
 
     <div class="catalog__body">
       <div class="catalog__body-control">
         <catalog-control>
-          <template v-slot:titleInput>Наименование отдела</template>
+          <template v-slot:titleInput>Наименование должности</template>
         </catalog-control>
       </div>
       <hr class="catalog__separator"/>
@@ -35,16 +35,16 @@ export default {
   },
   created: function() {
     axios
-      .post(pathBackend + 'catalog.php', null, {params: {function: 'getListDepartment'}})
+      .post(pathBackend + 'catalog.php', null, {params: {function: 'getListPost'}})
       .then(response => {
         console.log(response.data);
         this.listItem = response.data;
       })
       .catch(() => {
         this.listItem = [
-          {CID: '1', CNAME: 'Нет соединения с базой', CCONFIRM: '0', CVISIBLE: '1'},
-          {CID: '2', CNAME: 'Или произошла ошибка при получении данных', CCONFIRM: '1', CVISIBLE: '1'},
-          {CID: '3', CNAME: 'А возможно так сошлись звезды', CCONFIRM: '0', CVISIBLE: '0'},
+          {CID: '1', CNAME: 'Специалист-эксперт', CCONFIRM: '0', CVISIBLE: '1'},
+          {CID: '2', CNAME: 'Специалист', CCONFIRM: '1', CVISIBLE: '1'},
+          {CID: '3', CNAME: 'Начальник отдела', CCONFIRM: '0', CVISIBLE: '0'},
         ]
       })
   }

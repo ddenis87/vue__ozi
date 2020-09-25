@@ -15,6 +15,11 @@ Vue.use(VueRouter)
     component: () => import('../views/catalog/catalog__department.vue')
   },
   {
+    path: '/catalog__post',
+    name: 'catalogPost',
+    component: () => import('../views/catalog/catalog__post.vue')
+  },
+  {
     path: '/person',
     name: 'person',
     component: () => import('../views/person/person.vue')
