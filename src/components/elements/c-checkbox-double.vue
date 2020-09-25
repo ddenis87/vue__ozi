@@ -50,8 +50,8 @@ export default {
         width: 12px;
         height: 12px;
         border-radius: 8px;
-        border: 1px solid darkgreen;
-        background-color: darkgreen;
+        border: 1px solid darkgrey;
+        background-color: darkgrey;
         box-sizing: border-box;
       }
     }
