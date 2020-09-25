@@ -12,7 +12,9 @@
       </thead>
       <tbody class="person-list__table-body">
         <template v-for="(item, index) in listItem">
-          <tr class="person-list__table-body_row" :key="index">
+          <tr class="person-list__table-body_row" 
+              :key="index"
+              @click="personEnter(item.ID)">
             <td class="person-list__table-body_column">{{ index + 1 }}</td>
             <td class="person-list__table-body_column">{{ item.VFIO }}</td>
             <td class="person-list__table-body_column">{{ item.VPOST }}</td>
@@ -29,6 +31,11 @@ export default {
   name: 'personList',
   props: {
     listItem: {default: []},
+  },
+  methods: {
+    personEnter: function(personId) {
+      this.$emit('click', personId);
+    }
   }
 }
 </script>
@@ -51,7 +58,13 @@ export default {
       &_column:nth-child(4) { width: 31%; }
     }
     &-body {
-      &_row { border-bottom: 1px solid grey; }
+      &_row { 
+        border-bottom: 1px solid grey; 
+        cursor: pointer;
+        &:hover {
+          background-color:rgba(95, 158, 160, .3);
+        }
+      }
       &_column { padding: 5px; }
     }
   }
