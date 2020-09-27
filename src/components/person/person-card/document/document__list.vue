@@ -16,8 +16,6 @@
 
 <style lang="scss" scoped>
 .document-list {
-  // padding-left: 20px;
-  // padding-right: 20px;
   font-family: 'Open sans';
   font-size: 13px;
   &__table {
