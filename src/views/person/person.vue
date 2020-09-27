@@ -1,7 +1,7 @@
 <template>
   <div class="person">
     <h3 class="person__title">Журналы - Пользователи</h3>
-    <div class="person_body">
+    <div class="person__body">
       <div class="person__body-control">
         <person-control @click="personSearch"></person-control>
       </div>

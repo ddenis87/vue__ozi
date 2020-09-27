@@ -66,7 +66,7 @@ export default {
         background-color: darkgray;
       }
       &_column { padding: 5px; }
-      &_column:nth-child(3) {  }
+      // &_column:nth-child(3) {  }
       &_column:nth-child(5) {
         padding: 0px 10px;
         .control {

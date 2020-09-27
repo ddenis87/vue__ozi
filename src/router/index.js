@@ -47,7 +47,17 @@ Vue.use(VueRouter)
   {
     path: '/person-card',
     name: 'person-card',
-    component: () => import('../views/person/person-card.vue')
+    component: () => import('../views/person/person-card.vue'),
+    children: [
+      {
+        path: '/person-card/__document',
+        component: () => import('../views/person/person-card/__document')
+      },
+      {
+        path: '/person-card/__crypto',
+        component: () => import('../views/person/person-card/__crypto')
+      },
+    ]
   },
   {
     path: '/report-week',
