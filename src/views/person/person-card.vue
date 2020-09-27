@@ -1,19 +1,19 @@
 <template>
   <div class="person-card">
-    <h3 class="person-card__title">Пользователь - Карта</h3>
+    <h3 class="person-card__title">Пользователь - FIO</h3>
     <div class="person-card__body">
-      <div class="person-card__body-control">
-        <person-card-control></person-card-control>
-      </div>
       <hr class="person-card__separator"/>
       <div class="person-card__sub-menu">
         <ul class="sub-menu">
           <router-link tag="li" 
                        class="sub-menu__item"
-                       to="/person-card/__document">Заявки</router-link>
+                       :to="'/person-card/__info?personId=' + personId">Общее</router-link>
           <router-link tag="li" 
                        class="sub-menu__item"
-                       to="/person-card/__crypto">Криптосредства</router-link>
+                       :to="'/person-card/__document?personId=' + personId">Заявки</router-link>
+          <router-link tag="li" 
+                       class="sub-menu__item"
+                       :to="'/person-card/__crypto?personId=' + personId">Криптосредства</router-link>
           <router-link tag="li" 
                        class="sub-menu__item"
                        to="">Ресурсы</router-link>
@@ -30,12 +30,10 @@
 </template>
 
 <script>
-import personCardControl from '@/components/person/person-card/person-card__control'
 
 export default {
   name: 'personCard',
   components: {
-    personCardControl,
   },
   data: function() {
     return {

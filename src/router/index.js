@@ -50,6 +50,10 @@ Vue.use(VueRouter)
     component: () => import('../views/person/person-card.vue'),
     children: [
       {
+        path: '/person-card/__info',
+        component: () => import('../views/person/person-card/__info')
+      },
+      {
         path: '/person-card/__document',
         component: () => import('../views/person/person-card/__document')
       },

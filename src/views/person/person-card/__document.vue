@@ -1,32 +1,73 @@
 <template>
   <div class="document">
-    <div class="document-input">
-      <h5>Входящие документы</h5>
+    <div class="document-control-input">
+      <h4 class="document__title">Входящие документы</h4>
       <hr/>
-      <div class="document__control"></div>
-      <div class="document__list"></div>
+      <div class="document__control">
+        <document-control></document-control>
+      </div>
     </div>
-    <div class="document-output">
-      <h5>Исходящие документы</h5>
+    <div class="document-control-output">
+      <h4 class="document__title">Исходящие документы</h4>
       <hr/>
-      <div class="document__control"></div>
-      <div class="document__list"></div>
+      <div class="document__control">
+        <document-control></document-control>
+      </div>
+    </div>
+    <div class="document-list-input">
+      <document-list><template v-slot:title>Входящие документы</template></document-list>
+    </div>
+    <div class="document-list-output">
+      <document-list><template v-slot:title>Исходящие документы</template></document-list>
     </div>
   </div>
 </template>
 
+<script>
+import documentControl from '@/components/person/person-card/document/document__control';
+import documentList from '@/components/person/person-card/document/document__list';
+
+export default {
+  name: 'personCardDocument',
+  components: {
+    documentControl,
+    documentList,
+  },
+}
+</script>
+
 <style lang="scss" scoped>
 .document {
   display: grid;
-  grid-template-areas: "document-input document-output";
+  grid-template-areas: "document-control-input document-control-output"
+                       "document-list-input document-list-input"
+                       "document-list-output document-list-output";
   grid-template-rows: auto;
   grid-template-columns: 1fr 1fr;
   width: 100%;
-  &-input {
-    grid-area: document-input;
+  &__title {
+    color: darkslategrey;;
   }
-  &-output {
-    grid-area: document-output;
+  &-control-input {
+    grid-area: document-control-input;
+    padding-right: 10px;
+    border-right: 1px solid darkgrey;
+    // box-sizing: border-box;
+  }
+  &-control-output {
+    grid-area: document-control-output;
+    padding-left: 10px;
+    // box-sizing: border-box;
+  }
+  &-list-input {
+    grid-area: document-list-input;
+    margin-top: 5px;
+    border-top: 1px solid darkgray;
+  }
+  &-list-output {
+    grid-area: document-list-output;
+    margin-top: 5px;
+    border-top: 1px solid darkgray;
   }
 }
 </style>
