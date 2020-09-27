@@ -45,6 +45,8 @@ export default {
           {CURL: '/catalog__document-input', CNAME: 'Входящие документы'},
           {CURL: '', CNAME: 'Журналы'},
           {CURL: '/person', CNAME: 'Пользователи'},
+          {CURL: '', CNAME: 'Отчеты'},
+          {CURL: '/report-week', CNAME: 'Неделя'},
         ];
       })
   }

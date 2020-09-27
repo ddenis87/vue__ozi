@@ -12,7 +12,6 @@
       <c-button class="person-control__button-item"
                 @click="personCreate">Создать</c-button>
     </div>
-    
   </div>
 </template>
 
