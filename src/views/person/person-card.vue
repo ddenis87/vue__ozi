@@ -5,21 +5,12 @@
       <hr class="person-card__separator"/>
       <div class="person-card__sub-menu">
         <ul class="sub-menu">
-          <router-link tag="li" 
-                       class="sub-menu__item"
-                       :to="'/person-card/__info?personId=' + personId">Общее</router-link>
-          <router-link tag="li" 
-                       class="sub-menu__item"
-                       :to="'/person-card/__document?personId=' + personId">Заявки</router-link>
-          <router-link tag="li" 
-                       class="sub-menu__item"
-                       :to="'/person-card/__crypto?personId=' + personId">Криптосредства</router-link>
-          <router-link tag="li" 
-                       class="sub-menu__item"
-                       to="">Ресурсы</router-link>
-          <router-link tag="li" 
-                       class="sub-menu__item"
-                       to="">Прочее</router-link>
+          <router-link class="sub-menu__item"
+                       active-class="sub-menu__item-active"
+                       v-for="(item, index) in listSubmenu"
+                       :key="index"
+                       :to="item.CPATH + '?personId=' + personId"
+                       tag="li">{{ item.CNAME }}</router-link>
         </ul>
       </div>
       <div class="person-card__props">
@@ -37,10 +28,18 @@ export default {
   },
   data: function() {
     return {
-      personId: decodeURI(window.location.search.slice(window.location.search.indexOf("=") + 1))
+      listSubmenu: [
+        {CNAME: 'Общее', CPATH: '/person-card/__info'},
+        {CNAME: 'Заявки', CPATH: '/person-card/__document'},
+        {CNAME: 'Криптография', CPATH: '/person-card/__crypto'},
+        {CNAME: 'Ресурсы', CPATH: '/person-card/__res'},
+        {CNAME: 'Прочее', CPATH: '/person-card/__other'},
+      ],
+      personId: decodeURI(window.location.search.slice(window.location.search.indexOf("=") + 1)),
     }
   },
   created: function() {
+    this.$router.push('/person-card/__document?personId=' + this.personId)
     console.log(this.personId);
   }
 }
@@ -75,6 +74,9 @@ export default {
         box-sizing: border-box;
         background-color: $colorMain;
         cursor: pointer;
+        &-active {
+          background-color: darkgoldenrod;
+        }
       }
     }
   }
