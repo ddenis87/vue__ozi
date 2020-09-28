@@ -4,14 +4,14 @@
       <h4 class="document__title">Входящие документы</h4>
       <hr/>
       <div class="document__control">
-        <document-control :inListItem="inputDocument"></document-control>
+        <document-control inListType="documentInput"></document-control>
       </div>
     </div>
     <div class="document-control-output">
       <h4 class="document__title">Исходящие документы</h4>
       <hr/>
       <div class="document__control">
-        <document-control :inListItem="outputDocument"></document-control>
+        <document-control inListType="documentOutput"></document-control>
       </div>
     </div>
     <div class="document-list-input">
@@ -35,34 +35,6 @@ export default {
     documentControl,
     documentList,
   },
-  data: function() {
-    return {
-      inputDocument: [
-        {ID: '0', CNAME: ''},
-        {ID: '1', CNAME: 'Заявка на предоставление доступа'},
-        {ID: '2', CNAME: 'Акт о вскрытии'},
-        {ID: '3', CNAME: 'Заявка на криптографию'},
-      ],
-      outputDocument: [
-        {ID: '0', CNAME: ''},
-        {ID: '1', CNAME: 'Парольная документация Интернет'},
-        {ID: '2', CNAME: 'Сертификат ключа'},
-        {ID: '3', CNAME: 'Акт смены мастер ключа'},
-      ],
-    }
-  },
-  created: function() {
-  },
-  methods: {
-    selectDB: function(option) {
-      axios
-        .post(pathBackend + 'person-card__document.php', null, {params: option})
-        .then((response) => {
-          return response.data; 
-        })
-        .catch(() => { return []; })
-    }
-  }
 }
 </script>
 

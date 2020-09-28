@@ -2,7 +2,6 @@
   <div class="c-select">
     <label class="c-select__title"><slot></slot></label>
     <select class="c-select__select">
-      <!-- <option :value='listItem[0].ID'>{{ listItem[0].CNAME }}</option> -->
       <option v-for="(item, index) in listItem" 
               :key="index" 
               :value="item.ID">{{ item.CNAME }}</option>
