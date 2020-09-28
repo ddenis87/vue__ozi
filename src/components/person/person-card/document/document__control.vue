@@ -2,7 +2,8 @@
   <div class="document-control">
     <div class="document-control__title">Добавление документа</div>
     <div class="document-control__box">
-      <c-select class="document-control__select">Документ</c-select>
+      <c-select class="document-control__select"
+                :inListItem="listItem">Документ</c-select>
       <c-input class="document-control__input">Примечание</c-input>
       <div class="document-control__button">
         <c-button class="document-control__button-item">Добавить</c-button>
@@ -22,6 +23,12 @@ export default {
     cInput,
     cSelect,
     cButton,
+  },
+  props: [
+    'inListItem',
+  ],
+  computed: {
+    listItem: function() { return this.inListItem; }
   }
 }
 </script>

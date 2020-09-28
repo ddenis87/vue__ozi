@@ -13,8 +13,14 @@
 <script>
 export default {
   name: 'cSelect',
-  props: {
-    listItem: Array,
+  props: [
+    'inListItem',
+  ],
+  computed: {
+    listItem() { return this.inListItem }
+  },
+  created: function() {
+    
   }
 }
 </script>
