@@ -7,7 +7,7 @@
       <c-checkbox class="catalog-control__checkbox">Требует верификации</c-checkbox>
       <c-button class="catalog-control__button-item">Добавить</c-button>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -22,48 +22,15 @@ export default {
     cCheckbox,
     cButton,
   },
-  data: function() {
-    return {
-    }
-  },
-  methods: {
-  }
 }
 </script>
 
 <style lang="scss" scoped>
+@import 'catalog__control.scss';
+
 .catalog-control {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 0px 20px;
-  box-sizing: border-box;
-  &__title {
-    margin-bottom: 5px;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  &__input {
-    margin-bottom: 10px;
-  }
   &__box {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
   }
-  &__button-item {
-    width: 150px;
-  }
-
-
-  // .confirm {
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: center;
-  //   padding: 3px;
-  //   &__input {cursor: pointer;}
-  //   &__text {padding-left: 3px; cursor: pointer;}
-  //   &_hidden {visibility: hidden;}
-  // }
 }
 </style>

@@ -33,30 +33,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.catalog-control {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 0px 20px;
-  box-sizing: border-box;
-  &__title {
-    margin-bottom: 5px;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
+@import 'catalog__control.scss';
+
+.catalog__control {
   &__input {
-    width: 100%;
-    margin-bottom: 10px;
+    // width: 100%; // ??????
     &:nth-child(2) { width: 400px; margin-left: 20px; }
     &:nth-child(3) { width: 300px; margin-left: 20px; }
   }
   &__box {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
-  }
-  &__button-item {
-    width: 150px;
   }
 }
 </style>
