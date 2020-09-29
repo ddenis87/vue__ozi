@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'catalog__control.scss';
+@import 'g-catalog__control.scss';
 
 .catalog-control {
   &__box {
