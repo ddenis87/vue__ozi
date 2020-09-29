@@ -47,13 +47,21 @@ export default {
     }
   },
   created: function() {
-    let option = {
-      function: this.inListType,
-    };
+    let option = {};
+    switch(this.inListType) {
+      case 'documentInput': {
+        option.function = 'getListDocumentInput';
+        break;
+      }
+      case 'documentOutput': {
+        option.function = 'getListDocumentOutput';
+        break;
+      }
+    }
     axios
       .post(pathBackend + 'person-card__document.php', null, {params: option})
       .then((response) => {
-        this.listItem = response.data; 
+        this.listItem = response.data;
       })
   },
   methods: {
