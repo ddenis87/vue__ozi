@@ -1,10 +1,10 @@
 <template>
   <div class="document-control">
-    <div class="document-control__title">Добавление документа</div>
+    <!-- <div class="document-control__title">Добавление документа</div> -->
     <div class="document-control__box">
       <c-select class="document-control__select"
                 :inListItem="listItem"
-                v-model="documentProps">Документ</c-select>
+                v-model="documentProps">Выберите документ для добавления</c-select>
       <c-input class="document-control__input"
                v-model="documentNote">Примечание</c-input>
       <div class="document-control__button">

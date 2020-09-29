@@ -97,7 +97,8 @@ export default {
     &-body {
       &_row { border-bottom: 1px solid grey; }
       &_row-disabled {
-        background-color: darkgray;
+        background-color: darkred;
+        color: white;
       }
       &_column { padding: 5px; }
       &_column:nth-child(3), &_column:nth-child(4) { text-align: center; }

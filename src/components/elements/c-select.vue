@@ -4,6 +4,7 @@
     <select class="c-select__select"
             v-model="selectValue"
             @change="changeSelectValue">
+      <option value="0" selected></option>
       <option v-for="(item, index) in listItem" 
               :key="index" 
               :value="item">{{ item.CNAME }}</option>

@@ -1,10 +1,11 @@
 <template>
-  <div class="document-list">
+  <div class="document-list"
+       :class="listType">
     <table class="document-list__table">
       <caption class="document-list__table-title"><slot></slot></caption>
       <thead class="document-list__table-head">
         <tr class="document-list__table-head_row">
-          <th class="document-list__table-head_column">№</th>
+          <th class="document-list__table-head_column">{{ tabTitle }}</th>
           <th class="document-list__table-head_column">Дата</th>
           <th class="document-list__table-head_column">Наименование</th>
           <th class="document-list__table-head_column">Примечание</th>
@@ -38,9 +39,15 @@ export default {
   name: 'documentList',
   props: {
     inListItem: Array,
+    inListType: String,
   },
   computed: {
-    listItem() { return this.inListItem; }
+    listItem() { return this.inListItem; },
+    listType() { return "document-list__" + this.inListType; },
+    tabTitle() { 
+      if (this.inListType == 'document-input') return "№ вх.";
+      if (this.inListType == 'document-output') return "№ исх."; 
+    }
   },
   data: function() {
     return {
@@ -64,21 +71,34 @@ export default {
 .document-list {
   font-family: 'Open sans';
   font-size: 13px;
+  &__document-input {
+    background-color: rgba(173, 216, 230, .3);
+  }
+  &__document-output {
+    background-color: rgba(144, 238, 144, .3);
+  }
   &__table {
     width: 100%;
     border-collapse: collapse;
     &-title {
-      text-align: right;
-      color: darkslategray;
+      padding: 3px;
+      padding-left: 10px;
+      text-align: left;
+      font-weight: bold;
+      color: black;
       text-transform: uppercase;
+      &::after {
+        content: '';
+        background-image: url('~@/assets/images/arrow_blue.png');
+      }
     }
     &-head {
       &_row { border-bottom: 1px solid grey; }
       &_column { padding: 5px; }
       &_column:nth-child(1) { width: 5%; }
       &_column:nth-child(2) { width: 8%; }
-      &_column:nth-child(3) { width: 41%; text-align: left; }
-      &_column:nth-child(4) { width: 41%; text-align: left; }
+      &_column:nth-child(3) { width: 52%; text-align: left; }
+      &_column:nth-child(4) { width: 30%; text-align: left; }
       &_column:nth-child(5) { width: 5%; }
     }
     &-body {
@@ -95,8 +115,8 @@ export default {
         justify-content: center;
         align-items: center;
         &__button {
-          width: 24px;
-          height: 24px;
+          width: 20px;
+          height: 20px;
           border: 0px;
           background-color: rgba(0, 0, 0, 0);
           background-size: contain;

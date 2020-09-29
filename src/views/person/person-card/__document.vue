@@ -1,24 +1,30 @@
 <template>
   <div class="document">
     <div class="document-control-input">
-      <h4 class="document__title">Входящие документы</h4>
+      <h5 class="document__title">Входящие документы</h5>
       <hr/>
       <div class="document__control">
-        <document-control inListType="documentInput"></document-control>
+        <document-control inListType="documentInput"
+                          @add-document="addDocumentInput"></document-control>
       </div>
     </div>
     <div class="document-control-output">
-      <h4 class="document__title">Исходящие документы</h4>
+      <h5 class="document__title">Исходящие документы</h5>
       <hr/>
       <div class="document__control">
-        <document-control inListType="documentOutput"></document-control>
+        <document-control inListType="documentOutput"
+                          @add-document="addDocumentOutput"></document-control>
       </div>
     </div>
     <div class="document-list-input">
-      <document-list><template v-slot:title>Входящие документы</template></document-list>
+      <hr/>
+      <document-list :inListItem="listDocumentInput"
+                     inListType="document-input">Входящие документы</document-list>
     </div>
     <div class="document-list-output">
-      <document-list><template v-slot:title>Исходящие документы</template></document-list>
+      <hr/>
+      <document-list :inListItem="listDocumentOutput"
+                     inListType="document-output">Исходящие документы</document-list>
     </div>
   </div>
 </template>
@@ -35,6 +41,48 @@ export default {
     documentControl,
     documentList,
   },
+  data: function() {
+    return {
+      personId: this.$store.state.personProfile.personId,
+      listDocumentInput: [],
+      listDocumentOutput: [],
+    }
+  },
+  created: function() {
+    console.log(this.personId);
+    this.getListDocumentInput();
+    this.getListDocumentOutput();
+  },
+  methods: {
+    addDocumentInput: function(option) {
+      console.log(option)
+    },
+    addDocumentOutput: function(option) {
+      console.log(option)
+    },
+    getListDocumentInput: function() {
+      let option = {
+        function: 'getListDocumentInputPerson',
+        personId: this.personId
+      }
+      axios
+        .post(pathBackend + 'person-card__document.php', null, {params: option})
+        .then(response => {
+          this.listDocumentInput = response.data;
+        })
+    },
+    getListDocumentOutput: function() {
+      let option = {
+        function: 'getListDocumentOutputPerson',
+        personId: this.personId
+      }
+      axios
+        .post(pathBackend + 'person-card__document.php', null, {params: option})
+        .then(response => {
+          this.listDocumentOutput = response.data;
+        })
+    },
+  }
 }
 </script>
 
@@ -47,6 +95,7 @@ export default {
   grid-template-rows: auto;
   grid-template-columns: 1fr 1fr;
   width: 100%;
+  padding-bottom: 20px;
   &__title {
     color: darkslategrey;;
   }
@@ -64,12 +113,12 @@ export default {
   &-list-input {
     grid-area: document-list-input;
     margin-top: 5px;
-    border-top: 1px solid darkgray;
+    // border-top: 1px solid darkgray;
   }
   &-list-output {
     grid-area: document-list-output;
     margin-top: 5px;
-    border-top: 1px solid darkgray;
+    // border-top: 1px solid darkgray;
   }
 }
 </style>

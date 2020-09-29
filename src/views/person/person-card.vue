@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: 'personCard',
@@ -39,7 +40,19 @@ export default {
     }
   },
   created: function() {
-    this.$router.push('/person-card/__document?personId=' + this.personId)
+    let option = {
+      function: 'getPersonInfoFull',
+      personId: this.personId
+    }
+    axios
+      .post(pathBackend + 'person.php', null, {params: option})
+      .then(response => {
+        this.$store.commit('setPersonProfile', response.data[0]);
+        this.$router.push('/person-card/__document?personId=' + this.personId)
+      })
+      .catch(() => {
+        this.$router.push('/person-card/__document?personId=' + this.personId)
+      })
     console.log(this.personId);
   }
 }

@@ -82,7 +82,7 @@ export default {
     &-body {
       &_row { border-bottom: 1px solid grey; }
       &_row-disabled {
-        background-color: darkgray;
+        background-color: rgba(255, 0, 0, .3);
       }
       &_column { padding: 5px; }
       &_column:nth-child(3) { text-align: center; }
