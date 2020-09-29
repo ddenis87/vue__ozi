@@ -76,20 +76,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'variables.scss';
+@import 'catalog__list.scss';
 
 .catalog-list {
-  margin-bottom: $bodyMarginBottom;
-  padding-left: $bodyPaddingLeft;
-  padding-right: $bodyPaddingRight;
-  font-family: $fontFamily;
-  font-size: $fontSize;
   &__table {
-    width: $tableWidth;
-    border-collapse: collapse;
     &-head {
-      &_row { border-bottom: 1px solid $tableBorderColor; }
-      &_column { padding: 5px; }
       &_column:nth-child(1) { width: 8%; }
       &_column:nth-child(2) { width: 76%; }
       &_column:nth-child(3) { width: 8%; }
@@ -97,36 +88,8 @@ export default {
       &_column:nth-child(5) { width: 8%; }
     }
     &-body {
-      &_row { border-bottom: 1px solid $tableBorderColor; }
-      &_row-disabled {
-        background-color: $disabledRowBackground;
-        color: $disabledRowText;
-      }
-      &_column { padding: 5px; }
       &_column:nth-child(3), &_column:nth-child(4) { text-align: center; }
-      &_column:nth-child(5) {
-        padding: 0px 10px;
-        .control {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          &__button {
-            width: $controlButtonWidth;
-            height: $controlButtonHeight;
-            border: 0px;
-            background-color: rgba(0, 0, 0, 0);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center center;
-            cursor: pointer;
-            &_disabled-on { background-image: url('~@/assets/images/control/button_disabled-on.png'); }
-            &_disabled-off { background-image: url('~@/assets/images/control/button_disabled-off.png'); }
-            &_delete { 
-              background-image: url('~@/assets/images/control/button_delete.png');
-            }
-          }
-        }
-      }
+      &_column:nth-child(5) { padding: 0px 10px; }
     }
   }
 }
