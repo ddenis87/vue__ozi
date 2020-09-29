@@ -76,17 +76,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'variables.scss';
+
 .catalog-list {
-  margin-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  font-family: 'Open sans';
-  font-size: 13px;
+  margin-bottom: $bodyMarginBottom;
+  padding-left: $bodyPaddingLeft;
+  padding-right: $bodyPaddingRight;
+  font-family: $fontFamily;
+  font-size: $fontSize;
   &__table {
-    width: 100%;
+    width: $tableWidth;
     border-collapse: collapse;
     &-head {
-      &_row { border-bottom: 1px solid grey; }
+      &_row { border-bottom: 1px solid $tableBorderColor; }
       &_column { padding: 5px; }
       &_column:nth-child(1) { width: 8%; }
       &_column:nth-child(2) { width: 76%; }
@@ -95,10 +97,10 @@ export default {
       &_column:nth-child(5) { width: 8%; }
     }
     &-body {
-      &_row { border-bottom: 1px solid grey; }
+      &_row { border-bottom: 1px solid $tableBorderColor; }
       &_row-disabled {
-        background-color: darkred;
-        color: white;
+        background-color: $disabledRowBackground;
+        color: $disabledRowText;
       }
       &_column { padding: 5px; }
       &_column:nth-child(3), &_column:nth-child(4) { text-align: center; }
@@ -109,8 +111,8 @@ export default {
           justify-content: space-between;
           align-items: center;
           &__button {
-            width: 24px;
-            height: 24px;
+            width: $controlButtonWidth;
+            height: $controlButtonHeight;
             border: 0px;
             background-color: rgba(0, 0, 0, 0);
             background-size: contain;
