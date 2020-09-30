@@ -49,7 +49,6 @@ export default {
     }
   },
   created: function() {
-    console.log(this.personId);
     this.getListDocumentInput();
     this.getListDocumentOutput();
   },

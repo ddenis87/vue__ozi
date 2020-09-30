@@ -51,9 +51,9 @@ export default {
         this.$router.push('/person-card/__document?personId=' + this.personId)
       })
       .catch(() => {
-        this.$router.push('/person-card/__document?personId=' + this.personId)
+        // this.$router.push('/person-card/__document') //?personId=' + this.personId)
       })
-    console.log(this.personId);
+    // console.log(this.personId);
   }
 }
 </script>

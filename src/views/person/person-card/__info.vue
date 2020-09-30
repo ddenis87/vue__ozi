@@ -2,16 +2,25 @@
   <div class="person-card-info">
     <div class="person-card-info__title">Информация о пользователе</div>
     <div class="person-card-info__box">
-      <c-input class="person-card-info__input">Фамилия</c-input>
-      <c-select class="person-card-info__select">Территориальный орган</c-select>
+      <c-input class="person-card-info__input"
+               :inValue="personProfile.personFa">Фамилия</c-input>
+      <c-select class="person-card-info__select"
+                :inListItem="listDistrict"
+                :inValue="personProfile.personDistrictId">Территориальный орган</c-select>
     </div>
     <div class="person-card-info__box">
-      <c-input class="person-card-info__input">Имя</c-input>
-      <c-select class="person-card-info__select">Структурное подразделение</c-select>
+      <c-input class="person-card-info__input" 
+               :inValue="personProfile.personIm">Имя</c-input>
+      <c-select class="person-card-info__select"
+                :inListItem="listDepartment"
+                :inValue="personProfile.personDepartmentId">Структурное подразделение</c-select>
     </div>
     <div class="person-card-info__box">
-      <c-input class="person-card-info__input">Отчество</c-input>
-      <c-select class="person-card-info__select">Должность</c-select>
+      <c-input class="person-card-info__input" 
+               :inValue="personProfile.personOt">Отчество</c-input>
+      <c-select class="person-card-info__select"
+                :inListItem="listPost"
+                :inValue="personProfile.personPostId">Должность</c-select>
     </div>
     <div class="person-card-info__box">
       <c-button class="person-card-info__button-item">Изменить</c-button>
@@ -21,6 +30,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 import cInput from '@/components/elements/c-input';
 import cSelect from '@/components/elements/c-select';
 import cButton from '@/components/elements/c-button';
@@ -31,6 +42,45 @@ export default {
     cInput,
     cSelect,
     cButton
+  },
+  computed: {
+    personProfile() { return this.$store.state.personProfile; }
+  },
+  data: function() {
+    return {
+      listDistrict: [],
+      listDepartment: [],
+      listPost: [],
+    }
+  },
+  created: function() {
+    // console.log(this.personProfile);
+    this.getListDistrict();
+    this.getListDepartment();
+    this.getListPost();
+  },
+  methods: {
+    getListDistrict: function() {
+      axios
+        .post(pathBackend + 'person-card__info.php', null, {params: {function: 'getListDistrict'}})
+        .then(response => {
+          this.listDistrict = response.data;
+        })
+    },
+    getListDepartment: function() {
+      axios
+        .post(pathBackend + 'person-card__info.php', null, {params: {function: 'getListDepartment'}})
+        .then(response => {
+          this.listDepartment = response.data;
+        })
+    },
+    getListPost: function() {
+       axios
+        .post(pathBackend + 'person-card__info.php', null, {params: {function: 'getListPost'}})
+        .then(response => {
+          this.listPost = response.data;
+        })
+    }
   }
 }
 </script>
