@@ -7,7 +7,7 @@
       <option value="0" selected></option>
       <option v-for="(item, index) in listItem" 
               :key="index" 
-              :value="item">{{ item.CNAME }}</option>
+              :value="item.ID">{{ item.CNAME }}</option>
     </select>
   </div>  
 </template>
@@ -20,6 +20,7 @@ export default {
   },
   props: [
     'inListItem',
+    'inValue'
   ],
   computed: {
     listItem() { return this.inListItem }
@@ -28,6 +29,9 @@ export default {
     return {
       selectValue: '0',
     }
+  },
+  created: function() {
+    this.selectValue = this.inValue;
   },
   methods: {
     changeSelectValue: function() {
