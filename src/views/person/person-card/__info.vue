@@ -54,7 +54,6 @@ export default {
     }
   },
   created: function() {
-    // console.log(this.personProfile);
     this.getListDistrict();
     this.getListDepartment();
     this.getListPost();
