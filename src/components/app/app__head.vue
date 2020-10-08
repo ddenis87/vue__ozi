@@ -49,7 +49,7 @@ export default {
     setInterval(() => {
       let dateNow = new Date();
       let dd = (+dateNow.getDate() < 10) ? '0' + dateNow.getDate() : dateNow.getDate();
-      let mm = (+dateNow.getMonth() < 10) ? '0' + (+dateNow.getMonth() + 1) : +dateNow.getMonth() + 1;
+      let mm = (+dateNow.getMonth() < 9) ? '0' + (+dateNow.getMonth() + 1) : +dateNow.getMonth() + 1;
       let yyyy = dateNow.getFullYear();
       let hh = dateNow.getHours();
     let mi = (+dateNow.getMinutes() < 10) ? '0' + dateNow.getMinutes() : dateNow.getMinutes();

@@ -89,7 +89,7 @@ export default {
       text-transform: uppercase;
       &::after {
         content: '';
-        background-image: url('~@/assets/images/arrow_blue.png');
+        background-image: url('~@/assets/images/view/arrow_blue.png');
       }
     }
     &-head {

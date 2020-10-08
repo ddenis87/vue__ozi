@@ -4,68 +4,63 @@
       <caption class="crypto-table__title"><slot></slot></caption>
       <thead class="crypto-table__head">
         <tr class="crypto-table__head_row">
-          <th class="crypto-table__head_column">№ п/п</th>
-          <th class="crypto-table__head_column">Наименование</th>
-          <th class="crypto-table__head_column">Установка</th>
-          <!-- <th class="crypto-table__head_column">Основание</th> -->
-          <th class="crypto-table__head_column">Акты</th>
-          <th class="crypto-table__head_column">Удаление</th>
-          <!-- <th class="crypto-table__head_column">Основание</th> -->
-          <th class="crypto-table__head_column">Акты</th>
+          <th rowspan="2" class="crypto-table__head_column">№ п/п</th>
+          <th rowspan="2" class="crypto-table__head_column">Наименование</th>
+          <th colspan="3" class="crypto-table__head_column">Задачи</th>
+          <th rowspan="2" class="crypto-table__head_column">Установка</th>
+          <th rowspan="2" class="crypto-table__head_column">Акты</th>
+          <th rowspan="2" class="crypto-table__head_column">Удаление</th>
+          <th rowspan="2" class="crypto-table__head_column">Акты</th>
           <th rowspan="2" class="crypto-table__head_column crypto-table__head_column-action"></th>
+        </tr>
+        <tr class="crypto-table__head_row">
+          <th class="crypto-table__head_column-task">З</th>
+          <th class="crypto-table__head_column-task">ДП</th>
+          <th class="crypto-table__head_column-task">К</th>
         </tr>
       </thead>
       <tbody class="crypto-table__body">
-        <tr class="crypto-table__body_row">
-          <td class="crypto-table__body_column">1</td>
-          <td class="crypto-table__body_column">ViPNet Client</td>
-          <td class="crypto-table__body_column">Заявка № 1229 от 22.12.2017</td>
-          <td class="crypto-table__body_column">
-            <div class="control">
-              <button class="control__button control__button_document" title="Просмотреть документ"></button>
-              <button class="control__button control__button_delete" title="Удалить документ"></button>
-            </div>
-          </td>
-          <td class="crypto-table__body_column">Заявка № 444 от 11.04.2019</td>
-          <td class="crypto-table__body_column">
-            <div class="control">
-              <div></div>
-              <button class="control__button control__button_upload" title="Удалить документ"></button>
-            </div>
-          </td>
-          <!-- <td class="crypto-table__body_column"></td> -->
-          <td class="crypto-table__body_column">
-            <div class="control">
-              <button class="control__button control__button_delete-row" title="Удалить запись"></button>
-            </div>
-          </td>
-        </tr>
-        <tr class="crypto-table__body_row">
-          <td colspan="7" class="crypto-table__body_column crypto-table__body_column-end"><b>Примечание: </b>Установлен для личного использования</td>
-        </tr>
-        <tr class="crypto-table__body_row">
-          <td class="crypto-table__body_column">2</td>
-          <td class="crypto-table__body_column">ViPNet Cryptoservice</td>
-          <td class="crypto-table__body_column">Заявка № 19 от 22.01.2017</td>
-          <td class="crypto-table__body_column">
-            <div class="control">
-              <button class="control__button control__button_document-create" title="Загрузить документ"></button>
-              <button class="control__button control__button_upload" title="Загрузить документ"></button>
-            </div>
-          </td>
-          <td class="crypto-table__body_column"></td>
-          <td class="crypto-table__body_column"></td>
-          <td class="crypto-table__body_column"></td>
-        </tr>
-        <tr class="crypto-table__body_row">
-          <td class="crypto-table__body_column">3</td>
-          <td class="crypto-table__body_column">ViPNet CSP</td>
-          <td class="crypto-table__body_column">Заявка № 1229 от 22.12.2017</td>
-          <td class="crypto-table__body_column"></td>
-          <td class="crypto-table__body_column"></td>
-          <td class="crypto-table__body_column"></td>
-          <td class="crypto-table__body_column"></td>
-        </tr>
+        <template v-for="(item, index) in listItem">
+          <tr class="crypto-table__body_row" :key="index + 1">
+            <td class="crypto-table__body_column">{{ index + 1 }}</td>
+            <td class="crypto-table__body_column">{{ item.VNAME }}</td>
+            <td class="crypto-table__body_column crypto-table__body_column-task" :class="{'crypto-table__body_column-task_yes': (item.VTASKCLIENT == 1) ? true : false }"></td>
+            <td class="crypto-table__body_column crypto-table__body_column-task" :class="{'crypto-table__body_column-task_yes': (item.VTASKMAIL == 1) ? true : false }"></td>
+            <td class="crypto-table__body_column crypto-table__body_column-task" :class="{'crypto-table__body_column-task_yes': (item.VTASKCS == 1) ? true : false }"></td>
+            <td class="crypto-table__body_column crypto-table__body_column-base">
+              <span>{{ getFormatedDocumentBase(item.VINSTALLDOCNUMBER, item.VINSTALLDOCDATE) }}</span>
+              <button class="base-button" title="Выбрать">...</button>
+            </td>
+            <td class="crypto-table__body_column">
+              <div class="control">
+                <button class="control__button control__button_document" title="Показать документ" v-if="(item.VINSTALLPATH)"></button>
+                <button class="control__button control__button_document-create" title="Распечатать документ" v-else></button>
+                <button class="control__button control__button_document-delete" title="Удалить документ" v-if="(item.VINSTALLPATH)"></button>
+                <button class="control__button control__button_document-upload" title="Загрузить документ" v-else></button>
+              </div>
+            </td>
+            <td class="crypto-table__body_column crypto-table__body_column-base">
+              <span>{{ getFormatedDocumentBase(item.VUNISTALLDOCNUMBER, item.VUNISTALLDOCDATE) }}</span>
+              <button class="base-button" title="Выбрать">...</button>
+            </td>
+            <td class="crypto-table__body_column">
+              <div class="control">
+                <button class="control__button control__button_document" title="Показать документ" v-if="(item.VUNISTALLPATH)"></button>
+                <button class="control__button control__button_document-create" title="Распечатать документ" v-else></button>
+                <button class="control__button control__button_document-delete" title="Удалить документ" v-if="(item.VUNISTALLPATH)"></button>
+                <button class="control__button control__button_document-upload" title="Загрузить документ" v-else></button>
+              </div>
+            </td>
+            <td rowspan="2" class="crypto-table__body_column">
+              <div class="control">
+                <button class="control__button control__button_delete-row" title="Удалить запись"></button>
+              </div>
+            </td>
+          </tr>
+          <tr class="crypto-table__body_row" :key="index + 1 * 1000">
+            <td colspan="10" class="crypto-table__body_column crypto-table__body_column-end"><b>Примечание: </b>Установлен для личного использования</td>
+          </tr>
+        </template>
       </tbody>
     </table>
   </div>
@@ -74,6 +69,18 @@
 <script>
 export default {
   name: 'cryptoList',
+  props: {
+    inListItem: Array,
+  },
+  computed: {
+    listItem() { return this.inListItem; }
+  },
+  methods: {
+    getFormatedDocumentBase(docNumber, docDate) {
+      if (docNumber == null) return '---';
+      return `Заявка № ${docNumber} от ${docDate}`;
+    }
+  }
 }
 </script>
 
@@ -85,50 +92,56 @@ export default {
   }
   &-table {
     width: 100%;
-    // border-collapse: collapse;
+    border-collapse: collapse;
     &__title {
       text-align: left;
       font-family: 'Montserrat';
       font-size: 14px;
       font-weight: bold;
-      border-bottom: 1px solid grey;
+      border-bottom: 2px solid grey;
     }
     &__head {
       &_column {
-        padding: 2px;
-        &-action {
-
-          
-        }
+        padding: 3px;
+        border-bottom: 2px solid grey;
         &:nth-child(1) { width: 42px; }
-        &:nth-child(3), &:nth-child(5) { width: 200px; }
-        &:nth-child(4), &:nth-child(6) { width: 60px; }
-        &:nth-child(3), &:nth-child(4) { background-color: lightblue; }
-        &:nth-child(5), &:nth-child(6) { background-color: lightgreen; }
-        &:nth-child(7) {
+        &:nth-child(3) { border-left: 2px solid grey; border-right: 2px solid grey; }
+        &:nth-child(5), &:nth-child(7) { width: 60px; border-left: 2px solid darkgray; }
+        &:nth-child(4), &:nth-child(6) { width: 230px; }
+        &:nth-child(4), &:nth-child(5) { background-color: lightblue; }
+        &:nth-child(6), &:nth-child(7) { background-color: lightgreen; }
+        &:nth-child(8) {
           width: 30px;
-          // background-color: rgba(253, 73, 73, 0.796);
-          background-image: url('~@/assets/images/control/action.png'); background-size: contain;
+          background-image: url('~@/assets/images/view/action.png');
+          background-size: 18px 18px;
           background-repeat: no-repeat;
           background-position: center;
         }
-
-        
+        &-task {
+          padding: 3px;
+          border-bottom: 1px solid grey;
+          width: 25px;
+          text-align: center; 
+          font-size: 10px; 
+          font-weight: bold; 
+          &:nth-child(1) { border-left: 2px solid grey; border-bottom: 2px solid grey; }
+          &:nth-child(2) { border-left: 1px solid grey; border-right: 1px solid grey; border-bottom: 2px solid grey; }
+          &:nth-child(3) { border-right: 2px solid grey; border-bottom: 2px solid grey; }
+        }
       }
     }
     &__body {
       &_column {
         padding: 5px 5px;
         &-end {
-          border-bottom: 2px solid grey;
+          border-bottom: 1px solid grey;
         }
-        &:nth-child(3), &:nth-child(4) { background-color: rgba(173, 216, 230, .3); }
-        &:nth-child(5), &:nth-child(6) { background-color: rgba(144, 238, 144, .3); }
-        // &:nth-child(7) { background-color: rgba(255, 102, 0, 0.522); }
+        &:nth-child(6), &:nth-child(7) { background-color: rgba(173, 216, 230, .3); }
+        &:nth-child(8), &:nth-child(9) { background-color: rgba(144, 238, 144, .3); }
+        &:nth-child(10) { background-color: #FF9200; }
         .control {
           display: flex;
-          justify-content: space-between;
-          // padding: 0px 5px;
+          justify-content: space-around;
           &__button {
             width: 20px;
             height: 20px;
@@ -138,17 +151,34 @@ export default {
             cursor: pointer;
             &_document { background-image: url('~@/assets/images/control/button_document.png'); background-size: contain; }
             &_document-create { background-image: url('~@/assets/images/control/button_document-create.png'); background-size: contain; }
-            &_delete { background-image: url('~@/assets/images/control/button_delete_file2.png'); background-size: contain; }
-            &_upload { background-image: url('~@/assets/images/control/button_upload_file2.png'); background-size: contain; }
+            &_document-delete { background-image: url('~@/assets/images/control/button_delete_file2.png'); background-size: contain; }
+            &_document-upload { background-image: url('~@/assets/images/control/button_upload_file2.png'); background-size: contain; }
             &_delete-row { background-image: url('~@/assets/images/control/button_delete.png'); background-size: contain; }
-
-            
           }
-         
+        }
+        &-base {
+          display: flex;
+          justify-content: space-between;
+          .base-button {
+            width: 20px;
+            height: 20px;
+            padding: 0px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 1px solid black;
+            background-color: transparent;
+          }
+        }
+        &-task {
+          text-align: center;
+          background-image: url('~@/assets/images/view/no.png');
+          background-size: 14px 14px;
+          background-repeat: no-repeat;
+          background-position: center;
+          &_yes { background-image: url('~@/assets/images/view/yes.png'); }
         }
       }
     }
   }
-
 }
 </style>
