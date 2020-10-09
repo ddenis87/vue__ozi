@@ -1,18 +1,22 @@
 <template>
   <div>
-    <crypto-list :inListItem="listCryptoVpnCL">ViPNet</crypto-list>
+    <crypto-vpn-cl-list v-if="(listCryptoVpnCL.length != 0)" 
+                        :inListItem="listCryptoVpnCL">ViPNet</crypto-vpn-cl-list>
+    <crypto-vpn-cs-list v-if="(listCryptoVpnCS.length != 0)"></crypto-vpn-cs-list>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 
-import cryptoList from '@/components/person/person-card/crypto/crypto__list';
+import cryptoVpnClList from '@/components/person/person-card/crypto/crypto__vpn-cl-list';
+import cryptoVpnCsList from '@/components/person/person-card/crypto/crypto__vpn-cs-list';
 
 export default {
   name: 'personCardCrypto',
   components: {
-    cryptoList,
+    cryptoVpnClList,
+    cryptoVpnCsList,
   },
   data() {
     return {

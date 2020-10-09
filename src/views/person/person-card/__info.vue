@@ -37,7 +37,7 @@ import cSelect from '@/components/elements/c-select';
 import cButton from '@/components/elements/c-button';
 
 export default {
-  name: 'personCardControl',
+  name: 'personCardInfo',
   components: {
     cInput,
     cSelect,
