@@ -51,6 +51,7 @@ export default new Vuex.Store({
       state.personProfile.personFa = option.VFA;
       state.personProfile.personIm = option.VIM;
       state.personProfile.personOt = option.VOT;
+      state.personProfile.personNameFull = `${option.VFA} ${option.VIM} ${option.VOT}`;
       state.personProfile.personDistrictId = option.VDISTRICTID;
       state.personProfile.personDistrictName = option.VDISTRICTNAME;
       state.personProfile.personDepartmentId = option.VDEPARTMENTID;

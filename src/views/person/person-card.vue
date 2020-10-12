@@ -1,6 +1,9 @@
 <template>
   <div class="person-card">
-    <h3 class="person-card__title">Пользователь - FIO</h3>
+    <h3 class="person-card__title">Пользователь - {{ personNameFull }}</h3>
+    <div class="person-card__control">
+      <c-button @click="backPerson">Вернуться</c-button>
+    </div>
     <div class="person-card__body">
       <hr class="person-card__separator"/>
       <div class="person-card__sub-menu">
@@ -22,10 +25,15 @@
 
 <script>
 import axios from 'axios';
+import cButton from '@/components/elements/c-button';
 
 export default {
   name: 'personCard',
   components: {
+    cButton,
+  },
+  computed: {
+    personNameFull() { return this.$store.state.personProfile.personNameFull; },
   },
   data: function() {
     return {
@@ -51,9 +59,12 @@ export default {
         this.$router.push('/person-card/__document?personId=' + this.personId)
       })
       .catch(() => {
-        // this.$router.push('/person-card/__document') //?personId=' + this.personId)
       })
-    // console.log(this.personId);
+  },
+  methods: {
+    backPerson() {
+      this.$router.push('/person');
+    }
   }
 }
 </script>
@@ -66,6 +77,9 @@ export default {
   &__title {
     margin-bottom: 10px;
     color: darkslategrey;
+  }
+  &__control {
+    max-width: 200px;
   }
   &__sub-menu {
     padding: 0px 20px;
