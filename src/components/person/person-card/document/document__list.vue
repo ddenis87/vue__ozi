@@ -9,7 +9,7 @@
           <th class="document-list__table-head_column">Дата</th>
           <th class="document-list__table-head_column">Наименование</th>
           <th class="document-list__table-head_column">Примечание</th>
-          <th class="document-list__table-head_column">Дейст.</th>
+          <th class="document-list__table-head_column document-list__table-head_column-action"></th>
         </tr>
       </thead>
       <tbody class="document-list__table-body">
@@ -81,16 +81,12 @@ export default {
     width: 100%;
     border-collapse: collapse;
     &-title {
-      padding: 3px;
+      padding: 2px;
       padding-left: 10px;
       text-align: left;
       font-weight: bold;
       color: black;
       text-transform: uppercase;
-      &::after {
-        content: '';
-        background-image: url('~@/assets/images/view/arrow_blue.png');
-      }
     }
     &-head {
       &_row { border-bottom: 1px solid grey; }
@@ -99,7 +95,13 @@ export default {
       &_column:nth-child(2) { width: 8%; }
       &_column:nth-child(3) { width: 52%; text-align: left; }
       &_column:nth-child(4) { width: 30%; text-align: left; }
-      &_column:nth-child(5) { width: 5%; }
+      &_column:nth-child(5) {
+        width: 30px;
+        background-image: url('~@/assets/images/view/action.png');
+        background-size: 18px 18px;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
     }
     &-body {
       &_row { 

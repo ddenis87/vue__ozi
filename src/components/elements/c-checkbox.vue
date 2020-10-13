@@ -1,7 +1,11 @@
 <template>
   <div class="c-checkbox">
     <label class="c-checkbox__title">
-      <input class="c-checkbox__checkbox" type="checkbox"/>
+      <input class="c-checkbox__checkbox"
+             type="checkbox"
+             :value="inValue"
+             v-model="valueChecked"
+             @change="setInputValue(valueChecked)" />
       <div class="c-checkbox__slider">
         <div class="c-checkbox__slider-item"></div>
       </div>
@@ -12,7 +16,35 @@
 
 <script>
 export default {
-  name: 'cCheckbox'  
+  name: 'cCheckbox',
+  model: {
+    prop: 'checked',
+  //   event: 'change'
+  },
+  props: {
+    inValue: String,
+    inValueChecked: String
+  },
+  computed: {
+    cValueChecked: {
+      get() { return (this.inValueChecked == '1') ? true : false },
+      set(newValue) { this.valueChecked = newValue; }
+    }
+  },
+  data() {
+    return {
+      valueChecked: this.cValueChecked,
+    }
+  },
+  beforeUpdate() { this.valueChecked = this.cValueChecked; },
+  methods: {
+    setInputValue(item) {
+      // this.cValueChecked = item;
+      // console.log(item);
+      // console.log(this.valueChecked);
+      // this.$emit('change', this.cChecked);
+    },
+  }
 }
 </script>
 

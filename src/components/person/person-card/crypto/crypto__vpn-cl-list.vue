@@ -24,9 +24,15 @@
           <tr class="crypto-table__body_row" :key="index + 1">
             <td class="crypto-table__body_column">{{ index + 1 }}</td>
             <td class="crypto-table__body_column">{{ item.VNAME }}</td>
-            <td class="crypto-table__body_column crypto-table__body_column-task" :class="{'crypto-table__body_column-task_yes': (item.VTASKCLIENT == 1) ? true : false }"></td>
-            <td class="crypto-table__body_column crypto-table__body_column-task" :class="{'crypto-table__body_column-task_yes': (item.VTASKMAIL == 1) ? true : false }"></td>
-            <td class="crypto-table__body_column crypto-table__body_column-task" :class="{'crypto-table__body_column-task_yes': (item.VTASKCS == 1) ? true : false }"></td>
+            <td class="crypto-table__body_column crypto-table__body_column-task" 
+                :class="{'crypto-table__body_column-task_yes': (item.VTASKCLIENT == 1) ? true : false }" 
+                @click="(event) => showDialogTask(event, item)"></td>
+            <td class="crypto-table__body_column crypto-table__body_column-task" 
+                :class="{'crypto-table__body_column-task_yes': (item.VTASKMAIL == 1) ? true : false }" 
+                @click="(event) => showDialogTask(event, item)"></td>
+            <td class="crypto-table__body_column crypto-table__body_column-task" 
+                :class="{'crypto-table__body_column-task_yes': (item.VTASKCS == 1) ? true : false }" 
+                @click="(event) => showDialogTask(event, item)"></td>
             <td class="crypto-table__body_column crypto-table__body_column-base">
               <span>{{ getFormatedDocumentBase(item.VINSTALLDOCNUMBER, item.VINSTALLDOCDATE) }}</span>
               <button class="base-button" title="Выбрать">...</button>
@@ -74,19 +80,45 @@
         </template>
       </tbody>
     </table>
+    <div class="crypto-dialog">
+      <vpn-dialog :style="{left: dialogTaskPosition.left + 'px', top: dialogTaskPosition.top + 'px'}"
+                  :inShowDialog="dialogTaskVisibility"
+                  :inTaskValue="dialogTaskValue"
+                  @cancel-close="() => {dialogTaskVisibility = false}" tabindex='1'></vpn-dialog>
+    </div>
   </div>
 </template>
 
 <script>
+import vpnDialog from '@/components/person/person-card/crypto/crypto__vpn-dialog';
+
 export default {
   name: 'vpnClList',
+  components: {
+    vpnDialog
+  },
   props: {
     inListItem: Array,
   },
   computed: {
     listItem() { return this.inListItem; }
   },
+  data() {
+    return {
+      dialogTaskPosition: {left: 0, top: 0},
+      dialogTaskVisibility: false,
+      dialogTaskValue: {}
+    }
+  },
   methods: {
+    showDialogTask(event, item) {
+      // console.log(item)
+      this.dialogTaskValue = 0;
+      this.dialogTaskValue = item;
+      this.dialogTaskPosition.left = event.x + 15;
+      this.dialogTaskPosition.top = event.y + 15;
+      this.dialogTaskVisibility = true;
+    },
     documentOpen(documentPath) {
       alert('Open ' + documentPath);
       window.open(pathDocument + documentPath);
@@ -194,10 +226,14 @@ export default {
           background-size: 14px 14px;
           background-repeat: no-repeat;
           background-position: center;
+          cursor: pointer;
           &_yes { background-image: url('~@/assets/images/view/yes.png'); }
         }
       }
     }
+  }
+  &-dialog {
+    position: relative;
   }
 }
 </style>
