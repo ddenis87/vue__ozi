@@ -1,10 +1,16 @@
 <template>
-  <div class="vpn-dialog" :class="{'vpn-dialog_show': cShowDialog}">
+  <div class="vpn-dialog" :class="{'vpn-dialog_show': cShowDialog}" >
     <h3 class="vpn-dialog__title">Прикладные задачи</h3>
-    <div class="vpn-dialog__checkbox" v-show="cShowDialog">
-      <c-checkbox class="vpn-dialog__checkbox_item" inValue="client" :inValueChecked="inTaskValue.VTASKCLIENT">Защита трафика</c-checkbox>
-      <c-checkbox class="vpn-dialog__checkbox_item" inValue="mail" :inValueChecked="inTaskValue.VTASKMAIL">Деловая почта</c-checkbox>
-      <c-checkbox class="vpn-dialog__checkbox_item" inValue="cs" :inValueChecked="inTaskValue.VTASKCS">Криптосервис</c-checkbox>
+    <div class="vpn-dialog__checkbox">
+      <c-checkbox class="vpn-dialog__checkbox_item" 
+                  :inInputChecked="cItemProps.VTASKCLIENT" 
+                  v-model="taskValue.client">Защита трафика</c-checkbox>
+      <c-checkbox class="vpn-dialog__checkbox_item" 
+                  :inInputChecked="cItemProps.VTASKMAIL"  
+                  v-model="taskValue.mail">Деловая почта</c-checkbox>
+      <c-checkbox class="vpn-dialog__checkbox_item" 
+                  :inInputChecked="cItemProps.VTASKCS" 
+                  v-model="taskValue.cs">Криптосервис</c-checkbox>
     </div>
     <div class="vpn-dialog__control">
       <c-button class="vpn-dialog__control_item" @click="accept">Применить</c-button>
@@ -20,33 +26,41 @@ import cCheckbox from '@/components/elements/c-checkbox';
 import cButton from '@/components/elements/c-button';
 
 export default {
-  name: 'cryptoVpnDialog',
+  name: 'vpnDialogTask',
   components: {
     cCheckbox,
     cButton,
   },
   props: {
     inShowDialog: false,
-    inTaskValue: {}
+    inItemProps: {}
   },
   computed: {
     cShowDialog() { return this.inShowDialog; },
-    cTaskValue() { return this.inTaskValue; }
+    cItemProps() { return this.inItemProps; }
   },
   data() {
     return {
-      // taskClient: '',
-      // taskMail: cTaskValue.VTASKMAIL,
-      // taskCs: cTaskValue.VTASKCS,
-      taskValue: []
+      taskValue: {},
     }
   },
   methods: {
     accept() {
-      // console.log(item);
-      console.log(this.taskClient);
-      console.log(this.taskMail);
-      console.log(this.taskCs);
+      if (Object.keys(this.taskValue).length == 0) return;
+      let option = {
+        function: 'setCryptoVpnClTask',
+        itemId: this.cItemProps.VID,
+        client: (this.taskValue.client == true) ? '1' : '0',
+        mail: (this.taskValue.mail == true) ? '1' : '0',
+        cs: (this.taskValue.cs == true) ? '1' : '0',
+      }
+      axios
+       .post(pathBackend + 'person-card__crypto.php', null, {params: option})
+       .then(response => {
+        //  console.log(response.data);
+         this.$emit('update-task', response.data);
+       })
+      
     }
   }
 }

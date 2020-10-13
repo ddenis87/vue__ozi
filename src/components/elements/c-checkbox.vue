@@ -3,9 +3,9 @@
     <label class="c-checkbox__title">
       <input class="c-checkbox__checkbox"
              type="checkbox"
-             :value="inValue"
-             v-model="valueChecked"
-             @change="setInputValue(valueChecked)" />
+             v-model="checkedValue"
+             :checked="(inInputChecked == '1') ? true : false" 
+             @change="setCheckboxValue"/>
       <div class="c-checkbox__slider">
         <div class="c-checkbox__slider-item"></div>
       </div>
@@ -19,31 +19,20 @@ export default {
   name: 'cCheckbox',
   model: {
     prop: 'checked',
-  //   event: 'change'
+    event: 'change'
   },
-  props: {
-    inValue: String,
-    inValueChecked: String
-  },
-  computed: {
-    cValueChecked: {
-      get() { return (this.inValueChecked == '1') ? true : false },
-      set(newValue) { this.valueChecked = newValue; }
-    }
-  },
+  props: ['inInputChecked'],
   data() {
     return {
-      valueChecked: this.cValueChecked,
+      checkedValue: (this.inInputChecked == '1') ? true : false,
     }
   },
-  beforeUpdate() { this.valueChecked = this.cValueChecked; },
+  beforeUpdate() { this.setCheckboxValue() },
   methods: {
-    setInputValue(item) {
-      // this.cValueChecked = item;
-      // console.log(item);
-      // console.log(this.valueChecked);
-      // this.$emit('change', this.cChecked);
-    },
+    setCheckboxValue() {
+      // console.log(this.checkedValue);
+      this.$emit('change', this.checkedValue);
+    }
   }
 }
 </script>

@@ -81,21 +81,26 @@
       </tbody>
     </table>
     <div class="crypto-dialog">
-      <vpn-dialog :style="{left: dialogTaskPosition.left + 'px', top: dialogTaskPosition.top + 'px'}"
-                  :inShowDialog="dialogTaskVisibility"
-                  :inTaskValue="dialogTaskValue"
-                  @cancel-close="() => {dialogTaskVisibility = false}" tabindex='1'></vpn-dialog>
+      <vpn-dialog-task v-if="dialogTaskVisibility" 
+                       :style="{left: dialogTaskPosition.left + 'px', top: dialogTaskPosition.top + 'px'}"
+                       :inShowDialog="dialogTaskVisibility"
+                       :inItemProps="dialogItemProps"
+                       @cancel-close="() => {dialogTaskVisibility = false}"
+                       @update-task="() => {$emit('update-task'); dialogTaskVisibility = false;}"
+                       tabindex='1'></vpn-dialog-task>
     </div>
+    <div class="crypto__blocked-content"
+         v-if="(dialogTaskVisibility)"></div>
   </div>
 </template>
 
 <script>
-import vpnDialog from '@/components/person/person-card/crypto/crypto__vpn-dialog';
+import vpnDialogTask from '@/components/person/person-card/crypto/vpn-dialog__task';
 
 export default {
   name: 'vpnClList',
   components: {
-    vpnDialog
+    vpnDialogTask
   },
   props: {
     inListItem: Array,
@@ -107,14 +112,13 @@ export default {
     return {
       dialogTaskPosition: {left: 0, top: 0},
       dialogTaskVisibility: false,
-      dialogTaskValue: {}
+      dialogItemProps: {}
     }
   },
   methods: {
     showDialogTask(event, item) {
       // console.log(item)
-      this.dialogTaskValue = 0;
-      this.dialogTaskValue = item;
+      this.dialogItemProps = item;
       this.dialogTaskPosition.left = event.x + 15;
       this.dialogTaskPosition.top = event.y + 15;
       this.dialogTaskVisibility = true;
@@ -234,6 +238,15 @@ export default {
   }
   &-dialog {
     position: relative;
+    z-index: 998;
+  }
+  &__blocked-content {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
   }
 }
 </style>

@@ -37,7 +37,7 @@ export default {
     axios 
       .post(pathBackend + 'index.php', null, {params: {function: 'getUserSecurity'}})
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         let option = {
           userId: response.data[0].ID,
           userIp: response.data[0].CIP,

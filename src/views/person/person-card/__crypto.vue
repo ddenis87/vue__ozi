@@ -1,7 +1,8 @@
 <template>
   <div>
     <crypto-vpn-cl-list v-if="(listCryptoVpnCL.length != 0)" 
-                        :inListItem="listCryptoVpnCL">ViPNet</crypto-vpn-cl-list>
+                        :inListItem="listCryptoVpnCL"
+                        @update-task="getListCryptoVpnCL">ViPNet</crypto-vpn-cl-list>
     <crypto-vpn-cs-list v-if="(listCryptoVpnCS.length != 0)"></crypto-vpn-cs-list>
   </div>
 </template>
@@ -32,19 +33,18 @@ export default {
   methods: {
     getListCryptoVpnCL() {
       let option = {
-        function: 'getListCryptoVpnCL',
+        function: 'getCryptoVpnClList',
         personId: this.personId
       }
       axios
         .post(pathBackend + 'person-card__crypto.php', null, {params: option})
         .then(response => {
           this.listCryptoVpnCL = response.data;
-          console.log(this.listCryptoVpnCL);
         })
     },
     getListCryptoVpnCS() {
       let option = {
-        function: 'getListCryptoVpnCS',
+        function: 'getCryptoVpnCsList',
         personId: this.personId
       }
       axios
