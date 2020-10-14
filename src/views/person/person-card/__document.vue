@@ -41,16 +41,18 @@ export default {
     documentControl,
     documentList,
   },
+  computed: {
+    listDocumentInput() { return this.$store.getters.PERSON_DOCUMENT_INPUT; },
+    listDocumentOutput() { return this.$store.getters.PERSON_DOCUMENT_OUTPUT; }
+  },
   data: function() {
     return {
       personId: this.$store.state.personProfile.personId,
-      listDocumentInput: [],
-      listDocumentOutput: [],
     }
   },
   created: function() {
-    this.getListDocumentInput();
-    this.getListDocumentOutput();
+    this.$store.dispatch('SET_PERSON_DOCUMENTS', 'Input');
+    this.$store.dispatch('SET_PERSON_DOCUMENTS', 'Output');
   },
   methods: {
     addDocumentInput: function(option) {
@@ -58,28 +60,6 @@ export default {
     },
     addDocumentOutput: function(option) {
       console.log(option)
-    },
-    getListDocumentInput: function() {
-      let option = {
-        function: 'getListDocumentInputPerson',
-        personId: this.personId
-      }
-      axios
-        .post(pathBackend + 'person-card__document.php', null, {params: option})
-        .then(response => {
-          this.listDocumentInput = response.data;
-        })
-    },
-    getListDocumentOutput: function() {
-      let option = {
-        function: 'getListDocumentOutputPerson',
-        personId: this.personId
-      }
-      axios
-        .post(pathBackend + 'person-card__document.php', null, {params: option})
-        .then(response => {
-          this.listDocumentOutput = response.data;
-        })
     },
   }
 }
@@ -102,22 +82,18 @@ export default {
     grid-area: document-control-input;
     padding-right: 10px;
     border-right: 1px solid darkgrey;
-    // box-sizing: border-box;
   }
   &-control-output {
     grid-area: document-control-output;
     padding-left: 10px;
-    // box-sizing: border-box;
   }
   &-list-input {
     grid-area: document-list-input;
     margin-top: 5px;
-    // border-top: 1px solid darkgray;
   }
   &-list-output {
     grid-area: document-list-output;
     margin-top: 5px;
-    // border-top: 1px solid darkgray;
   }
 }
 </style>

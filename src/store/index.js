@@ -1,5 +1,8 @@
+import axios from 'axios';
+
 import Vue from 'vue'
 import Vuex from 'vuex'
+
 
 Vue.use(Vuex)
 
@@ -24,21 +27,19 @@ export default new Vuex.Store({
       personDepartmentName: '',
       personPostId: '',
       personPostName: '',
-    }
-    // userProfile: {
-    //   userId: '3',
-    //   userIp: '10.38.0.112', // ?
-    //   userNameFull: 'Dontsov Denis Aleksandrovich',
-    //   userNameShort: 'Dontsov D.A.',
-    //   userLevelAccess: 'opfr',
-    // },
-    // systemout: {
-    //   text: 'Hello', 
-    //   status: 'default',
-      
-    // }
+      documentInput: [], // список входящих документов выбранного пользователя
+      documentOutput: [], // список исходящих документов выбранного пользователя
+    },
+  },
+  getters: {
+    PERSON_ID: state => { return state.personProfile.personId; },
+    PERSON_DOCUMENT_INPUT: state => { return state.personProfile.documentInput; },
+    PERSON_DOCUMENT_OUTPUT: state => { return state.personProfile.documentOutput; }
   },
   mutations: {
+    SET_PERSON_DOCUMENT_INPUT(state, option) { state.personProfile.documentInput = option; },
+    SET_PERSON_DOCUMENT_OUTPUT(state, option) { state.personProfile.documentOutput = option; },
+
     setUserProfile(state, option) {
       state.userProfile.userId = option.userId;
       state.userProfile.userIp = option.userIp;
@@ -59,19 +60,19 @@ export default new Vuex.Store({
       state.personProfile.personPostId = option.VPOSTID;
       state.personProfile.personPostName = option.VPOSTNAME;
     }
-    // systemoutState(state, systemoutProps) { 
-    //   state.systemout.text = systemoutProps.text; 
-    //   state.systemout.status = systemoutProps.status; 
-    //   console.log(systemoutProps.status);
-    //   if (systemoutProps.status != 'information') {
-    //     setTimeout(() => {
-    //       state.systemout.text = '';
-    //       state.systemout.status = 'default'
-    //     }, 5000);
-    //   }
-    // },
+
   },
   actions: {
+    SET_PERSON_DOCUMENTS(context, documentType) {
+      let option = {
+        function: `getListDocumentPerson${documentType}`,
+        personId: context.getters.PERSON_ID,
+      }
+      axios.post(pathBackend + 'person-card__document.php', null, {params: option})
+           .then(response => {
+             context.commit(`SET_PERSON_DOCUMENT_${documentType.toUpperCase()}`, response.data);
+           })
+    },
   },
   modules: {
   }
