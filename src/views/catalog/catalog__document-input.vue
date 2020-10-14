@@ -122,14 +122,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.catalog {
-  font-family: 'Montserrat';
-  &__title {
-    margin-bottom: 10px;
-    color: darkslategrey;
-  }
-  &__separator {
-    margin: 10px 20px;
-  }
-}
+@import 'catalog.scss';
 </style>
