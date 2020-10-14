@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'catalog__control.scss';
+@import 'zs-catalog__control.scss';
 
 .catalog__control {
   &__input {

@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'catalog__control.scss';
+@import 'zs-catalog__control.scss';
 
 .catalog-control {
   &__box {
