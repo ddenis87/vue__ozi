@@ -53,7 +53,7 @@ export default {
 .person-control {
   width: 100%;
   margin-bottom: 10px;
-  padding: 0px 20px;
+  // padding: 0px 20px;
   box-sizing: border-box;
   &__title {
     margin-bottom: 5px;

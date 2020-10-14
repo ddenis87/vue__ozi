@@ -42,8 +42,8 @@ export default {
 
 <style lang="scss" scoped>
 .person-list {
-  padding-left: 20px;
-  padding-right: 20px;
+  // padding-left: 20px;
+  // padding-right: 20px;
   font-family: 'Open sans';
   font-size: 13px;
   &__table {

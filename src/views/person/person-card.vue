@@ -1,8 +1,11 @@
 <template>
   <div class="person-card">
-    <h3 class="person-card__title">Пользователь - {{ personNameFull }}</h3>
-    <div class="person-card__control">
-      <c-button @click="backPerson">Вернуться</c-button>
+    <div class="title-box">
+      <h3 class="title-box__title">Пользователь - </h3>
+      <div class="title-box__title-info">{{ personNameFull }}</div>
+      <div class="title-box__control">
+        <c-button @click="backPerson">Вернуться</c-button>
+      </div>
     </div>
     <div class="person-card__body">
       <hr class="person-card__separator"/>
@@ -74,27 +77,37 @@ export default {
 
 .person-card {
   font-family: 'Montserrat';
-  &__title {
-    margin-bottom: 10px;
-    color: darkslategrey;
-  }
-  &__control {
-    max-width: 200px;
+  box-sizing: border-box;
+  // border: 1px solid grey;
+  .title-box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    &__title {
+      margin-bottom: 10px;
+      color: darkslategrey;
+    }
+    &__control {
+      max-width: 200px;
+    }
   }
   &__sub-menu {
-    padding: 0px 20px;
+    padding: 0px 10px;
+    
     .sub-menu {
       display: flex;
       list-style: none;
       padding: 0px;
+      margin: 0px;
       &__item {
         width: 100%;
         margin: 0px 1px;
-        padding: 3px;
+        padding: 2px;
         text-align: center;
         color: white;
         font-family: 'Open sans';
-        font-size: 14px;
+        font-size: 12px;
         text-transform: uppercase;
         border: 1px solid darkblue;
         border-radius: 5px 3px 0px 0px;
@@ -108,10 +121,11 @@ export default {
     }
   }
   &__props {
-    padding: 0px 20px;
+    padding: 10px 15px;
   }
   &__separator {
-    margin: 10px 20px;
+    margin: 10px 0px;
+
   }
 }
 </style>

@@ -97,6 +97,7 @@ h3 {
     grid-area: body;
     min-height: calc(100vh - 100px);
     padding-top: 10px;
+    padding-right: 20px;
     box-sizing: border-box;
   }
   &__footer {

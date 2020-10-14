@@ -61,12 +61,15 @@ export default {
 <style lang="scss" scoped>
 .person {
   font-family: 'Montserrat';
+  &__body {
+    padding-left: 10px;
+  }
   &__title {
     margin-bottom: 10px;
     color: darkslategrey;
   }
   &__separator {
-    margin: 10px 20px;
+    margin: 10px 0px;
   }
 }
 </style>
