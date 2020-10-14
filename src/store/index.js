@@ -35,7 +35,7 @@ export default new Vuex.Store({
   getters: {
     PERSON_ID: state => { return state.personProfile.personId; },
     PERSON_DOCUMENT_INPUT: state => { return state.personProfile.documentInput; },
-    PERSON_DOCUMENT_OUTPUT: state => { return state.personProfile.documentOutput; }
+    PERSON_DOCUMENT_OUTPUT: state => { return state.personProfile.documentOutput; },
   },
   mutations: {
     SET_PERSON_DOCUMENT_INPUT(state, option) { state.personProfile.documentInput = option; },

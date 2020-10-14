@@ -27,29 +27,33 @@ export default {
     catalogControl,
     catalogList,
   },
+  computed: {
+    listItem() { this.$store.getters.GET_LIST_DEPARTMENT; }
+  },
   data: function() {
     return {
-      listItem: Array,
+      // listItem: Array,
     }
   },
   created: function() {
-    this.getListItem();
+    this.$store.dispatch('SET_LIST_CATALOGS', 'DEPARTMENT');
+    // this.getListItem();
   },
   methods: {
-    getListItem: function() {
-      axios
-      .post(pathBackend + 'catalog.php', null, {params: {function: 'getListDepartment'}})
-      .then(response => {
-        this.listItem = response.data;
-      })
-      .catch(() => {
-        this.listItem = [
-          {CID: '1', CNAME: 'Нет соединения с базой', CCONFIRM: '0', CVISIBLE: '1'},
-          {CID: '2', CNAME: 'Или произошла ошибка при получении данных', CCONFIRM: '1', CVISIBLE: '1'},
-          {CID: '3', CNAME: 'А возможно так сошлись звезды', CCONFIRM: '0', CVISIBLE: '0'},
-        ]
-      })
-    }
+    // getListItem: function() {
+    //   axios
+    //   .post(pathBackend + 'catalog.php', null, {params: {function: 'getListDepartment'}})
+    //   .then(response => {
+    //     this.listItem = response.data;
+    //   })
+    //   .catch(() => {
+    //     this.listItem = [
+    //       {CID: '1', CNAME: 'Нет соединения с базой', CCONFIRM: '0', CVISIBLE: '1'},
+    //       {CID: '2', CNAME: 'Или произошла ошибка при получении данных', CCONFIRM: '1', CVISIBLE: '1'},
+    //       {CID: '3', CNAME: 'А возможно так сошлись звезды', CCONFIRM: '0', CVISIBLE: '0'},
+    //     ]
+    //   })
+    // }
   }
 }
 </script>

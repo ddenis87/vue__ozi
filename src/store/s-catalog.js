@@ -6,7 +6,7 @@ export default {
   },
   getters: {
     GET_LIST_DEPARTMENT() { return state.listDepartment; },
-    GET_LIST_DEPARTMENT_ACTIVE() { return state.listDepartment.filter(item => item.CVISIBLE == 1); }
+    GET_LIST_DEPARTMENT_VISIBLE() { return state.listDepartment.filter(item => item.CVISIBLE == 1); }
   },
   mutations: {
     SET_LIST_DEPARTMENT(state, option) { state.listDepartment = option; }
