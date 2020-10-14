@@ -57,7 +57,6 @@ export default {
       axios
        .post(pathBackend + 'person-card__crypto.php', null, {params: option})
        .then(response => {
-        //  console.log(response.data);
          this.$emit('update-task', response.data);
        })
       
@@ -81,12 +80,13 @@ export default {
   box-shadow: 1px 1px 1px black;
   background-color: white;
   visibility: hidden;
+
+  font-size: 12px;
+  font-family: 'Montserrat';
+
   &_show {
     visibility: visible;
   }
- 
-
-  visibility: hidden;
   &__title {
     color: black;
     margin-bottom: 10px;
@@ -94,7 +94,7 @@ export default {
   &__checkbox {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     &_item {
       padding: 5px;
     }

@@ -35,7 +35,9 @@
                 @click="(event) => showDialogTask(event, item)"></td>
             <td class="crypto-table__body_column crypto-table__body_column-base">
               <span>{{ getFormatedDocumentBase(item.VINSTALLDOCNUMBER, item.VINSTALLDOCDATE) }}</span>
-              <button class="base-button" title="Выбрать">...</button>
+              <div class="control">
+                <button class="control__button base-button" title="Выбрать" @click="showDialogBasis(item.VID, item.VINSTALLDOCID, 'install')">...</button>
+              </div>
             </td>
             <td class="crypto-table__body_column">
               <div class="control">
@@ -50,7 +52,9 @@
             </td>
             <td class="crypto-table__body_column crypto-table__body_column-base">
               <span>{{ getFormatedDocumentBase(item.VUNISTALLDOCNUMBER, item.VUNISTALLDOCDATE) }}</span>
-              <button class="base-button" title="Выбрать">...</button>
+              <div class="control">
+                <button class="control__button base-button" title="Выбрать" @click="showDialogBasis(item.VID, item.VUNISTALLDOCID, 'unistall')">...</button>
+              </div>
             </td>
             <td class="crypto-table__body_column">
               <div class="control">
@@ -88,19 +92,26 @@
                        @cancel-close="() => {dialogTaskVisibility = false}"
                        @update-task="() => {$emit('update-task'); dialogTaskVisibility = false;}"
                        tabindex='1'></vpn-dialog-task>
+      <vpn-dialog-basis v-if="dialogPropsBasis.visibility"
+                        :inDialogProps="dialogPropsBasis"
+                        @cancel-close="() => { dialogPropsBasis.visibility = false }"
+                        @update-basis="updateBasisDocument">Документ основание</vpn-dialog-basis>
     </div>
     <div class="crypto__blocked-content"
-         v-if="(dialogTaskVisibility)"></div>
+         v-if="(dialogTaskVisibility || dialogPropsBasis.visibility)"></div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import vpnDialogTask from '@/components/person/person-card/crypto/vpn-dialog__task';
+import vpnDialogBasis from '@/components/person/person-card/crypto/vpn-dialog__basis';
 
 export default {
   name: 'vpnClList',
   components: {
-    vpnDialogTask
+    vpnDialogTask,
+    vpnDialogBasis
   },
   props: {
     inListItem: Array,
@@ -112,12 +123,42 @@ export default {
     return {
       dialogTaskPosition: {left: 0, top: 0},
       dialogTaskVisibility: false,
+      dialogPropsBasis: {
+        visibility: false,
+        listItemId: null,
+        documentBasisId: null,
+        typeBasis: null,
+      },
       dialogItemProps: {}
     }
   },
   methods: {
+    updateBasisDocument(inOption) {
+      let option = {
+        function: null,
+        listItemId: inOption.listItemId,
+        documentBasisId: inOption.documentBasisId
+      }
+      switch(inOption.typeBasis) {
+        case 'install': option.function = 'setCryptoVpnClBasisInstall'; break;
+        case 'unistall': option.function = 'setCryptoVpnClBasisUnistall'; break;
+      }
+      axios
+       .post(pathBackend + 'person-card__crypto.php', null, {params: option})
+       .then(response => {
+         if (response.data == '1') this.$emit('update-basis');
+         this.dialogPropsBasis.visibility = false;
+       })
+      // console.log(option);
+    },
+    showDialogBasis(listItemId, documentBasisId, typeBasis) {
+      this.dialogPropsBasis.visibility = true;
+      this.dialogPropsBasis.documentBasisId = documentBasisId;
+      this.dialogPropsBasis.listItemId = listItemId;
+      this.dialogPropsBasis.typeBasis = typeBasis;
+    },
     showDialogTask(event, item) {
-      // console.log(item)
+      console.log(item);
       this.dialogItemProps = item;
       this.dialogTaskPosition.left = event.x + 15;
       this.dialogTaskPosition.top = event.y + 15;
@@ -203,6 +244,7 @@ export default {
             border: 0px solid darkcyan;
             background-color: transparent;
             background-repeat: no-repeat;
+            outline: none;
             cursor: pointer;
             &_document { background-image: url('~@/assets/images/control/button_document.png'); background-size: contain; }
             &_document-create { background-image: url('~@/assets/images/control/button_document-create.png'); background-size: contain; }
