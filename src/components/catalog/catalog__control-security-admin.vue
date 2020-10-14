@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'g-catalog__control.scss';
+@import 'catalog__control.scss';
 
 .catalog__control {
   &__input {

@@ -62,7 +62,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'g-catalog__list.scss';
+@import 'catalog__list.scss';
 
 .catalog-list {
   &__table {
