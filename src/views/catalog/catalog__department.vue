@@ -1,7 +1,6 @@
 <template>
   <div class="catalog">
     <h3 class="catalog__title">Справочники - Отделы</h3>
-
     <div class="catalog__body">
       <div class="catalog__body-control">
         <catalog-control>

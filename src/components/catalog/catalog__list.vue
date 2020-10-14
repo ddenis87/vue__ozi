@@ -25,7 +25,7 @@
                         'control__button_disabled-off': (item.CVISIBLE == '1') ? true : false,
                         'control__button_disabled-on': (item.CVISIBLE == '0') ? true : false
                       }" 
-                      @click="disableItem(item)"></button>
+                      @click="switchVisibilityItem(item)"></button>
               <button class="control__button control__button_delete" 
                       title="Удалить запись"
                       @click="deleteItem(item)"></button>
@@ -51,8 +51,8 @@ export default {
     }
   },
   methods: {
-    disableItem: function(row) {
-      this.$emit('disableItem', row);
+    switchVisibilityItem: function(row) {
+      this.$emit('switchVisibilityItem', row);
     },
     deleteItem: function(row) {
       this.$emit('deleteItem', row);
