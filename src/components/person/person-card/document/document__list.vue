@@ -16,7 +16,7 @@
         <template v-for="(item, index) in listItem">
           <tr class="document-list__table-body_row"
               :key="index">
-            <td class="document-list__table-body_column">{{ item.VID }}</td>
+            <td class="document-list__table-body_column">{{ item.VNUMBERDOC }}</td>
             <td class="document-list__table-body_column">{{ modDate(item.VDATE) }}</td>
             <td class="document-list__table-body_column">{{ item.VNAME }}</td>
             <td class="document-list__table-body_column">{{ item.VNOTE }}</td>
