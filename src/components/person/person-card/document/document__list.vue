@@ -70,7 +70,7 @@ export default {
 <style lang="scss" scoped>
 .document-list {
   font-family: 'Open sans';
-  font-size: 13px;
+  font-size: 12px;
   &__document-input {
     background-color: rgba(173, 216, 230, .3);
   }
@@ -90,7 +90,7 @@ export default {
     }
     &-head {
       &_row { border-bottom: 1px solid grey; }
-      &_column { padding: 5px; }
+      &_column { padding: 2px; }
       &_column:nth-child(1) { width: 5%; }
       &_column:nth-child(2) { width: 8%; }
       &_column:nth-child(3) { width: 52%; text-align: left; }
@@ -111,7 +111,7 @@ export default {
           background-color:rgba(95, 158, 160, .3);
         }
       }
-      &_column { padding: 5px; }
+      &_column { padding: 3px; }
       .control {
         display: flex;
         justify-content: center;

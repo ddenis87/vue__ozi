@@ -2,8 +2,10 @@
   <div>
     <crypto-vpn-cl-list v-if="(listCryptoVpnCL.length != 0)" 
                         :inListItem="listCryptoVpnCL"
-                        @update-task="getListCryptoVpnCL">ViPNet</crypto-vpn-cl-list>
-    <crypto-vpn-cs-list v-if="(listCryptoVpnCS.length != 0)"></crypto-vpn-cs-list>
+                        @update-task="getListCryptoVpnCL"
+                        @update-basis="getListCryptoVpnCL">ViPNet</crypto-vpn-cl-list>
+    <crypto-vpn-cs-list v-if="(listCryptoVpnCS.length != 0)"
+                        :inListItem="listCryptoVpnCS"></crypto-vpn-cs-list>
   </div>
 </template>
 
@@ -28,7 +30,7 @@ export default {
   },
   created() {
     this.getListCryptoVpnCL();
-    
+    this.getListCryptoVpnCS()
   },
   methods: {
     getListCryptoVpnCL() {

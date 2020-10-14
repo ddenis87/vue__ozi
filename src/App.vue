@@ -6,9 +6,9 @@
     <div class="app__navigation">
       <app-navigation></app-navigation>
     </div>
-    <div class="app__system-out">
+    <!-- <div class="app__system-out">
       <app-system-out></app-system-out>
-    </div>
+    </div> -->
     <div class="app__body">
       <router-view />
     </div>
@@ -65,15 +65,18 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0px;
   padding: 0px;
 }
+h3 {
+  font-size: 16px;
+}
 
 .app {
   display: grid;
   grid-template-areas: "head head" 
-                       "navigation system-out"
-                       "navigation body" 
+                       "navigation body"
+                        
                        "footer footer";
   grid-template-columns: 250px 1fr;
-  grid-template-rows: 80px 25px auto 20px;
+  grid-template-rows: 80px auto 20px;
   width: 100%;
   min-width: $pageMinWidth;
   margin-left: auto;
@@ -92,7 +95,8 @@ h1, h2, h3, h4, h5, h6 {
   }
   &__body {
     grid-area: body;
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 100px);
+    padding-top: 10px;
     box-sizing: border-box;
   }
   &__footer {

@@ -2,7 +2,7 @@
   <div class="document">
     <div class="document-control-input">
       <h5 class="document__title">Входящие документы</h5>
-      <hr/>
+      <!-- <hr/> -->
       <div class="document__control">
         <document-control inListType="documentInput"
                           @add-document="addDocumentInput"></document-control>
@@ -10,7 +10,7 @@
     </div>
     <div class="document-control-output">
       <h5 class="document__title">Исходящие документы</h5>
-      <hr/>
+      <!-- <hr/> -->
       <div class="document__control">
         <document-control inListType="documentOutput"
                           @add-document="addDocumentOutput"></document-control>
@@ -76,7 +76,8 @@ export default {
   width: 100%;
   padding-bottom: 20px;
   &__title {
-    color: darkslategrey;;
+    color: darkslategrey;
+    margin-bottom: 10px;
   }
   &-control-input {
     grid-area: document-control-input;

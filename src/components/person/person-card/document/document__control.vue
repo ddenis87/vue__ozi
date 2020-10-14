@@ -1,15 +1,16 @@
 <template>
   <div class="document-control">
-    <!-- <div class="document-control__title">Добавление документа</div> -->
     <div class="document-control__box">
       <c-select class="document-control__select"
                 :inListItem="listItem"
-                v-model="documentProps">Выберите документ для добавления</c-select>
-      <c-input class="document-control__input"
-               v-model="documentNote">Примечание</c-input>
-      <div class="document-control__button">
-        <c-button class="document-control__button-item"
-                  @click="addDocument">Добавить</c-button>
+                v-model="documentProps">Укажите документ для добавления</c-select>
+      <div class="document-control__box_inline">
+        <c-input class="document-control__input"
+                 v-model="documentNote">Примечание к документу</c-input>
+        <!-- <div class="document-control__button"> -->
+          <c-button class="document-control__button-item"
+                    @click="addDocument">Добавить</c-button>
+        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -81,6 +82,11 @@ export default {
   width: 100%;
   margin-bottom: 10px;
   box-sizing: border-box;
+  &__box_inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   &__title {
     margin-bottom: 5px;
     font-size: 12px;
@@ -89,17 +95,17 @@ export default {
   }
   &__input {
     width: 100%;
-    margin-bottom: 10px;
+    margin-right: 10px;
   }
   &__select {
     width: 100%;
     margin-bottom: 10px;
   }
   &__button {
-    display: flex;
-    justify-content: flex-end;
+    // display: flex;
+    // justify-content: flex-end;
     &-item {
-      width: 150px;
+      min-width: 150px;
     }
   }
 }
