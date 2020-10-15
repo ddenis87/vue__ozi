@@ -1,13 +1,20 @@
 <template>
   <div class="c-button">
     <button class="c-button__button" 
-            @click="$emit('click')"><slot></slot></button>
+            @click="$emit('click')"
+            :disabled="cDisabled"><slot></slot></button>
   </div>  
 </template>
 
 <script>
 export default {
   name: 'cButton',
+  props: {
+    inDisabled: { type: Boolean, default: false },
+  },
+  computed: {
+    cDisabled() { return this.inDisabled },
+  }
 }
 </script>
 

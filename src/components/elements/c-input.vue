@@ -3,7 +3,7 @@
     <label class="c-input__title"><slot></slot></label>
     <input class="c-input__input" 
            type="text"
-           :class="{'c-input__input_validation': isEmpty}"
+           :class="{'validation': isEmpty}"
            v-model="inputValue"
            @input="setInputValue"
            @keydown="enteredValue" />
@@ -64,9 +64,9 @@ export default {
     &:focus {
       box-shadow: 1px 1px 1px lightblue, -1px -1px 1px lightblue;
     }
-    &_validation {
-      box-shadow: 1px 1px 1px red, -1px -1px 1px red;
-    }
+  }
+  .validation {
+    box-shadow: 1px 1px 1px red, -1px -1px 1px red;
   }
 }
 </style>

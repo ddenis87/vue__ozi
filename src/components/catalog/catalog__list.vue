@@ -54,13 +54,9 @@ export default {
     }
   },
   methods: {
-    switchVisibilityItem(row) {
-      this.$emit('switchVisibilityItem', row);
-    },
-    edit() {},
-    deleteItem(row) {
-      this.$emit('deleteItem', row);
-    },
+    switchVisibilityItem(inItem) { this.$emit('switch-visibility-item', inItem); },
+    editItem(inItem) { this.$emit('edit-item', inItem); },
+    deleteItem(inItem) { this.$emit('delete-item', inItem); },
   }
 }
 </script>
