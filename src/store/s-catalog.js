@@ -38,13 +38,24 @@ export default {
 
   },
   actions: {
-    SET_LIST_CATALOGS(context, catalogName) {
+    SET_LIST_CATALOGS(store, catalogName) {
       axios
         .post(pathBackend + 'catalog.php', null, {params: {function: `getList${catalogName.toUpperCase()}`}})
         .then(response => {
-          context.commit(`SET_LIST_${catalogName.toUpperCase()}`, response.data);
+          store.commit(`SET_LIST_${catalogName.toUpperCase()}`, response.data);
         })
         .catch();
-    }
+    },
+    ADDING_ITEM_CATALOGS(store, inOption) {
+      let sendOption = inOption;
+      sendOption.function = `adding${inOption.catalogName.toUpperCase()}`,
+      axios
+        .post(pathBackend + 'catalog.php', null, {params: sendOption})
+        .then(response => {
+          console.log(response.data);
+          if (response.data == '1') store.dispatch('SET_LIST_CATALOGS', inOption.catalogName.toUpperCase());
+        })
+        .catch();
+    },
   }
 }

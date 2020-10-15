@@ -3,7 +3,7 @@
     <h3 class="catalog__title">Справочники - Должности</h3>
     <div class="catalog__body">
       <div class="catalog__body-control">
-        <catalog-control>
+        <catalog-control @adding-item="addingItem">
           <template v-slot:titleInput>Наименование должности</template>
         </catalog-control>
       </div>
@@ -32,6 +32,13 @@ export default {
     this.$store.dispatch('SET_LIST_CATALOGS', 'POST');
   },
   methods: {
+    addingItem(inValueName) {
+      let option = {
+        catalogName: 'POST',
+        valueName: inValueName,
+      };
+      this.$store.dispatch('ADDING_ITEM_CATALOGS', option);
+    },
   }
 }
 </script>

@@ -1,10 +1,13 @@
 <template>
   <div class="catalog-control">
     <div class="catalog-control__title">Добавление записи</div>
-    <c-input class="catalog-control__input"><slot name="titleInput"></slot></c-input>
-    
+    <c-input class="catalog-control__input"
+             :inValidation="validation"
+             v-model="valueName"
+             @keydown="() => { validation = false; }"><slot name="titleInput"></slot></c-input>
     <div class="catalog-control__box">
-      <c-button class="catalog-control__button-item">Добавить</c-button>
+      <c-button class="catalog-control__button-item"
+                @click="addingItem">Добавить</c-button>
     </div>
   </div>
 </template>
@@ -19,6 +22,22 @@ export default {
     cInput,
     cButton,
   },
+  data() {
+    return {
+      valueName: '',
+      validation: false
+    }
+  },
+  methods: {
+    addingItem() {
+      this.validation = false;
+      if (this.valueName == '') {
+        this.validation = true;
+        return;
+      }
+      this.$emit('adding-item', this.valueName);
+    },
+  }
 }
 </script>
 

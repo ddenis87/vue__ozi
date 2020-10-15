@@ -3,7 +3,7 @@
     <h3 class="catalog__title">Справочники - Администраторы</h3>
     <div class="catalog__body">
       <div class="catalog__body-control">
-        <catalog-control>
+        <catalog-control @adding-item="addingItem">
           <template v-slot:titleInput>Наименование должности</template>
         </catalog-control>
       </div>
@@ -32,6 +32,17 @@ export default {
     this.$store.dispatch('SET_LIST_CATALOGS', 'SECURITY_ADMIN');
   },
   methods: {
+    addingItem(inValueFioFull, inValueFioShort, inValueIp, inValueAccessLevel) {
+      let option = {
+        catalogName: 'SECURITY_ADMIN',
+        valueFioFull: inValueFioFull,
+        valueFioShort: inValueFioShort,
+        valueIp: inValueIp,
+        valueAccessLevel: (inValueAccessLevel == true) ? '2' : '3',
+      };
+      console.log(option);
+      this.$store.dispatch('ADDING_ITEM_CATALOGS', option);
+    },
   }
 }
 </script>

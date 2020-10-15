@@ -1,19 +1,36 @@
 <template>
   <div class="c-checkbox">
     <label class="c-checkbox__title">
-      <input class="c-checkbox__checkbox" type="checkbox"/>
-      <slot name="accessOff"></slot>
+      <div class="level"><slot name="accessOff"></slot></div>
+      <input class="c-checkbox__checkbox"
+             type="checkbox"
+             v-model="checkedValue"
+             @change="setCheckboxValue"/>
       <div class="c-checkbox__slider">
         <div class="c-checkbox__slider-item"></div>
       </div>
-      <slot name="accessOn"></slot>
+      <div class="level"><slot name="accessOn"></slot></div>
     </label>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'cCheckboxDouble'  
+  name: 'cCheckboxDouble',
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
+  data() {
+    return {
+      checkedValue: false,
+    }
+  },
+  methods: {
+    setCheckboxValue() {
+      this.$emit('change', this.checkedValue);
+    }
+  }
 }
 </script>
 
@@ -22,11 +39,12 @@ export default {
   &__title {
     display: inline-flex;
     align-items: center;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     text-transform: uppercase;
     color: rgba(0,0,0, .8);
     cursor: pointer;
+    .level { padding-top: 2px;  }
   }
   display: inline-flex;
   align-items: center;
