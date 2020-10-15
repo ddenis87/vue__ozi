@@ -7,8 +7,8 @@
       <c-input class="body__input" :inValidation="validation" @input="inputValidation" v-model="valueInput">Вставте в это поле наименование удаляемого документа</c-input>
     </div>
     <div class="dialog-delete__control">
-      <c-button class="dialog-delete__control_item" @click="accept" :inDisabled="true">Применить</c-button>
-      <c-button class="dialog-delete__control_item" @click="$emit('cancel-close')">Отменить</c-button>
+      <c-button class="dialog-delete__control_item" @click="deleteItem(cDialogProps.VID)" :inDisabled="true">Применить</c-button>
+      <c-button class="dialog-delete__control_item" @click="$emit('cancel-deleting')">Отменить</c-button>
     </div>
   </div>
 </template>
@@ -28,6 +28,7 @@ export default {
   },
   computed: {
     cDialogProps() { console.log(this.inDialogProps); return this.inDialogProps; },
+    cCountUseItem() {  },
   },
   data() {
     return {
@@ -40,7 +41,9 @@ export default {
       this.validation = false;
       if (this.valueInput != this.cDialogProps.CNAME) this.validation = true;
     },
-    accept() {},
+    deleteItem(inValueId) {
+      this.$emit('accept-deleting', inValueId);
+    },
   }
 }
 </script>

@@ -15,7 +15,8 @@
     <div class="catalog-dialog">
       <dialog-delete v-if="dialogDelete.visibility"
                      :inDialogProps="dialogDelete.dialogProps"
-                     @cancel-close="() => { dialogDelete.visibility = false }"></dialog-delete>
+                     @accept-deleting="deleteItem"
+                     @cancel-deleting="() => { dialogDelete.visibility = false }"></dialog-delete>
     </div>
     <div class="catalog__blocked-content"
          v-if="(dialogDelete.visibility)"></div>
@@ -40,16 +41,17 @@ export default {
   },
   data() {
     return {
-      dialogDelete: { visibility: false, }
+      catalogName: 'DEPARTMENT',
+      dialogDelete: { visibility: false, },
     }
   },
   created: function() {
-    this.$store.dispatch('SET_LIST_CATALOGS', 'DEPARTMENT');
+    this.$store.dispatch('SET_LIST_CATALOGS', this.catalogName);
   },
   methods: {
     addingItem(inValueName) {
       let option = {
-        catalogName: 'DEPARTMENT',
+        catalogName: this.catalogName,
         valueName: inValueName,
       };
       this.$store.dispatch('ADDING_ITEM_CATALOGS', option);
@@ -59,7 +61,13 @@ export default {
       this.dialogDelete.dialogProps = inItem;
       console.log(inItem);
     },
-    deleteItem() {}
+    deleteItem(inValueId) {
+      let option = {
+        catalogName: this.catalogName,
+        valueId: inValueId,
+      };
+      this.$store.dispatch('DELETE_ITEM_CATALOGS', option);
+    },
   }
 }
 </script>

@@ -28,16 +28,34 @@ export default {
   computed: {
     listItem() { return this.$store.getters.GET_LIST_DISTRICT; }
   },
+  data() {
+    return {
+      catalogName: 'DISTRICT',
+      dialogDelete: { visibility: false, },
+    }
+  },
   created: function() {
-    this.$store.dispatch('SET_LIST_CATALOGS', 'DISTRICT');
+    this.$store.dispatch('SET_LIST_CATALOGS', this.catalogName);
   },
   methods: {
     addingItem(inValueName) {
       let option = {
-        catalogName: 'DISTRICT',
+        catalogName: this.catalogName,
         valueName: inValueName,
       };
       this.$store.dispatch('ADDING_ITEM_CATALOGS', option);
+    },
+    confirmDeleteItem(inItem) {
+      this.dialogDelete.visibility = true;
+      this.dialogDelete.dialogProps = inItem;
+      console.log(inItem);
+    },
+    deleteItem(inValueId) {
+      let option = {
+        catalogName: this.catalogName,
+        valueId: inValueId,
+      };
+      this.$store.dispatch('DELETE_ITEM_CATALOGS', option);
     },
   }
 }

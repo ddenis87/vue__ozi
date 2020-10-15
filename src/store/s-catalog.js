@@ -57,5 +57,15 @@ export default {
         })
         .catch();
     },
+    DELETE_ITEM_CATALOGS(store, inOption) {
+      let sendOption = inOption;
+      sendOption.function = `delete${inOption.catalogName.toUpperCase()}`,
+      axios
+        .post(pathBackend + 'catalog.php', null, {params: sendOption})
+        .then(response => {
+          if (response.data == '1') store.dispatch('SET_LIST_CATALOGS', inOption.catalogName.toUpperCase());
+        })
+        .catch();
+    },
   }
 }
