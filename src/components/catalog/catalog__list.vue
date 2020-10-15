@@ -26,6 +26,9 @@
                         'control__button_disabled-on': (item.CVISIBLE == '0') ? true : false
                       }" 
                       @click="switchVisibilityItem(item)"></button>
+              <button class="control__button control__button_edit" 
+                      title="Редактировать запись"
+                      @click="editItem(item)"></button>
               <button class="control__button control__button_delete" 
                       title="Удалить запись"
                       @click="deleteItem(item)"></button>
@@ -51,10 +54,11 @@ export default {
     }
   },
   methods: {
-    switchVisibilityItem: function(row) {
+    switchVisibilityItem(row) {
       this.$emit('switchVisibilityItem', row);
     },
-    deleteItem: function(row) {
+    edit() {},
+    deleteItem(row) {
       this.$emit('deleteItem', row);
     },
   }
@@ -68,9 +72,9 @@ export default {
   &__table {
     &-head {
       &_column:nth-child(1) { width: 8%; }
-      &_column:nth-child(2) { width: 76%; }
+      &_column:nth-child(2) { width: 74%; }
       &_column:nth-child(3) { width: 8%; }
-      &_column:nth-child(4) { width: 8%; }
+      &_column:nth-child(4) { width: 10%; min-width: 114px; box-sizing: border-box; }
     }
     &-body {
       &_column:nth-child(3) { text-align: center; }

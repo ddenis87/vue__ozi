@@ -33,6 +33,7 @@
           cursor: pointer;
           &_disabled-on { background-image: url('~@/assets/images/control/button_disabled-on.png'); }
           &_disabled-off { background-image: url('~@/assets/images/control/button_disabled-off.png'); }
+          &_edit { background-image: url('~@/assets/images/control/button_edit.png'); }
           &_delete { 
             background-image: url('~@/assets/images/control/button_delete.png');
           }

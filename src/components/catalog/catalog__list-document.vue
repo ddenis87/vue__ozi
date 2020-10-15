@@ -35,6 +35,9 @@
                           'control__button_disabled-on': (item.CVISIBLE == '0') ? true : false
                         }" 
                         @click="switchVisibilityItem(item)"></button>
+                <button class="control__button control__button_edit" 
+                      title="Редактировать запись"
+                      @click="editItem(item)"></button>
                 <button class="control__button control__button_delete" 
                         title="Удалить запись"
                         @click="deleteItem(item)"></button>
@@ -82,10 +85,10 @@ export default {
   &__table {
     &-head {
       &_column:nth-child(1) { width: 8%; }
-      &_column:nth-child(2) { width: 76%; }
+      &_column:nth-child(2) { width: 66%; }
       &_column:nth-child(3) { width: 8%; }
       &_column:nth-child(4) { width: 8%; }
-      &_column:nth-child(5) { width: 8%; }
+      &_column:nth-child(5) { width: 10%; min-width: 114px; box-sizing: border-box;}
     }
     &-body {
       &_column:nth-child(3), &_column:nth-child(4) { text-align: center; }
