@@ -85,17 +85,17 @@
       </tbody>
     </table>
     <div class="crypto-dialog">
-      <vpn-dialog-task v-if="dialogTaskVisibility" 
-                       :style="{left: dialogTaskPosition.left + 'px', top: dialogTaskPosition.top + 'px'}"
-                       :inShowDialog="dialogTaskVisibility"
-                       :inItemProps="dialogItemProps"
-                       @cancel-close="() => {dialogTaskVisibility = false}"
-                       @update-task="() => {$emit('update-task'); dialogTaskVisibility = false;}"
-                       tabindex='1'></vpn-dialog-task>
-      <vpn-dialog-basis v-if="dialogPropsBasis.visibility"
-                        :inDialogProps="dialogPropsBasis"
-                        @cancel-close="() => { dialogPropsBasis.visibility = false }"
-                        @update-basis="updateBasisDocument">Документ основание</vpn-dialog-basis>
+      <dialog-task v-if="dialogTaskVisibility" 
+                   :style="{left: dialogTaskPosition.left + 'px', top: dialogTaskPosition.top + 'px'}"
+                   :inShowDialog="dialogTaskVisibility"
+                   :inItemProps="dialogItemProps"
+                   @cancel-close="() => {dialogTaskVisibility = false}"
+                   @update-task="() => {$emit('update-task'); dialogTaskVisibility = false;}"
+                   tabindex='1'></dialog-task>
+      <dialog-basis v-if="dialogPropsBasis.visibility"
+                    :inDialogProps="dialogPropsBasis"
+                    @cancel-close="() => { dialogPropsBasis.visibility = false }"
+                    @update-basis="updateBasisDocument">Документ основание</dialog-basis>
     </div>
     <div class="crypto__blocked-content"
          v-if="(dialogTaskVisibility || dialogPropsBasis.visibility)"></div>
@@ -104,14 +104,14 @@
 
 <script>
 import axios from 'axios';
-import vpnDialogTask from '@/components/person/person-card/crypto/vpn-dialog__task';
-import vpnDialogBasis from '@/components/person/person-card/crypto/vpn-dialog__basis';
+import dialogTask from '@/components/person/person-card/crypto/dialog__task';
+import dialogBasis from '@/components/person/person-card/crypto/dialog__basis';
 
 export default {
   name: 'vpnClList',
   components: {
-    vpnDialogTask,
-    vpnDialogBasis
+    dialogTask,
+    dialogBasis
   },
   props: {
     inListItem: Array,
