@@ -20,7 +20,7 @@
             <td class="catalog-list__table-body_column">
               <div class="control">
               <button class="control__button"
-                      v-bind:title="(item.CVISIBLE == '0') ? 'Активировать' : 'Деактивировать'" 
+                      v-bind:title="(item.CVISIBLE == '0') ? 'Активировать' : 'Отключить'" 
                       v-bind:class="{
                         'control__button_disabled-off': (item.CVISIBLE == '1') ? true : false,
                         'control__button_disabled-on': (item.CVISIBLE == '0') ? true : false

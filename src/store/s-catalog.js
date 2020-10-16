@@ -52,7 +52,7 @@ export default {
   actions: {
     async SET_COUNT_USED_ITEM_ACTIVE(store, inOption) {
       let sendOption = inOption;
-      sendOption.function = `getListUsedItemActive${inOption.catalogName.toUpperCase()}`;
+      sendOption.function = `sumUsedActive${inOption.catalogName.toUpperCase()}`;
       console.log(sendOption);
       await axios
         .post(pathBackend + 'catalog.php', null, {params: sendOption})
@@ -63,7 +63,7 @@ export default {
     },
     async SET_COUNT_USED_ITEM_INACTIVE(store, inOption) {
       let sendOption = inOption;
-      sendOption.function = `getListUsedItemInactive${inOption.catalogName.toUpperCase()}`;
+      sendOption.function = `sumUsedInactive${inOption.catalogName.toUpperCase()}`;
       console.log(sendOption);
       await axios
         .post(pathBackend + 'catalog.php', null, {params: sendOption})
