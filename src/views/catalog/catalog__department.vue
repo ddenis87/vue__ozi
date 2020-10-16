@@ -9,23 +9,32 @@
       </div>
       <hr class="catalog__separator"/>
       <div class="catalog__body-list">
-        <catalog-list :listItem="listItem" @delete-item="confirmDeleteItem"></catalog-list>
+        <catalog-list :listItem="listItem"
+                      @change-item="showDialogChange"
+                      @switch-item="showDialogSwitch"
+                      @delete-item="showDialogDelete"></catalog-list>
       </div>
     </div>
     <div class="catalog-dialog">
       <dialog-delete v-if="dialogDelete.visibility"
                      :inDialogProps="dialogDelete.dialogProps"
+                     :inCatalogName="catalogName"
                      @accept-deleting="deleteItem"
                      @cancel-deleting="() => { dialogDelete.visibility = false }"></dialog-delete>
+      <dialog-switch v-if="dialogSwitch.visibility"
+                     :inDialogProps="dialogSwitch.dialogProps"
+                     @accept-switching="switchItem"
+                     @cancel-switching="() => { dialogSwitch.visibility = false }"></dialog-switch>
     </div>
     <div class="catalog__blocked-content"
-         v-if="(dialogDelete.visibility)"></div>
+         v-if="(dialogDelete.visibility || dialogSwitch.visibility)"></div>
   </div>
 </template>
 
 <script>
 import catalogControl from '@/components/catalog/catalog__control';
 import catalogList from '@/components/catalog/catalog__list';
+import dialogSwitch from '@/components/catalog/dialog__switch';
 import dialogDelete from '@/components/catalog/dialog__delete';
 
 
@@ -34,6 +43,7 @@ export default {
   components: {
     catalogControl,
     catalogList,
+    dialogSwitch,
     dialogDelete
   },
   computed: {
@@ -42,7 +52,10 @@ export default {
   data() {
     return {
       catalogName: 'DEPARTMENT',
+      dialogSwitch: { visibility: false, },
+      dialogChange: { visibility: false, },
       dialogDelete: { visibility: false, },
+      
     }
   },
   created: function() {
@@ -56,10 +69,31 @@ export default {
       };
       this.$store.dispatch('ADDING_ITEM_CATALOGS', option);
     },
-    confirmDeleteItem(inItem) {
+    
+    showDialogSwitch(inItem) { 
+      this.dialogSwitch.visibility = true;
+      this.dialogSwitch.dialogProps = inItem;
+    },
+    switchItem(inValueId, inValueVisible) {
+      let option = {
+        catalogName: this.catalogName,
+        valueId: inValueId,
+        valueVisible: inValueVisible,
+      };
+      console.log(option);
+      this.$store.dispatch('SWITCH_ITEM_CATALOGS', option);
+      this.dialogSwitch.visibility = false;
+    },
+
+    showDialogChange(inItem) { 
+      this.dialogChange.visibility = true;
+      this.dialogChange.dialogProps = inItem;
+    },
+    changeItem() {  },
+
+    showDialogDelete(inItem) {
       this.dialogDelete.visibility = true;
       this.dialogDelete.dialogProps = inItem;
-      console.log(inItem);
     },
     deleteItem(inValueId) {
       let option = {
@@ -67,6 +101,7 @@ export default {
         valueId: inValueId,
       };
       this.$store.dispatch('DELETE_ITEM_CATALOGS', option);
+      this.dialogDelete.visibility = false;
     },
   }
 }

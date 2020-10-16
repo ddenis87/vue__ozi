@@ -25,10 +25,10 @@
                         'control__button_disabled-off': (item.CVISIBLE == '1') ? true : false,
                         'control__button_disabled-on': (item.CVISIBLE == '0') ? true : false
                       }" 
-                      @click="switchVisibilityItem(item)"></button>
+                      @click="switchItem(item)"></button>
               <button class="control__button control__button_edit" 
                       title="Редактировать запись"
-                      @click="editItem(item)"></button>
+                      @click="changeItem(item)"></button>
               <button class="control__button control__button_delete" 
                       title="Удалить запись"
                       @click="deleteItem(item)"></button>
@@ -54,8 +54,8 @@ export default {
     }
   },
   methods: {
-    switchVisibilityItem(inItem) { this.$emit('switch-visibility-item', inItem); },
-    editItem(inItem) { this.$emit('edit-item', inItem); },
+    switchItem(inItem) { this.$emit('switch-item', inItem); },
+    changeItem(inItem) { this.$emit('change-item', inItem); },
     deleteItem(inItem) { this.$emit('delete-item', inItem); },
   }
 }
