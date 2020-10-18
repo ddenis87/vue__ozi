@@ -30,6 +30,8 @@
           background-size: contain;
           background-repeat: no-repeat;
           background-position: center center;
+
+          outline: none;
           cursor: pointer;
           &_disabled-on { background-image: url('~@/assets/images/control/button_disabled-on.png'); }
           &_disabled-off { background-image: url('~@/assets/images/control/button_disabled-off.png'); }

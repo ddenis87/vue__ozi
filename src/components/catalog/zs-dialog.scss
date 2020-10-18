@@ -1,0 +1,45 @@
+$minWidth: 600px;
+.dialog-catalog {
+  position: fixed;
+  top: calc(50% - 150px);
+  left: calc(50% - 300px) ;
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 300px;
+  padding: 10px;
+  min-width: $minWidth;
+  max-width: 700px;
+  border: 2px solid grey;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px black;
+  background-color: white;
+
+  font-size: 13px;
+  font-family: 'Montserrat';
+  &__title {
+    color: darkslategrey;
+    margin-bottom: 10px;
+  }
+  &__body {
+    margin-bottom: 10px;
+    .body__text {
+      margin: 6px 0px;
+      &_title { color: darkgreen; }
+      &_warning {
+        margin: 20px 0px;
+        color: red;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+    }
+  }
+  &__control {
+    display: flex;
+    justify-content: space-between;
+    &_item {
+      min-width: 100px;
+    }
+  }
+}

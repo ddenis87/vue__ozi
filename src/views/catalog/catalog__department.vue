@@ -9,25 +9,28 @@
       </div>
       <hr class="catalog__separator"/>
       <div class="catalog__body-list">
-        <catalog-list :listItem="listItem"
+        <catalog-list :list-item="listItem"
                       @change-item="showDialogChange"
                       @switch-item="showDialogSwitch"
                       @delete-item="showDialogDelete"></catalog-list>
       </div>
     </div>
     <div class="catalog-dialog">
-      <dialog-delete v-if="dialogDelete.visibility"
-                     :inDialogProps="dialogDelete.dialogProps"
-                     :inCatalogName="catalogName"
-                     @accept-deleting="deleteItem"
-                     @cancel-deleting="() => { dialogDelete.visibility = false }"></dialog-delete>
       <dialog-switch v-if="dialogSwitch.visibility"
-                     :inDialogProps="dialogSwitch.dialogProps"
+                     :in-dialog-props="dialogSwitch.dialogProps"
                      @accept-switching="switchItem"
                      @cancel-switching="() => { dialogSwitch.visibility = false }"></dialog-switch>
+      <dialog-change v-if="dialogChange.visibility"
+                     :inCatalogName="catalogName" 
+                     @cancel-changes="() => { dialogChange.visibility = false }"></dialog-change>
+      <dialog-delete v-if="dialogDelete.visibility"
+                     :in-dialog-props="dialogDelete.dialogProps"
+                     :in-catalog-name="catalogName"
+                     @accept-deleting="deleteItem"
+                     @cancel-deleting="() => { dialogDelete.visibility = false }"></dialog-delete>
     </div>
     <div class="catalog__blocked-content"
-         v-if="(dialogDelete.visibility || dialogSwitch.visibility)"></div>
+         v-if="(dialogDelete.visibility || dialogSwitch.visibility || dialogChange.visibility)"></div>
   </div>
 </template>
 
@@ -35,6 +38,7 @@
 import catalogControl from '@/components/catalog/catalog__control';
 import catalogList from '@/components/catalog/catalog__list';
 import dialogSwitch from '@/components/catalog/dialog__switch';
+import dialogChange from '@/components/catalog/dialog__change';
 import dialogDelete from '@/components/catalog/dialog__delete';
 
 
@@ -44,10 +48,18 @@ export default {
     catalogControl,
     catalogList,
     dialogSwitch,
-    dialogDelete
+    dialogChange,
+    dialogDelete,
   },
   computed: {
-    listItem() { return this.$store.getters.GET_LIST_DEPARTMENT; }
+    listItem() { 
+      // return this.$store.getters.GET_LIST_DEPARTMENT; 
+      return [
+        {ID: '1', CNAME: 'Отдел ИТ', CVISIBLE: '1'},
+        {ID: '2', CNAME: 'Отдел защиты', CVISIBLE: '1'},
+        {ID: '3', CNAME: 'Отдел кадров', CVISIBLE: '0'},
+      ];
+    }
   },
   data() {
     return {

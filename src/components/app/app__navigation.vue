@@ -41,8 +41,11 @@ export default {
         this.listItem = [
           // {CURL: '/', CNAME: 'На главную'},
           {CURL: '', CNAME: 'Справочники'},
+          {CURL: '/catalog__district', CNAME: 'Территориальные органы'},
           {CURL: '/catalog__department', CNAME: 'Отделы'},
+          {CURL: '/catalog__post', CNAME: 'Должности'},
           {CURL: '/catalog__document-input', CNAME: 'Входящие документы'},
+          {CURL: '/catalog__document-output', CNAME: 'Исходящие документы'},
           {CURL: '', CNAME: 'Журналы'},
           {CURL: '/person', CNAME: 'Пользователи'},
           {CURL: '', CNAME: 'Отчеты'},

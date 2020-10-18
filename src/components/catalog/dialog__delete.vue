@@ -1,7 +1,7 @@
 <template>
-  <div class="dialog-delete">
-    <h3 class="dialog-delete__title">Подтверждение удаления</h3>
-    <div class="dialog-delete__body">
+  <div class="dialog-catalog">
+    <h3 class="dialog-catalog__title">Подтверждение удаления</h3>
+    <div class="dialog-catalog__body">
       <p class="body__text">Удаляемый документ: <b class="body__text_title">{{ cDialogProps.CNAME }}.</b></p>
       <p class="body__text">Документ имеет следующие связи:</p>
       <table class="body__table">
@@ -22,9 +22,9 @@
         <c-input class="body__input" :inValidation="validation" @input="inputValidation" v-model="valueInput">Вставте в это поле наименование удаляемого документа</c-input>
       </template>
     </div>
-    <div class="dialog-delete__control">
-      <div class="dialog-delete__control_item"><c-button class="dialog-delete__control_item" v-if="cCountUsedItem.itemActive == 0 && valueInput != ''" @click="deleteItem(cDialogProps.ID)">Применить</c-button></div>
-      <c-button class="dialog-delete__control_item" @click="$emit('cancel-deleting')">Отменить</c-button>
+    <div class="dialog-catalog__control">
+      <div class="dialog-catalog__control_item"><c-button class="dialog-catalog__control_item" v-if="cCountUsedItem.itemActive == 0 && valueInput != ''" @click="deleteItem(cDialogProps.ID)">Применить</c-button></div>
+      <c-button class="dialog-catalog__control_item" @click="$emit('cancel-deleting')">Отменить</c-button>
     </div>
   </div>
 </template>
@@ -72,39 +72,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$minWidth: 600px;
-.dialog-delete {
-  position: fixed;
-  top: calc(50% - 150px);
-  left: calc(50% - 300px) ;
-  display: block;
-  width: auto;
-  height: auto;
-  max-height: 300px;
-  padding: 10px;
-  min-width: $minWidth;
-  max-width: 700px;
-  border: 2px solid grey;
-  border-radius: 3px;
-  box-shadow: 1px 1px 1px black;
-  background-color: white;
+@import 'zs-dialog.scss';
 
-  font-size: 13px;
-  font-family: 'Montserrat';
-  &__title {
-    color: darkslategrey;
-    margin-bottom: 10px;
-  }
+.dialog-catalog {
   &__body {
-    margin-bottom: 10px;
     .body__text {
-      margin: 6px 0px;
-      &_title { color: darkgreen; }
       &_warning {
-        color: red;
-        font-size: 12px;
-        font-weight: bold;
-        text-transform: uppercase;
+        margin: 3px 0px;
       }
     }
     .body__table {
@@ -115,13 +89,6 @@ $minWidth: 600px;
       text-transform: uppercase;
       .table-row_active { color: red; }
       .table-row_inactive { color: grey; }
-    }
-  }
-  &__control {
-    display: flex;
-    justify-content: space-between;
-    &_item {
-      min-width: 100px;
     }
   }
 }
