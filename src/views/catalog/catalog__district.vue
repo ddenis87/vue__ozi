@@ -9,33 +9,44 @@
       </div>
       <hr class="catalog__separator"/>
       <div class="catalog__body-list">
-        <catalog-list :listItem="listItem"></catalog-list>
+        <catalog-list :list-item="listItem"
+                      @switch-item="showDialogSwitch"></catalog-list>
       </div>
     </div>
+    <div class="catalog-dialog">
+      <dialog-switch v-if="dialogSwitch.visibility"
+                     :in-dialog-props="dialogSwitch.dialogProps"
+                     @accept-switching="switchItem"
+                     @cancel-switching="() => { dialogSwitch.visibility = false }"></dialog-switch>
+    </div>
+    <div class="catalog__blocked-content"
+         v-if="(dialogDelete.visibility || dialogSwitch.visibility || dialogChange.visibility)"></div>
   </div>
 </template>
 
 <script>
+import { catalog } from './catalog';
 import catalogControl from '@/components/catalog/catalog__control';
 import catalogList from '@/components/catalog/catalog__list';
+import dialogSwitch from '@/components/catalog/dialog__switch';
 
 export default {
   name: 'catalogDistrict',
   components: {
     catalogControl,
     catalogList,
+    dialogSwitch,
   },
+  mixins: [catalog],
   computed: {
-    listItem() { return this.$store.getters.GET_LIST_DISTRICT; }
+    listItem() {
+      return this.$store.getters.GET_LIST_DISTRICT;
+    }
   },
   data() {
     return {
       catalogName: 'DISTRICT',
-      dialogDelete: { visibility: false, },
     }
-  },
-  created: function() {
-    this.$store.dispatch('SET_LIST_CATALOGS', this.catalogName);
   },
   methods: {
     addingItem(inValueName) {
@@ -44,18 +55,6 @@ export default {
         valueName: inValueName,
       };
       this.$store.dispatch('ADDING_ITEM_CATALOGS', option);
-    },
-    confirmDeleteItem(inItem) {
-      this.dialogDelete.visibility = true;
-      this.dialogDelete.dialogProps = inItem;
-      console.log(inItem);
-    },
-    deleteItem(inValueId) {
-      let option = {
-        catalogName: this.catalogName,
-        valueId: inValueId,
-      };
-      this.$store.dispatch('DELETE_ITEM_CATALOGS', option);
     },
   }
 }
