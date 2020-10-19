@@ -2,13 +2,18 @@
   <div class="dialog-catalog">
     <h3 class="dialog-catalog__title">Изменение документа</h3>
     <div class="dialog-catalog__body">
-      <c-input class="body__input">Наименование документа</c-input>
-      <c-checkbox class="body__checkbox">Верификация</c-checkbox>
-      <p class="body__text body__text_warning">Документ измениться везде где он назначен</p>
+      <c-input class="body__input" :inValue="cDialogProps.CNAME" v-model="valueName">Наименование документа</c-input>
+      <c-checkbox class="body__checkbox" 
+                  v-if="cVerify" 
+                  :inInputChecked="cDialogProps.CCONFIRM" 
+                  v-model="valueVerify">Верификация</c-checkbox>
+      <p class="body__text body__text_warning">Наименование документа измениться везде где он назначен</p>
     </div>
-    
     <div class="dialog-catalog__control">
-      <div class="dialog-catalog__control_item"><c-button class="dialog-catalog__control_item">Применить</c-button></div>
+      <div class="dialog-catalog__control_item">
+        <c-button class="dialog-catalog__control_item"
+                  @click="changeItem(cDialogProps.ID)">Применить</c-button>
+      </div>
       <c-button class="dialog-catalog__control_item" @click="$emit('cancel-changes')">Отменить</c-button>
     </div>
   </div>
@@ -26,6 +31,27 @@ export default {
     cCheckbox,
     cButton,
   },
+  props: {
+    dialogProps: Object,
+  },
+  computed: {
+    cDialogProps() { return this.dialogProps; },
+    cVerify() { return (this.dialogProps?.CCONFIRM) ? true : false; }
+  },
+  created() {
+    this.valueName = this.cDialogProps.CNAME;
+  },
+  data() {
+    return {
+      valueName: '',
+      valueVerify: false,
+    }
+  },
+  methods: {
+    changeItem(inValueId) {
+      this.$emit('accept-change', inValueId, this.valueName, this.valueVerify);
+    }
+  }
 }
 </script>
 

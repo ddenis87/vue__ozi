@@ -23,7 +23,10 @@
       </template>
     </div>
     <div class="dialog-catalog__control">
-      <div class="dialog-catalog__control_item"><c-button class="dialog-catalog__control_item" v-if="cCountUsedItem.itemActive == 0 && valueInput != ''" @click="deleteItem(cDialogProps.ID)">Применить</c-button></div>
+      <div class="dialog-catalog__control_item">
+        <c-button class="dialog-catalog__control_item" 
+                  v-if="cCountUsedItem.itemActive == 0 && valueInput != ''" 
+                  @click="deleteItem(cDialogProps.ID)">Применить</c-button></div>
       <c-button class="dialog-catalog__control_item" @click="$emit('cancel-deleting')">Отменить</c-button>
     </div>
   </div>

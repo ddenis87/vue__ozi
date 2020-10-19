@@ -46,14 +46,12 @@ export default {
     SET_COUNT_USED_ITEM(state, option) { 
       if ('itemActive' in option) state.countUsedItem.itemActive = option.itemActive; 
       if ('itemInactive' in option) state.countUsedItem.itemInactive = option.itemInactive; 
-      console.log(state.countUsedItem);
     },
   },
   actions: {
     async SET_COUNT_USED_ITEM_ACTIVE(store, inOption) {
       let sendOption = inOption;
       sendOption.function = `sumUsedActive${inOption.catalogName.toUpperCase()}`;
-      console.log(sendOption);
       await axios
         .post(pathBackend + 'catalog.php', null, {params: sendOption})
         .then(response => {
@@ -64,7 +62,6 @@ export default {
     async SET_COUNT_USED_ITEM_INACTIVE(store, inOption) {
       let sendOption = inOption;
       sendOption.function = `sumUsedInactive${inOption.catalogName.toUpperCase()}`;
-      console.log(sendOption);
       await axios
         .post(pathBackend + 'catalog.php', null, {params: sendOption})
         .then(response => {
@@ -93,6 +90,16 @@ export default {
     SWITCH_ITEM_CATALOGS(store, inOption) {
       let sendOption = inOption;
       sendOption.function = `switch${inOption.catalogName.toUpperCase()}`;
+      axios
+        .post(pathBackend + 'catalog.php', null, {params: sendOption})
+        .then(response => {
+          if (response.data == '1') store.dispatch('SET_LIST_CATALOGS', inOption.catalogName.toUpperCase());
+        })
+        .catch();
+    },
+    CHANGE_ITEM_CATALOGS(store, inOption) {
+      let sendOption = inOption;
+      sendOption.function = `change${inOption.catalogName.toUpperCase()}`;
       axios
         .post(pathBackend + 'catalog.php', null, {params: sendOption})
         .then(response => {

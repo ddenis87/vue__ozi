@@ -21,7 +21,8 @@
                      @accept-switching="switchItem"
                      @cancel-switching="() => { dialogSwitch.visibility = false }"></dialog-switch>
       <dialog-change v-if="dialogChange.visibility"
-                     :inCatalogName="catalogName" 
+                     :dialog-props="dialogChange.dialogProps"
+                     @accept-change="changeItem"
                      @cancel-changes="() => { dialogChange.visibility = false }"></dialog-change>
       <dialog-delete v-if="dialogDelete.visibility"
                      :in-dialog-props="dialogDelete.dialogProps"
@@ -53,12 +54,7 @@ export default {
   },
   computed: {
     listItem() { 
-      // return this.$store.getters.GET_LIST_DEPARTMENT; 
-      return [
-        {ID: '1', CNAME: 'Отдел ИТ', CVISIBLE: '1'},
-        {ID: '2', CNAME: 'Отдел защиты', CVISIBLE: '1'},
-        {ID: '3', CNAME: 'Отдел кадров', CVISIBLE: '0'},
-      ];
+      return this.$store.getters.GET_LIST_DEPARTMENT; 
     }
   },
   data() {
@@ -67,7 +63,6 @@ export default {
       dialogSwitch: { visibility: false, },
       dialogChange: { visibility: false, },
       dialogDelete: { visibility: false, },
-      
     }
   },
   created: function() {
@@ -92,7 +87,6 @@ export default {
         valueId: inValueId,
         valueVisible: inValueVisible,
       };
-      console.log(option);
       this.$store.dispatch('SWITCH_ITEM_CATALOGS', option);
       this.dialogSwitch.visibility = false;
     },
@@ -101,7 +95,16 @@ export default {
       this.dialogChange.visibility = true;
       this.dialogChange.dialogProps = inItem;
     },
-    changeItem() {  },
+    changeItem(inValueId, inValueName, inValueVerify) {
+      let option = {
+        catalogName: this.catalogName,
+        valueId: inValueId,
+        valueName: inValueName,
+        valueVerify: (inValueVerify == true) ? '1' : '0',
+      }
+      this.$store.dispatch('CHANGE_ITEM_CATALOGS', option);
+      this.dialogChange.visibility = false;
+    },
 
     showDialogDelete(inItem) {
       this.dialogDelete.visibility = true;
