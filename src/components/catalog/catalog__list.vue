@@ -45,13 +45,7 @@
 export default {
   name: 'catalogList',
   props: {
-    listItem: {
-      default: []
-    }
-  },
-  data: function() {
-    return {
-    }
+    listItem: Array,
   },
   methods: {
     switchItem(inItem) { this.$emit('switch-item', inItem); },

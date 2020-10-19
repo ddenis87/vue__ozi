@@ -34,10 +34,10 @@
                           'control__button_disabled-off': (item.CVISIBLE == '1') ? true : false,
                           'control__button_disabled-on': (item.CVISIBLE == '0') ? true : false
                         }" 
-                        @click="switchVisibilityItem(item)"></button>
+                        @click="switchItem(item)"></button>
                 <button class="control__button control__button_edit" 
                       title="Редактировать запись"
-                      @click="editItem(item)"></button>
+                      @click="changeItem(item)"></button>
                 <button class="control__button control__button_delete" 
                         title="Удалить запись"
                         @click="deleteItem(item)"></button>
@@ -54,26 +54,12 @@
 export default {
   name: 'catalogListDocument',
   props: {
-    listItem: {
-      // type: Array,
-      default: [
-        {CID: '1', CNAME: 'Нет соединения с базой', CCONFIRM: '0', CVISIBLE: '1'},
-        {CID: '2', CNAME: 'Или произошла ошибка при получении данных', CCONFIRM: '1', CVISIBLE: '1'},
-        {CID: '3', CNAME: 'А возможно так сошлись звезды', CCONFIRM: '0', CVISIBLE: '0'},
-      ]
-    }
-  },
-  data: function() {
-    return {
-    }
+    listItem: Array,
   },
   methods: {
-    switchVisibilityItem: function(row) {
-      this.$emit('switchVisibilityItem', row);
-    },
-    deleteItem: function(row) {
-      this.$emit('deleteItem', row);
-    },
+    switchItem(inItem) { this.$emit('switch-item', inItem); },
+    changeItem(inItem) { this.$emit('change-item', inItem); },
+    deleteItem(inItem) { this.$emit('delete-item', inItem); },
   }
 }
 </script>
