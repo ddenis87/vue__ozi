@@ -78,19 +78,4 @@ export default {
 
 <style lang="scss" scoped>
 @import 'catalog.scss';
-
-.catalog {
-  &-dialog {
-    position: relative;
-    z-index: 998;
-  }
-  &__blocked-content {
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .3);
-  }
-}
 </style>

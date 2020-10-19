@@ -7,7 +7,7 @@
       </div>
       <hr class="person__separator"/>
       <div class="person__body-list">
-        <person-list :listItem="listItem"
+        <person-list :list-item="listItem"
                      @click="personEnter"></person-list>
       </div>
     </div>
