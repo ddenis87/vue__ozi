@@ -36,8 +36,8 @@
                         }" 
                         @click="switchItem(item)"></button>
                 <button class="control__button control__button_edit" 
-                      title="Редактировать запись"
-                      @click="changeItem(item)"></button>
+                        title="Редактировать запись"
+                        @click="changeItem(item)"></button>
                 <button class="control__button control__button_delete" 
                         title="Удалить запись"
                         @click="deleteItem(item)"></button>
