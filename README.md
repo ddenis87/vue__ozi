@@ -1,4 +1,4 @@
-# vue--ozi
+# vue__ozi
 
 ## Project setup
 ```
