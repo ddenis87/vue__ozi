@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 import cInput from '@/components/elements/c-input';
 import cSelect from '@/components/elements/c-select';
 import cButton from '@/components/elements/c-button';
@@ -31,39 +29,30 @@ export default {
     cButton,
   },
   props: {
-    inListType: {
-      default: 'documentInput'
+    listType: {
+      type: String,
+      default: 'INPUT'
     },
+  },
+  computed: {
+    listItem() { return this.$store.getters[`GET_LIST_DOCUMENT_${this.listType.toUpperCase()}_VISIBLE`]; },
   },
   data: function() {
     return {
-      listItem: [
-        {ID: '0', CNAME: ''},
-        {ID: '1', CNAME: 'Заявка на предоставление доступа'},
-        {ID: '2', CNAME: 'Акт о вскрытии'},
-        {ID: '3', CNAME: 'Заявка на криптографию'},
-      ],
+      
       documentProps: {},
       documentNote: '',
     }
   },
   created: function() {
-    let option = {};
-    switch(this.inListType) {
-      case 'documentInput': {
-        option.function = 'getListDocumentInput';
-        break;
+    switch(this.listType) {
+      case 'INPUT': {
+        this.$store.dispatch('SET_LIST_CATALOGS', 'DOCUMENT_INPUT');
       }
-      case 'documentOutput': {
-        option.function = 'getListDocumentOutput';
-        break;
+      case 'OUTPUT': {
+        this.$store.dispatch('SET_LIST_CATALOGS', 'DOCUMENT_OUTPUT');
       }
     }
-    axios
-      .post(pathBackend + 'person-card__document.php', null, {params: option})
-      .then((response) => {
-        this.listItem = response.data;
-      })
   },
   methods: {
     addDocument: function() {

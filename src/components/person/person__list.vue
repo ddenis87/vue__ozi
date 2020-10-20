@@ -15,7 +15,7 @@
             <tr class="person-list__table-body_row"
                 :key="index"
                 @click="personEnter(item)">
-            <td class="person-list__table-body_column">{{ incrementIndex() }}</td>
+            <td class="person-list__table-body_column">{{ index + 1 }}</td>
             <td class="person-list__table-body_column">{{ item.VFIO }}</td>
             <td class="person-list__table-body_column">{{ item.VPOSTNAME }}</td>
             <td class="person-list__table-body_column">{{ item.VDISTRICTNAME }}</td>
@@ -39,6 +39,9 @@ export default {
   name: 'personList',
   props: {
     listItem: {default: []},
+  },
+  computed: {
+    
   },
   data() {
     return {

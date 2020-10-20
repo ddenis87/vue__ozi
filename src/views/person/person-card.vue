@@ -1,8 +1,15 @@
 <template>
   <div class="person-card">
     <div class="title-box">
-      <h3 class="title-box__title">Пользователь - </h3>
-      <div class="title-box__title-info">{{ personNameFull }}</div>
+      <div class="title-box__info">
+        <h3 class="title-box__info-title">Пользователь -</h3>
+        <div class="title-box__info-description">
+          <span>{{ profileUser.VFIO }}</span>
+          <span>{{ profileUser.VPOSTNAME }}</span>
+          <span>{{ profileUser.VDEPARTMENTNAME }}</span>
+          <span>{{ profileUser.VDISTRICTNAME }}</span>
+        </div>
+      </div>
       <div class="title-box__control">
         <c-button @click="backPerson">Вернуться</c-button>
       </div>
@@ -15,7 +22,7 @@
                        active-class="sub-menu__item-active"
                        v-for="(item, index) in listSubmenu"
                        :key="index"
-                       :to="item.CPATH + '?personId=' + personId"
+                       :to="item.CPATH"
                        tag="li">{{ item.CNAME }}</router-link>
         </ul>
       </div>
@@ -36,9 +43,9 @@ export default {
     cButton,
   },
   computed: {
-    personNameFull() { return this.$store.state.personProfile.personNameFull; },
+    profileUser() { return this.$store.getters.GET_PROFILE_USER; }
   },
-  data: function() {
+  data() {
     return {
       listSubmenu: [
         {CNAME: 'Общее', CPATH: '/person-card/__info'},
@@ -47,27 +54,15 @@ export default {
         {CNAME: 'Ресурсы', CPATH: '/person-card/__res'},
         {CNAME: 'Прочее', CPATH: '/person-card/__other'},
       ],
-      personId: decodeURI(window.location.search.slice(window.location.search.indexOf("=") + 1)),
     }
   },
-  created: function() {
-    let option = {
-      function: 'getPersonInfoFull',
-      personId: this.personId
-    }
-    axios
-      .post(pathBackend + 'person.php', null, {params: option})
-      .then(response => {
-        this.$store.commit('setPersonProfile', response.data[0]);
-        this.$router.push('/person-card/__document?personId=' + this.personId)
-      })
-      .catch(() => {
-      })
+  created() {
+
+    this.$store.dispatch('SET_PROFILE_USER',{ personId: decodeURI(window.location.search.slice(window.location.search.indexOf("=") + 1)) });
+    this.$router.push('/person-card/__document');
   },
   methods: {
-    backPerson() {
-      this.$router.push('/person');
-    }
+    backPerson() { this.$router.push('/person'); }
   }
 }
 </script>
@@ -78,15 +73,21 @@ export default {
 .person-card {
   font-family: 'Montserrat';
   box-sizing: border-box;
-  // border: 1px solid grey;
   .title-box {
     display: flex;
     justify-content: space-between;
     width: 100%;
     box-sizing: border-box;
-    &__title {
-      margin-bottom: 10px;
+    &__info {
+      display: inline-flex;
       color: darkslategrey;
+      &-description {
+        display: inline-flex;
+        flex-direction: column;
+        padding-left: 5px;
+        font-size: 0.9em;
+        font-style: italic;
+      }
     }
     &__control {
       max-width: 200px;

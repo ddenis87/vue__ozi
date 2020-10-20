@@ -2,17 +2,15 @@
   <div class="document">
     <div class="document-control-input">
       <h5 class="document__title">Входящие документы</h5>
-      <!-- <hr/> -->
       <div class="document__control">
-        <document-control inListType="documentInput"
+        <document-control list-type="INPUT"
                           @add-document="addDocumentInput"></document-control>
       </div>
     </div>
     <div class="document-control-output">
       <h5 class="document__title">Исходящие документы</h5>
-      <!-- <hr/> -->
       <div class="document__control">
-        <document-control inListType="documentOutput"
+        <document-control list-type="OUTPUT"
                           @add-document="addDocumentOutput"></document-control>
       </div>
     </div>
@@ -30,8 +28,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 import documentControl from '@/components/person/person-card/document/document__control';
 import documentList from '@/components/person/person-card/document/document__list';
 
@@ -42,17 +38,12 @@ export default {
     documentList,
   },
   computed: {
-    listDocumentInput() { return this.$store.getters.PERSON_DOCUMENT_INPUT; },
-    listDocumentOutput() { return this.$store.getters.PERSON_DOCUMENT_OUTPUT; }
-  },
-  data: function() {
-    return {
-      personId: this.$store.state.personProfile.personId,
-    }
+    listDocumentInput() { return this.$store.getters.GET_USER_DOCUMENT_INPUT; },
+    listDocumentOutput() { return this.$store.getters.GET_USER_DOCUMENT_OUTPUT; }
   },
   created: function() {
-    this.$store.dispatch('SET_PERSON_DOCUMENTS', 'Input');
-    this.$store.dispatch('SET_PERSON_DOCUMENTS', 'Output');
+    this.$store.dispatch('SET_USER_DOCUMENTS', {catalogName: 'INPUT'});
+    this.$store.dispatch('SET_USER_DOCUMENTS', {catalogName: 'OUTPUT'});
   },
   methods: {
     addDocumentInput: function(option) {

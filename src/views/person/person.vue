@@ -20,7 +20,7 @@ import personControl from '@/components/person/person__control';
 import personList from '@/components/person/person__list';
 
 export default {
-  name: 'User',  
+  name: 'person',  
   components: {
     personControl,
     personList,
