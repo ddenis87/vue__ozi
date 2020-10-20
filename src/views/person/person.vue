@@ -3,12 +3,12 @@
     <h3 class="person__title">Журналы - Пользователи</h3>
     <div class="person__body">
       <div class="person__body-control">
-        <person-control @click="personSearch"></person-control>
+        <person-control @person-find="personFind"></person-control>
       </div>
       <hr class="person__separator"/>
       <div class="person__body-list">
         <person-list :list-item="listItem"
-                     @click="personEnter"></person-list>
+                     @click="intoPersonCard"></person-list>
       </div>
     </div>
   </div>
@@ -31,17 +31,16 @@ export default {
     }
   },
   methods: {
-    personSearch: function(searchString) {
-      console.log(searchString);
+    personFind: function(searchLine) {
+      console.log(searchLine);
       let option = {
-        function: 'getPerson',
-        personFa: searchString
+        function: 'getListPerson',
+        personFa: searchLine
       }
       axios
         .post(pathBackend + 'person.php', null, {params: option})
         .then((response) => {
           this.listItem = response.data; 
-          console.log(this.listItem);
         })
         .catch(() => {
           this.listItem = [
@@ -51,7 +50,7 @@ export default {
           ]
         })
     },
-    personEnter: function(personId) {
+    intoPersonCard: function(personId) {
       this.$router.push('/person-card?personId=' + personId);
     }
   }

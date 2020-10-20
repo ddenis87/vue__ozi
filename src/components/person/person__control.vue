@@ -4,11 +4,11 @@
     <div class="person-control__box">
       <c-input class="person-control__input"
                v-model="personFa"
-               :inValidation="isEmpty"
+               :in-validation="isEmpty"
                @input="() => { isEmpty = false; }"
-               @keydown="inputEnter">Укажите фамилию для поиска</c-input>
+               @keydown="pressEnter">Укажите фамилию для поиска</c-input>
       <c-button class="person-control__button-item"
-                @click="personSearch">Найти</c-button>
+                @click="personFind">Найти</c-button>
       <c-button class="person-control__button-item"
                 @click="personCreate">Создать</c-button>
     </div>
@@ -25,26 +25,22 @@ export default {
     cInput,
     cButton,
   },
-  data: function() {
+  data() {
     return {
       personFa: '',
       isEmpty: false,
     }
   },
   methods: {
-    inputEnter: function(key) {
-      if (key == 'Enter') this.personSearch();
-    },
-    personSearch: function() {
+    pressEnter(key) { if (key == 'Enter') this.personFind(); },
+    personFind() {
       if (this.personFa == '') {
         this.isEmpty = true; 
         return;
       }
-      this.$emit('click', this.personFa);
+      this.$emit('person-find', this.personFa);
     },
-    personCreate: function() {
-      this.$router.push('/person-card');
-    }
+    personCreate() { this.$emit('person-create'); }
   }
 }
 </script>
@@ -53,7 +49,6 @@ export default {
 .person-control {
   width: 100%;
   margin-bottom: 10px;
-  // padding: 0px 20px;
   box-sizing: border-box;
   &__title {
     margin-bottom: 5px;
