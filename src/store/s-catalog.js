@@ -16,22 +16,22 @@ export default {
   },
   getters: {
     GET_LIST_DEPARTMENT(state) { return state.listDepartment; },
-    GET_LIST_DEPARTMENT_VISIBLE(state) { return state.listDepartment.filter(item => item.CVISIBLE == 1); },
+    GET_LIST_DEPARTMENT_VISIBLE(state) { return state.listDepartment.filter(item => item.CVISIBLE == '1'); },
 
     GET_LIST_DISTRICT(state) { return state.listDistrict; },
-    GET_LIST_DISTRICT_VISIBLE(state) { return state.listDistrict.filter(item => item.CVISIBLE == 1); },
+    GET_LIST_DISTRICT_VISIBLE(state) { return state.listDistrict.filter(item => item.CVISIBLE == '1'); },
 
     GET_LIST_POST(state) { return state.listPost; },
-    GET_LIST_POST_VISIBLE(state) { return state.listPost.filter(item => item.CVISIBLE == 1); },
+    GET_LIST_POST_VISIBLE(state) { return state.listPost.filter(item => item.CVISIBLE == '1'); },
 
     GET_LIST_DOCUMENT_INPUT(state) { return state.listDocumentInput; },
-    GET_LIST_DOCUMENT_INPUT_VISIBLE(state) { return state.listDocumentInput.filter(item => item.CVISIBLE == 1); },
+    GET_LIST_DOCUMENT_INPUT_VISIBLE(state) { return state.listDocumentInput.filter(item => item.CVISIBLE == '1'); },
 
     GET_LIST_DOCUMENT_OUTPUT(state) { return state.listDocumentOutput; },
-    GET_LIST_DOCUMENT_OUTPUT_VISIBLE(state) { return state.listDocumentOutput.filter(item => item.CVISIBLE == 1); },
+    GET_LIST_DOCUMENT_OUTPUT_VISIBLE(state) { return state.listDocumentOutput.filter(item => item.CVISIBLE == '1'); },
 
     GET_LIST_SECURITY_ADMIN(state) { return state.listSecurityAdmin; },
-    GET_LIST_SECURITY_ADMIN_VISIBLE(state) { return state.listSecurityAdmin.filter(item => item.CVISIBLE == 1); },
+    GET_LIST_SECURITY_ADMIN_VISIBLE(state) { return state.listSecurityAdmin.filter(item => item.CVISIBLE == '1'); },
 
     GET_COUNT_USED_ITEM_CATALOG(state) { return state.countUsedItem; },
   },
