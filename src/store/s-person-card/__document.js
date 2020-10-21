@@ -17,12 +17,31 @@ export default {
     SET_USER_DOCUMENTS(state, option) {
       let sendOption = option;
       sendOption.function = `getUserDocument${option.catalogName.toUpperCase()}`;
-      sendOption.personId = state.getters.GET_PROFILE_USER_ID;
+      console.log(sendOption);
       axios.post(pathBackend + 'person-card__document.php', null, {params: sendOption})
         .then(response => {
+
           state.commit(`SET_USER_DOCUMENT_${option.catalogName.toUpperCase()}`, response.data);
         })
         .catch();
+    },
+    ADDING_USER_DOCUMENTS(state, option) {
+      let sendOption = option;
+      sendOption.function = `addingUserDocument${option.catalogName.toUpperCase()}`;
+      axios.post(pathBackend + 'person-card__document.php', null, {params: sendOption})
+       .then(response => {
+         if (response.data == '1') state.dispatch('SET_USER_DOCUMENTS', option);
+       })
+       .catch();
+    },
+    DELETE_USER_DOCUMENT(state, option) {
+      let sendOption = option;
+      sendOption.function = `deleteUserDocument${option.catalogName.toUpperCase()}`;
+      axios.post(pathBackend + 'person-card__document.php', null, {params: sendOption})
+       .then(response => {
+         if (response.data == '1') state.dispatch('SET_USER_DOCUMENTS', option);
+       })
+       .catch();
     },
   },
 }

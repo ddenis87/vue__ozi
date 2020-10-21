@@ -23,10 +23,10 @@ export default {
     },
   },
   actions: {
-    SET_PROFILE_USER(store, option) {
+    async SET_PROFILE_USER(store, option) {
       let sendOption = option;
-      sendOption.function = 'getProfileUser';
-      axios
+      sendOption.function = 'getUserProfile';
+      await axios
         .post(pathBackend + 'person.php', null, {params: sendOption})
         .then(response => {
           store.commit('SET_PROFILE_USER', response.data[0]);

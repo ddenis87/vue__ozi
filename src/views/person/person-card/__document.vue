@@ -4,20 +4,21 @@
       <h5 class="document__title">Входящие документы</h5>
       <div class="document__control">
         <document-control list-type="INPUT"
-                          @add-document="addDocumentInput"></document-control>
+                          @adding-item="addingItem"></document-control>
       </div>
     </div>
     <div class="document-control-output">
       <h5 class="document__title">Исходящие документы</h5>
       <div class="document__control">
         <document-control list-type="OUTPUT"
-                          @add-document="addDocumentOutput"></document-control>
+                          @adding-item="addingItem"></document-control>
       </div>
     </div>
     <div class="document-list-input">
       <hr/>
       <document-list :inListItem="listDocumentInput"
-                     inListType="document-input">Входящие документы</document-list>
+                     inListType="document-input"
+                     @delete-item="deleteItem">Входящие документы</document-list>
     </div>
     <div class="document-list-output">
       <hr/>
@@ -41,17 +42,26 @@ export default {
     listDocumentInput() { return this.$store.getters.GET_USER_DOCUMENT_INPUT; },
     listDocumentOutput() { return this.$store.getters.GET_USER_DOCUMENT_OUTPUT; }
   },
-  created: function() {
-    this.$store.dispatch('SET_USER_DOCUMENTS', {catalogName: 'INPUT'});
-    this.$store.dispatch('SET_USER_DOCUMENTS', {catalogName: 'OUTPUT'});
+  data() {
+    return {
+      valueUserId: decodeURI(window.location.search.slice(window.location.search.indexOf("=") + 1)),
+    }
+  },
+  created() {
+    this.$store.dispatch('SET_USER_DOCUMENTS', {catalogName: 'INPUT', valueUserId: this.valueUserId});
+    this.$store.dispatch('SET_USER_DOCUMENTS', {catalogName: 'OUTPUT', valueUserId: this.valueUserId});
   },
   methods: {
-    addDocumentInput: function(option) {
-      console.log(option)
+    addingItem(option) {
+      let sendOption = option;
+      sendOption.valueUserId = this.valueUserId;
+      this.$store.dispatch('ADDING_USER_DOCUMENTS', sendOption);
     },
-    addDocumentOutput: function(option) {
-      console.log(option)
-    },
+    deleteItem(valueId) {
+      let sendOption = {
+        valueId: valueId,
+      };
+    }
   }
 }
 </script>

@@ -32,9 +32,9 @@ export default {
   },
   methods: {
     personFind: function(searchLine) {
-      console.log(searchLine);
+      // console.log(searchLine);
       let option = {
-        function: 'getListPerson',
+        function: 'getUserList',
         personFa: searchLine
       }
       axios

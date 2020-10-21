@@ -4,8 +4,8 @@
     <input class="c-input__input" 
            type="text"
            :class="{'validation': isEmpty}"
-           v-model="inputValue"
-           @input="setInputValue"
+           :value="value"
+           @input="$emit('input', $event.target.value)"
            @keydown="enteredValue" />
   </div>
 </template>
@@ -15,29 +15,28 @@ export default {
   name: 'cInput',
   props: [
     'inValidation',
-    'inValue',
+    'value',
   ],
   computed: {
     isEmpty() {return this.inValidation;}
   },
   data: function() {
     return {
-      inputValue: '',
+      // inputValue: '',
     }
   },
   created: function() {
-    this.inputValue = this.inValue;
+    // this.inputValue = this.inValue;
   },
   methods: {
     setInputValue() {
       this.$emit('input', this.inputValue);
     },
     enteredValue(event) {
-      this.$emit('keydown', event.key);
+      // this.$emit('keydown', event.key);
     },
     resetComponent() {
       this.inputValue = '';
-      this.setInputValue();
     }
   }
 }

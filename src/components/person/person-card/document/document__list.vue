@@ -55,6 +55,9 @@ export default {
     }
   },
   methods: {
+    deleteItem(inItem) {
+      this.$emit('delete-item', inItem); 
+    },
     modDate: function(val) {
       let nVal = String(val);
       let nDay = nVal.slice(0,2);

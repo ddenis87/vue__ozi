@@ -2,6 +2,8 @@
   <div class="c-select">
     <label class="c-select__title"><slot></slot></label>
     <select class="c-select__select"
+            :class="{'validation': isEmpty}"
+            :value="inValue"
             v-model="selectValue"
             @change="changeSelectValue">
       <option value="0" selected></option>
@@ -20,22 +22,28 @@ export default {
   },
   props: [
     'inListItem',
-    'inValue'
+    'inValue',
+    'validation',
   ],
   computed: {
-    listItem() { return this.inListItem }
+    listItem() { return this.inListItem },
+    isEmpty() { return this.validation },
   },
-  data: function() {
+  data() {
     return {
       selectValue: '0',
     }
   },
-  created: function() {
+  created() {
     this.selectValue = this.inValue;
   },
   methods: {
-    changeSelectValue: function() {
+    changeSelectValue() {
       this.$emit('change', this.selectValue);
+    },
+    resetComponent() {
+      this.selectValue = '0';
+      this.changeSelectValue();
     }
   }
 }
@@ -66,9 +74,9 @@ export default {
     &:focus {
       box-shadow: 1px 1px 1px lightblue, -1px -1px 1px lightblue;
     }
-    &_validation {
-      box-shadow: 1px 1px 1px red, -1px -1px 1px red;
-    }
+  }
+  .validation {
+    box-shadow: 1px 1px 1px red, -1px -1px 1px red;
   }
 }
 </style>

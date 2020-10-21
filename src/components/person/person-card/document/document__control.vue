@@ -1,16 +1,16 @@
 <template>
   <div class="document-control">
     <div class="document-control__box">
-      <c-select class="document-control__select"
+      <c-select ref="documentId" class="document-control__select"
                 :inListItem="listItem"
-                v-model="documentProps">Укажите документ для добавления</c-select>
+                :validation="validation"
+                v-model="documentProps.valueDocumentId"
+                @change="() => { validation = false }">Укажите документ для добавления</c-select>
       <div class="document-control__box_inline">
-        <c-input class="document-control__input"
-                 v-model="documentNote">Примечание к документу</c-input>
-        <!-- <div class="document-control__button"> -->
-          <c-button class="document-control__button-item"
-                    @click="addDocument">Добавить</c-button>
-        <!-- </div> -->
+        <c-input ref="documentNote" class="document-control__input"
+                 v-model="documentProps.valueNote">Примечание к документу</c-input>
+        <c-button class="document-control__button-item"
+                  @click="addingItem">Добавить</c-button>
       </div>
     </div>
   </div>
@@ -37,30 +37,27 @@ export default {
   computed: {
     listItem() { return this.$store.getters[`GET_LIST_DOCUMENT_${this.listType.toUpperCase()}_VISIBLE`]; },
   },
-  data: function() {
+  data() {
     return {
-      
-      documentProps: {},
-      documentNote: '',
+      documentProps: {
+        catalogName: this.listType,
+        valueDocumentId: null,
+        valueNote: null,
+      },
+      validation: false,
     }
   },
-  created: function() {
-    switch(this.listType) {
-      case 'INPUT': {
-        this.$store.dispatch('SET_LIST_CATALOGS', 'DOCUMENT_INPUT');
-      }
-      case 'OUTPUT': {
-        this.$store.dispatch('SET_LIST_CATALOGS', 'DOCUMENT_OUTPUT');
-      }
-    }
+  created() {
+    this.$store.dispatch('SET_LIST_CATALOGS', `DOCUMENT_${this.listType.toUpperCase()}`);
   },
   methods: {
-    addDocument: function() {
-      let option = {
-        documentProps: this.documentProps,
-        documentNote: this.documentNote
-      }
-      this.$emit('add-document', option);
+    addingItem() {
+      let sendOption = {};
+      Object.assign(sendOption, this.documentProps);
+      if (sendOption.valueDocumentId == null || sendOption.valueDocumentId == '0') { this.validation = true; return;}
+      this.$emit('adding-item', sendOption);
+      this.$refs.documentId.resetComponent();
+      this.$refs.documentNote.resetComponent();
     }
   }
 }
@@ -91,8 +88,6 @@ export default {
     margin-bottom: 10px;
   }
   &__button {
-    // display: flex;
-    // justify-content: flex-end;
     &-item {
       min-width: 150px;
     }

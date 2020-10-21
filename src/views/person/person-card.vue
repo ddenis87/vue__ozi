@@ -22,7 +22,7 @@
                        active-class="sub-menu__item-active"
                        v-for="(item, index) in listSubmenu"
                        :key="index"
-                       :to="item.CPATH"
+                       :to="item.CPATH  + '?personId=' + personId"
                        tag="li">{{ item.CNAME }}</router-link>
         </ul>
       </div>
@@ -54,12 +54,13 @@ export default {
         {CNAME: 'Ресурсы', CPATH: '/person-card/__res'},
         {CNAME: 'Прочее', CPATH: '/person-card/__other'},
       ],
+      personId: decodeURI(window.location.search.slice(window.location.search.indexOf("=") + 1)),
     }
   },
   created() {
-
-    this.$store.dispatch('SET_PROFILE_USER',{ personId: decodeURI(window.location.search.slice(window.location.search.indexOf("=") + 1)) });
-    this.$router.push('/person-card/__document');
+    
+    this.$store.dispatch('SET_PROFILE_USER',{ personId: this.personId });
+    this.$router.push('/person-card/__document?personId=' + this.personId);
   },
   methods: {
     backPerson() { this.$router.push('/person'); }
