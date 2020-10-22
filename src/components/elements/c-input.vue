@@ -15,7 +15,7 @@ export default {
   name: 'cInput',
   props: [
     'inValidation',
-    'inValue',
+    'value',
   ],
   computed: {
     isEmpty() {return this.inValidation;}
@@ -26,7 +26,7 @@ export default {
     }
   },
   created: function() {
-    this.inputValue = this.inValue;
+    this.inputValue = this.value;
   },
   methods: {
     setInputValue() {
