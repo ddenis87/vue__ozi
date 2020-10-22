@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      personId: this.$store.state.personProfile.personId,
+      personId: this.$store.getters.GET_PROFILE_USER_ID,
       listCryptoVpnCL: [],
       listCryptoVpnCS: [],
     }

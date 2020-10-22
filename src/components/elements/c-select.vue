@@ -64,8 +64,9 @@ export default {
     top: 0px;
     width: 100%;
     padding: 3px;
-    padding-left: 5px;
-    padding-top: 16px;
+    padding-left: 0px;
+    padding-top: 15px;
+    padding-bottom: 2px;
     font-size: 14px;
     border: 1px solid grey;
     border-radius: 3px;

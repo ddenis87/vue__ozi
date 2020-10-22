@@ -30,9 +30,13 @@ export default {
       listItem: Array,
     }
   },
+  created() {
+    this.$store.dispatch('SET_LIST_CATALOGS', 'DISTRICT');
+    this.$store.dispatch('SET_LIST_CATALOGS', 'DEPARTMENT');
+    this.$store.dispatch('SET_LIST_CATALOGS', 'POST');
+  },
   methods: {
     personFind: function(searchLine) {
-      // console.log(searchLine);
       let option = {
         function: 'getUserList',
         personFa: searchLine
@@ -46,7 +50,6 @@ export default {
           this.listItem = [
             {ID: '2', VFIO: 'Константин Константинович Константинопольский', VPOST: 'Ведущий специалист-эксперт', VDISTRICT: 'КС на правах отдела в Селемджинском районе'},
             {ID: '1238', VFIO: 'Иванов Иван Иванович', VPOST: 'Специалист-эксперт', VDISTRICT: 'УПФР в г.Благовещенске'},
-            // {VFIO: '', VPOST: '', VDISTRICT: ''},
           ]
         })
     },

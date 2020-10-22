@@ -3,24 +3,27 @@
     <div class="person-card-info__title">Информация о пользователе</div>
     <div class="person-card-info__box">
       <c-input class="person-card-info__input"
-               :inValue="personProfile.personFa">Фамилия</c-input>
+               :inValue="profileUser.VFA">Фамилия</c-input>
       <c-select class="person-card-info__select"
                 :inListItem="listDistrict"
-                :inValue="personProfile.personDistrictId">Территориальный орган</c-select>
+                :inValue="profileUser.VDISTRICTID">Территориальный орган</c-select>
+      <button class="person-card-info__control"></button>
     </div>
     <div class="person-card-info__box">
       <c-input class="person-card-info__input" 
-               :inValue="personProfile.personIm">Имя</c-input>
+               :inValue="profileUser.VIM">Имя</c-input>
       <c-select class="person-card-info__select"
                 :inListItem="listDepartment"
-                :inValue="personProfile.personDepartmentId">Структурное подразделение</c-select>
+                :inValue="profileUser.VDEPARTMENTID">Структурное подразделение</c-select>
+      <button class="person-card-info__control"></button>
     </div>
     <div class="person-card-info__box">
       <c-input class="person-card-info__input" 
-               :inValue="personProfile.personOt">Отчество</c-input>
+               :inValue="profileUser.VOT">Отчество</c-input>
       <c-select class="person-card-info__select"
                 :inListItem="listPost"
-                :inValue="personProfile.personPostId">Должность</c-select>
+                :inValue="profileUser.VPOSTID">Должность</c-select>
+      <button class="person-card-info__control"></button>
     </div>
     <div class="person-card-info__box">
       <c-button class="person-card-info__button-item">Изменить</c-button>
@@ -44,42 +47,18 @@ export default {
     cButton
   },
   computed: {
-    personProfile() { return this.$store.state.personProfile; }
+    profileUser() { return this.$store.getters.GET_PROFILE_USER; },
+    listDistrict() { return this.$store.getters.GET_LIST_DISTRICT_VISIBLE; },
+    listDepartment() { return this.$store.getters.GET_LIST_DEPARTMENT_VISIBLE; },
+    listPost() { return this.$store.getters.GET_LIST_POST_VISIBLE; },
   },
   data: function() {
     return {
-      listDistrict: [],
-      listDepartment: [],
-      listPost: [],
     }
   },
   created: function() {
-    this.getListDistrict();
-    this.getListDepartment();
-    this.getListPost();
   },
   methods: {
-    getListDistrict: function() {
-      axios
-        .post(pathBackend + 'person-card__info.php', null, {params: {function: 'getListDistrict'}})
-        .then(response => {
-          this.listDistrict = response.data;
-        })
-    },
-    getListDepartment: function() {
-      axios
-        .post(pathBackend + 'person-card__info.php', null, {params: {function: 'getListDepartment'}})
-        .then(response => {
-          this.listDepartment = response.data;
-        })
-    },
-    getListPost: function() {
-       axios
-        .post(pathBackend + 'person-card__info.php', null, {params: {function: 'getListPost'}})
-        .then(response => {
-          this.listPost = response.data;
-        })
-    }
   }
 }
 </script>
@@ -101,6 +80,18 @@ export default {
   &__select {
     width: 100%;
     margin-left: 20px;
+  }
+  &__control {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    border: 0px;
+    background-color: unset;
+    background-image: url('~@/assets/images/control/button_adding.png');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
   }
   &__box {
     display: flex;
