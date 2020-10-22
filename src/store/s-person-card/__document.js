@@ -17,10 +17,8 @@ export default {
     SET_USER_DOCUMENTS(state, option) {
       let sendOption = option;
       sendOption.function = `getUserDocument${option.catalogName.toUpperCase()}`;
-      console.log(sendOption);
       axios.post(pathBackend + 'person-card__document.php', null, {params: sendOption})
         .then(response => {
-
           state.commit(`SET_USER_DOCUMENT_${option.catalogName.toUpperCase()}`, response.data);
         })
         .catch();
@@ -34,7 +32,7 @@ export default {
        })
        .catch();
     },
-    DELETE_USER_DOCUMENT(state, option) {
+    DELETE_USER_DOCUMENTS(state, option) {
       let sendOption = option;
       sendOption.function = `deleteUserDocument${option.catalogName.toUpperCase()}`;
       axios.post(pathBackend + 'person-card__document.php', null, {params: sendOption})

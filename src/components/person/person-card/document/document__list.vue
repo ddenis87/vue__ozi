@@ -1,6 +1,6 @@
 <template>
   <div class="document-list"
-       :class="listType">
+       :class="className">
     <table class="document-list__table">
       <caption class="document-list__table-title"><slot></slot></caption>
       <thead class="document-list__table-head">
@@ -38,15 +38,15 @@
 export default {
   name: 'documentList',
   props: {
-    inListItem: Array,
-    inListType: String,
+    listItem: Array,
+    listType: String,
   },
   computed: {
-    listItem() { return this.inListItem; },
-    listType() { return "document-list__" + this.inListType; },
+    className() { return "document-list__document-" + this.listType.toLowerCase(); },
+    catalogName() { return this.listType.toUpperCase(); },
     tabTitle() { 
-      if (this.inListType == 'document-input') return "№ вх.";
-      if (this.inListType == 'document-output') return "№ исх."; 
+      if (this.listType.toUpperCase() == 'INPUT') return "№ вх.";
+      if (this.listType.toUpperCase() == 'OUTPUT') return "№ исх.";
     }
   },
   data: function() {
@@ -55,8 +55,11 @@ export default {
     }
   },
   methods: {
-    deleteItem(inItem) {
-      this.$emit('delete-item', inItem); 
+    deleteItem(inItem) { 
+      let sendOption = inItem;
+      sendOption.catalogName = this.catalogName;
+      // console.log(sendOption);
+      this.$emit('delete-item', sendOption); 
     },
     modDate: function(val) {
       let nVal = String(val);

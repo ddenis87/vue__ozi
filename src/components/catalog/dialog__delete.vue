@@ -87,10 +87,10 @@ export default {
     .body__table {
       margin-left: 10px;
       font-family: 'Montserrat';
-      font-size: 12px;
+      font-size: 10px;
       font-weight: bold;
       text-transform: uppercase;
-      .table-row_active { color: red; }
+      .table-row_active { color: darkred; }
       .table-row_inactive { color: grey; }
     }
   }

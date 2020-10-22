@@ -16,27 +16,39 @@
     </div>
     <div class="document-list-input">
       <hr/>
-      <document-list :inListItem="listDocumentInput"
-                     inListType="document-input"
-                     @delete-item="deleteItem">Входящие документы</document-list>
+      <document-list :list-item="listDocumentInput"
+                     list-type="input"
+                     @delete-item="showDialogDelete">Входящие документы</document-list>
     </div>
     <div class="document-list-output">
       <hr/>
-      <document-list :inListItem="listDocumentOutput"
-                     inListType="document-output">Исходящие документы</document-list>
+      <document-list :list-item="listDocumentOutput"
+                     list-type="output"
+                     @delete-item="showDialogDelete">Исходящие документы</document-list>
     </div>
+    <div class="catalog-dialog">
+      <dialog-delete v-if="dialogDelete.visibility"
+                     :in-dialog-props="dialogDelete.dialogProps"
+                     :in-catalog-name="dialogDelete.catalogName"
+                     @accept-deleting="deleteItem"
+                     @cancel-deleting="() => { dialogDelete.visibility = false }"></dialog-delete>
+    </div>
+    <div class="catalog__blocked-content"
+         v-if="(dialogDelete.visibility)"></div>
   </div>
 </template>
 
 <script>
 import documentControl from '@/components/person/person-card/document/document__control';
 import documentList from '@/components/person/person-card/document/document__list';
+import dialogDelete from '@/components/person/person-card/document/dialog__delete';
 
 export default {
   name: 'personCardDocument',
   components: {
     documentControl,
     documentList,
+    dialogDelete,
   },
   computed: {
     listDocumentInput() { return this.$store.getters.GET_USER_DOCUMENT_INPUT; },
@@ -45,6 +57,7 @@ export default {
   data() {
     return {
       valueUserId: decodeURI(window.location.search.slice(window.location.search.indexOf("=") + 1)),
+      dialogDelete: { visibility: false, },
     }
   },
   created() {
@@ -57,10 +70,15 @@ export default {
       sendOption.valueUserId = this.valueUserId;
       this.$store.dispatch('ADDING_USER_DOCUMENTS', sendOption);
     },
-    deleteItem(valueId) {
-      let sendOption = {
-        valueId: valueId,
-      };
+    showDialogDelete(option) {
+      this.dialogDelete.visibility = true;
+      this.dialogDelete.catalogName = option.catalogName;
+      this.dialogDelete.dialogProps = option;
+    },
+    deleteItem(option) {
+      let sendOption = option;
+      this.$store.dispatch('DELETE_USER_DOCUMENTS', sendOption);
+      this.dialogDelete.visibility = false;
     }
   }
 }
