@@ -4,6 +4,7 @@
     <select class="c-select__select"
             :class="{'validation': isEmpty}"
             :value="inValue"
+            :disabled="disabled"
             v-model="selectValue"
             @change="changeSelectValue">
       <option value="0" selected></option>
@@ -20,11 +21,12 @@ export default {
   model: {
     event: 'change'
   },
-  props: [
-    'inListItem',
-    'inValue',
-    'validation',
-  ],
+  props: {
+    inListItem: Array,
+    inValue: String,
+    validation: Boolean,
+    disabled: Boolean,
+  },
   computed: {
     listItem() { return this.inListItem },
     isEmpty() { return this.validation },

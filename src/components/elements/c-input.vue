@@ -3,6 +3,7 @@
     <label class="c-input__title"><slot></slot></label>
     <input class="c-input__input" 
            type="text"
+           :disabled="disabled"
            :class="{'validation': isEmpty}"
            v-model="inputValue"
            @input="setInputValue"
@@ -13,12 +14,13 @@
 <script>
 export default {
   name: 'cInput',
-  props: [
-    'inValidation',
-    'value',
-  ],
+  props: {
+    inValidation: Boolean,
+    value: String,
+    disabled: Boolean,
+  },
   computed: {
-    isEmpty() {return this.inValidation;}
+    isEmpty() { return this.inValidation; }
   },
   data: function() {
     return {

@@ -47,6 +47,9 @@ export default {
           store.commit(`SET_HISTORY_USER_${option.catalogName.toUpperCase()}`, response.data);
         })
         .catch();
-    }
+    },
+    DELETE_HISTORY_USER(store, option) {},
+
+    CHANGE_PROFILE_USER(store, option) {}
   },
 }
