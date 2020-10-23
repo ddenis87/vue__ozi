@@ -33,19 +33,19 @@
     <div class="person-card-info__title">История изменений</div>
     <div class="person-card-info__box" v-if="(listHistoryFio.length > 0)">
       <history-tab :list-item="listHistoryFio">ФИО</history-tab>
-      <c-button>Очистить историю изменения ФИО</c-button>
+      <c-button class="history-clear_control">Очистить историю изменения ФИО</c-button>
     </div>
     <div class="person-card-info__box" v-if="(listHistoryDistrict.length > 0)">
       <history-tab :list-item="listHistoryDistrict">Территориальный орган</history-tab>
-      <c-button>Очистить историю изменения территориального органа</c-button>
+      <c-button class="history-clear_control">Очистить историю изменения территориального органа</c-button>
     </div>
     <div class="person-card-info__box" v-if="(listHistoryDepartment.length > 0)">
       <history-tab :list-item="listHistoryDepartment">Подразделение</history-tab>
-      <c-button>Очистить историю изменения подразделения</c-button>
+      <c-button class="history-clear_control">Очистить историю изменения подразделения</c-button>
     </div>
     <div class="person-card-info__box" v-if="(listHistoryPost.length > 0)">
-      <history-tab :list-item="listHistoryPost">Подразделение</history-tab>
-      <c-button>Очистить историю изменения подразделения</c-button>
+      <history-tab :list-item="listHistoryPost">Должности</history-tab>
+      <c-button class="history-clear_control">Очистить историю изменения должности</c-button>
     </div>
   </div>
 </template>
@@ -67,7 +67,7 @@ export default {
     historyTab,
   },
   computed: {
-    profileUser() { console.log(this.$store.getters.GET_PROFILE_USER); return this.$store.getters.GET_PROFILE_USER; },
+    profileUser() { return this.$store.getters.GET_PROFILE_USER; },
     listDistrict() { return this.$store.getters.GET_LIST_DISTRICT_VISIBLE; },
     listDepartment() { return this.$store.getters.GET_LIST_DEPARTMENT_VISIBLE; },
     listPost() { return this.$store.getters.GET_LIST_POST_VISIBLE; },
@@ -120,6 +120,7 @@ export default {
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
+    outline: none;
     cursor: pointer;
   }
   &__box {
@@ -127,6 +128,9 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    .history-clear_control {
+      align-self: flex-end;
+    }
   }
 
   &__button-item {
