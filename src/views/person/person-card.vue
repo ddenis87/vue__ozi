@@ -51,7 +51,7 @@ export default {
         {CNAME: 'Общее', CPATH: '/person-card/__info'},
         {CNAME: 'Заявки', CPATH: '/person-card/__document'},
         {CNAME: 'Криптография', CPATH: '/person-card/__crypto'},
-        {CNAME: 'Ресурсы', CPATH: '/person-card/__res'},
+        {CNAME: 'Ресурсы', CPATH: '/person-card/__resource'},
         {CNAME: 'Прочее', CPATH: '/person-card/__other'},
       ],
       personId: decodeURI(window.location.search.slice(window.location.search.indexOf("=") + 1)),

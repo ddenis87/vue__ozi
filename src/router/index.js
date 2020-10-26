@@ -61,6 +61,14 @@ Vue.use(VueRouter)
         path: '/person-card/__crypto',
         component: () => import('../views/person/person-card/__crypto')
       },
+      {
+        path: '/person-card/__resource',
+        component: () => import('../views/person/person-card/__resource')
+      },
+      {
+        path: '/person-card/__other',
+        component: () => import('../views/person/person-card/__other')
+      },
     ]
   },
   {
