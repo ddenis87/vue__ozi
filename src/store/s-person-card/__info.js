@@ -39,8 +39,9 @@ export default {
   },
   actions: {
     SET_HISTORY_USER(store, option) {
-      let sendOption = option;
-      sendOption.function = `getUserHistory${option.catalogName.toUpperCase()}`
+      let sendOption = {};
+      Object.assign(sendOption, option);
+      sendOption.function = `getHistory${option.catalogName.toUpperCase()}`;
       axios
         .post(pathBackend + 'person-card__info.php', null, {params: sendOption})
         .then(response => {
@@ -48,8 +49,32 @@ export default {
         })
         .catch();
     },
-    DELETE_HISTORY_USER(store, option) {},
+    CHANGE_PROFILE_USER(store, option) {
+      let sendOption = option;
+      sendOption.function = `changeUser${option.catalogName.toUpperCase()}`;
+      axios
+        .post(pathBackend + 'person-card__info.php', null, {params: sendOption})
+        .then(response => {
+          if (response.data == '1') {
+            store.dispatch('SET_HISTORY_USER', option);
+            store.dispatch('SET_PROFILE_USER', option);
+          }
+        })
+        .catch();
+    },
 
-    CHANGE_PROFILE_USER(store, option) {}
+    DELETE_HISTORY_USER(store, option) {
+      let sendOption = {};
+      Object.assign(sendOption, option);
+      sendOption.function = `deleteHistory${option.catalogName.toUpperCase()}`;
+      axios
+        .post(pathBackend + 'person-card__info.php', null, {params: sendOption})
+        .then(response => {
+          if (response.data == '1') store.dispatch('SET_HISTORY_USER', option);
+        })
+        .catch();
+    },
+
+    
   },
 }

@@ -9,7 +9,7 @@
     </thead>
     <tbody class="tab-history__body">
       <tr class="tab-history__body-row"
-          v-for="(item, index) in listItem"
+          v-for="(item, index) in historyList"
           :key="index">
         <td class="tab-history__body-column">{{ item.VNAME }}</td>
         <td class="tab-history__body-column">{{ formateDate(item.VDATE) + ' - ' + formateDate(item.VDATE_E) }}</td>
@@ -23,6 +23,9 @@ export default {
   name: 'historyTab',
   props: {
     listItem: Array,
+  },
+  computed: {
+    historyList() { return this.listItem },
   },
   data() {
     return {

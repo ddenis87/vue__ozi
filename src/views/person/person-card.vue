@@ -59,7 +59,7 @@ export default {
   },
   created() {
     
-    this.$store.dispatch('SET_PROFILE_USER',{ personId: this.personId });
+    this.$store.dispatch('SET_PROFILE_USER',{ valueUserId: this.personId });
     this.$router.push('/person-card/__document?personId=' + this.personId);
   },
   methods: {

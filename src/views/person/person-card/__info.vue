@@ -6,19 +6,19 @@
     <div class="person-card-info__title">История изменений</div>
     <div class="person-card-info__box" v-if="(listHistoryFio.length > 0)">
       <history-tab :list-item="listHistoryFio">ФИО</history-tab>
-      <c-button class="history-clear_control">Очистить историю изменения ФИО</c-button>
+      <c-button class="history-clear_control" @click="clearHistory('FIO')">Очистить историю изменения ФИО</c-button>
     </div>
     <div class="person-card-info__box" v-if="(listHistoryDistrict.length > 0)">
       <history-tab :list-item="listHistoryDistrict">Территориальный орган</history-tab>
-      <c-button class="history-clear_control">Очистить историю изменения территориального органа</c-button>
+      <c-button class="history-clear_control" @click="clearHistory('DISTRICT')">Очистить историю изменения территориального органа</c-button>
     </div>
     <div class="person-card-info__box" v-if="(listHistoryDepartment.length > 0)">
       <history-tab :list-item="listHistoryDepartment">Подразделение</history-tab>
-      <c-button class="history-clear_control">Очистить историю изменения подразделения</c-button>
+      <c-button class="history-clear_control" @click="clearHistory('DEPARTMENT')">Очистить историю изменения подразделения</c-button>
     </div>
     <div class="person-card-info__box" v-if="(listHistoryPost.length > 0)">
       <history-tab :list-item="listHistoryPost">Должности</history-tab>
-      <c-button class="history-clear_control">Очистить историю изменения должности</c-button>
+      <c-button class="history-clear_control" @click="clearHistory('POST')">Очистить историю изменения должности</c-button>
     </div>
   </div>
 </template>
@@ -53,6 +53,13 @@ export default {
     this.$store.dispatch('SET_HISTORY_USER', { valueUserId: this.$store.getters.GET_PROFILE_USER_ID, catalogName: 'POST' });
   },
   methods: {
+    clearHistory(value) {
+      let sendOption = {
+        valueUserId: this.$store.getters.GET_PROFILE_USER_ID,
+        catalogName: value,
+      };
+      this.$store.dispatch('DELETE_HISTORY_USER', sendOption);
+    },
   }
 }
 </script>

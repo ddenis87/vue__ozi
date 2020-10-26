@@ -4,36 +4,36 @@
       <c-input class="person-control__input"
                :value="profileUser.VFA"
                :disabled="isLock"
-               @input="(value) => { changeProfile.valueFa = value }">Фамилия</c-input>
+               @input="(value) => { newProfile.valueFa = value }">Фамилия</c-input>
       <c-select class="person-control__select"
                 :disabled="isLock"
                 :inListItem="listDistrict"
                 :inValue="profileUser.VDISTRICTID"
-                @change="(value) => { changeProfile.valueDistrictId = value }">Территориальный орган</c-select>
+                @change="(value) => { newProfile.valueDistrictId = value }">Территориальный орган</c-select>
       <button class="person-control__control" :disabled="isLock"></button>
     </div>
     <div class="person-control__box">
       <c-input class="person-control__input" 
                :value="profileUser.VIM"
                :disabled="isLock"
-               @input="(value) => { changeProfile.valueIm=value }">Имя</c-input>
+               @input="(value) => { newProfile.valueIm=value }">Имя</c-input>
       <c-select class="person-control__select"
                 :disabled="isLock"
                 :inListItem="listDepartment"
                 :inValue="profileUser.VDEPARTMENTID"
-                @change="(value) => { changeProfile.valueDepartmentId = value }">Структурное подразделение</c-select>
+                @change="(value) => { newProfile.valueDepartmentId = value }">Структурное подразделение</c-select>
       <button class="person-control__control" :disabled="isLock"></button>
     </div>
     <div class="person-control__box">
       <c-input class="person-control__input" 
                :value="profileUser.VOT"
                :disabled="isLock"
-               @input="(value) => { changeProfile.valueOt=value }">Отчество</c-input>
+               @input="(value) => { newProfile.valueOt=value }">Отчество</c-input>
       <c-select class="person-control__select"
                 :disabled="isLock"
                 :inListItem="listPost"
                 :inValue="profileUser.VPOSTID"
-                @change="(value) => { changeProfile.valuePostId = value }">Должность</c-select>
+                @change="(value) => { newProfile.valuePostId = value }">Должность</c-select>
       <button class="person-control__control" :disabled="isLock"></button>
     </div>
     <div class="person-control__box">
@@ -68,14 +68,14 @@ export default {
     return {
       isLock: true,
       buttonControlTitle: 'редактировать',
-      changeProfile: {
+      newProfile: {
         valueUserId: this.$store.getters.GET_PROFILE_USER_ID,
-        valueFa: '',
-        valueIm: '',
-        valueOt: '',
-        valueDistrictId: '',
-        valueDepartmentId: '',
-        valuePostId: ''
+        valueFa: null,
+        valueIm: null,
+        valueOt: null,
+        valueDistrictId: null,
+        valueDepartmentId: null,
+        valuePostId: null
       },
     }
   },
@@ -83,22 +83,56 @@ export default {
     changeUser() {
       this.isLock = !this.isLock;
       this.buttonControlTitle = (this.buttonControlTitle == 'редактировать') ? 'сохранить' : 'редактировать';
-      if (this.changeProfile.valueFa ?? this.changeProfile.valueIm ?? this.changeProfile.valueOt ) console.log('change FIO');
-      if (this.changeProfile.valueDistrictId) console.log('change District');
-      if (this.changeProfile.valueDepartmentId) console.log('change Department');
-      if (this.changeProfile.valuePostId) console.log('change Post');
+      if (this.newProfile.valueFa ?? this.newProfile.valueIm ?? this.newProfile.valueOt ) this.changeUserFio();
+      if (this.newProfile.valueDistrictId) this.changeUserDistrict(this.newProfile.valueDistrictId);
+      if (this.newProfile.valueDepartmentId) this.changeUserDepartment(this.newProfile.valueDepartmentId);
+      if (this.newProfile.valuePostId) this.changeUserPost(this.newProfile.valuePostId);
 
-      this.clearChangeProfile()
+      this.clearNewProfile();
     },
-    clearChangeProfile() {
-      this.changeProfile = {
+    changeUserFio() {
+      let sendOption = {
+        catalogName: 'FIO',
+        valueUserId: this.newProfile.valueUserId,
+        valueFa: (this.newProfile.valueFa) ? this.newProfile.valueFa : this.profileUser.VFA,
+        valueIm: (this.newProfile.valueIm) ? this.newProfile.valueIm : this.profileUser.VIM,
+        valueOt: (this.newProfile.valueOt) ? this.newProfile.valueOt : this.profileUser.VOT,
+      };
+      this.$store.dispatch('CHANGE_PROFILE_USER', sendOption);
+    },
+    changeUserDistrict(value) {
+      let sendOption = {
+        catalogName: 'DISTRICT',
+        valueUserId: this.newProfile.valueUserId,
+        valueDistrictId: value,
+      }
+      this.$store.dispatch('CHANGE_PROFILE_USER', sendOption);
+    },
+    changeUserDepartment(value) {
+      let sendOption = {
+        catalogName: 'DEPARTMENT',
+        valueUserId: this.newProfile.valueUserId,
+        valueDepartmentId: value,
+      }
+      this.$store.dispatch('CHANGE_PROFILE_USER', sendOption);
+    },
+    changeUserPost(value) {
+      let sendOption = {
+        catalogName: 'POST',
+        valueUserId: this.newProfile.valueUserId,
+        valuePostId: value,
+      }
+      this.$store.dispatch('CHANGE_PROFILE_USER', sendOption);
+    },
+    clearNewProfile() {
+      this.newProfile = {
         valueUserId: this.$store.getters.GET_PROFILE_USER_ID,
-        valueFa: undefined,
-        valueIm: undefined,
-        valueOt: undefined,
-        valueDistrictId: undefined,
-        valueDepartmentId: undefined,
-        valuePostId: undefined
+        valueFa: null,
+        valueIm: null,
+        valueOt: null,
+        valueDistrictId: null,
+        valueDepartmentId: null,
+        valuePostId: null
       };
     },
   },
