@@ -1,5 +1,6 @@
 import axios from 'axios';
 import personCardDocument from './s-person-card/__document';
+import personCardCrypto from './s-person-card/__crypto';
 import personCardInfo from './s-person-card/__info';
 
 
@@ -37,6 +38,7 @@ export default {
   },
   modules: {
     personCardDocument,
+    personCardCrypto,
     personCardInfo,
   }
 }

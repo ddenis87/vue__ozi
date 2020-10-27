@@ -49,43 +49,18 @@ Vue.use(VueRouter)
     name: 'person-card',
     component: () => import('../views/person/person-card.vue'),
     children: [
-      {
-        path: '/person-card/__info',
-        component: () => import('../views/person/person-card/__info')
-      },
-      {
-        path: '/person-card/__document',
-        component: () => import('../views/person/person-card/__document')
-      },
-      {
-        path: '/person-card/__crypto',
-        component: () => import('../views/person/person-card/__crypto')
-      },
-      {
-        path: '/person-card/__resource',
-        component: () => import('../views/person/person-card/__resource')
-      },
-      {
-        path: '/person-card/__other',
-        component: () => import('../views/person/person-card/__other')
-      },
+      { path: '/person-card/__info', component: () => import('../views/person/person-card/__info') },
+      { path: '/person-card/__document', component: () => import('../views/person/person-card/__document') },
+      { path: '/person-card/__crypto', component: () => import('../views/person/person-card/__crypto') },
+      { path: '/person-card/__resource', component: () => import('../views/person/person-card/__resource') },
+      { path: '/person-card/__other', component: () => import('../views/person/person-card/__other') },
     ]
   },
-  {
-    path: '/join-document-input',
-    name: 'join-document-input',
-    component: () => import('../views/report/join-document-input.vue')
-  },
-  {
-    path: '/join-document-output',
-    name: 'join-document-output',
-    component: () => import('../views/report/join-document-output.vue')
-  },
-  {
-    path: '/report-week',
-    name: 'report-week',
-    component: () => import('../views/report/report-week.vue')
-  },
+  //--REPORT
+  { path: '/report/document-input', name: 'join-document-input', component: () => import('../views/report/document-input.vue') },
+  { path: '/report/document-output', name: 'join-document-output', component: () => import('../views/report/document-output.vue') },
+  { path: '/report/cryptovpn-cl', name: 'join-cryptovpn-cl', component: () => import('../views/report/cryptovpn-cl.vue') },
+  { path: '/report-week', name: 'report-week', component: () => import('../views/report/report-week.vue') },
 ]
 
 const router = new VueRouter({

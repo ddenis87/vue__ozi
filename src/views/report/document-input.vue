@@ -2,29 +2,29 @@
   <div class="join-document">
     <h3 class="join-document__title">Журналы - Сводный журнал входящих документов</h3>
     <div class="join-document__control">
-      <join-document-control :listType="catalogName"
-                             @accept-filter="acceptFilter"></join-document-control>
+      <document-control :listType="catalogName"
+                        @accept-filter="acceptFilter"></document-control>
     </div>
     <hr/>
     <div class="join-document__list">
-      <join-document-list :listItem="listItem"
-                          :listType="catalogName"></join-document-list>
+      <document-list :listItem="listItem"
+                     :listType="catalogName"></document-list>
     </div>
   </div>
 </template>
 
 <script>
-import JoinDocumentList from '@/components/report/join-document__list';
-import JoinDocumentControl from '@/components/report/join-document__control';
+import DocumentList from '@/components/report/document__list';
+import DocumentControl from '@/components/report/document__control';
 
 export default {
   name: 'JoinDocumentInput',
   components: {
-    JoinDocumentList,
-    JoinDocumentControl,
+    DocumentList,
+    DocumentControl,
   },
   computed: {
-    listItem() { return this.$store.getters.GET_JOIN_DOCUMENT_LIST; }
+    listItem() { return this.$store.getters.GET_LIST_REPORT_DOCUMENT; }
   },
   data() {
     return {
@@ -36,7 +36,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('SET_JOIN_DOCUMENT_LIST', {catalogName: this.catalogName, dateStart: this.dateRange.dateStart, dateEnd: this.dateRange.dateEnd});
+    this.$store.dispatch('SET_LIST_REPORT_DOCUMENT', {catalogName: this.catalogName, dateStart: this.dateRange.dateStart, dateEnd: this.dateRange.dateEnd});
   },
   methods: {
     acceptFilter(option) {
@@ -46,8 +46,8 @@ export default {
         dateEnd: (option.dateRange[1]) ? option.dateRange[1] : this.dateRange.dateEnd,
         valueDocumentId: option.valueDocumentId,
       };
-      if (option.valueDocumentId != '0') this.$store.dispatch('SET_JOIN_DOCUMENT_LIST_FILTER', sendOption);
-      else this.$store.dispatch('SET_JOIN_DOCUMENT_LIST', sendOption);
+      if (option.valueDocumentId != '0') this.$store.dispatch('SET_LIST_REPORT_DOCUMENT_FILTER', sendOption);
+      else this.$store.dispatch('SET_LIST_REPORT_DOCUMENT', sendOption);
     },
   }
 }

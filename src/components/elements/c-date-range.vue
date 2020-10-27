@@ -63,7 +63,7 @@ export default {
   box-sizing: border-box;
   &__title {
     margin: 0px;
-    font-family: 'Open sans';
+    // font-family: 'Open sans';
     font-weight: bold;
     text-transform: uppercase;
   }
@@ -78,10 +78,10 @@ export default {
       &__title {
         position: absolute;
         display: inline-block;
-        left: 6px;
-        top: 3px;
+        left: 5px;
+        top: 5px;
 
-        font-size: 10px;
+        font-size: 8px;
         color: grey;
         text-transform: uppercase;
       }
@@ -89,12 +89,12 @@ export default {
         width: 140px;
         padding: 3px;
         padding-left: 6px;
-        padding-top: 15px;
+        padding-top: 17px;
         border: 1px solid grey;
         outline: none;
         border-radius: 3px;
         box-sizing: border-box;
-        font-family: 'Open sans';
+        // font-family: 'Open sans';
       }
     }
   }

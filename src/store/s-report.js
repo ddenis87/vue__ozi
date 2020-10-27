@@ -2,34 +2,50 @@ import axios from 'axios';
 
 export default {
   state: {
-    joinDocumentList: [],
+    listReportDocument: [],
+
+    listReportVpnCl: [],
   },
   getters: {
-    GET_JOIN_DOCUMENT_LIST(state) { return state.joinDocumentList; },
+    GET_LIST_REPORT_DOCUMENT(state) { return state.listReportDocument; },
+
+    GET_LIST_REPORT_CL(state) { return state.listReportVpnCl; },
   },
   mutations: {
-    SET_JOIN_DOCUMENT_LIST(state, option) {
-      state.joinDocumentList = option;
-    },
+    SET_LIST_REPORT_DOCUMENT(state, option) { state.listReportDocument = option; },
+
+    SET_LIST_REPORT_CL(state, option) { state.listReportVpnCl = option },
   },
   actions: {
-    SET_JOIN_DOCUMENT_LIST(state, option) {
+    SET_LIST_REPORT_DOCUMENT(state, option) {
       let sendOption = option;
       sendOption.function = `getJoinDocument${option.catalogName.toUpperCase()}`;
       axios
         .post(pathBackend + 'report.php', null, {params: sendOption})
         .then(response => {
-          state.commit('SET_JOIN_DOCUMENT_LIST', response.data);
+          state.commit('SET_LIST_REPORT_DOCUMENT', response.data);
         })
         .catch();
     },
-    SET_JOIN_DOCUMENT_LIST_FILTER(state, option) {
+    SET_LIST_REPORT_DOCUMENT_FILTER(state, option) {
       let sendOption = option;
       sendOption.function = `getJoinDocumentFilter${option.catalogName.toUpperCase()}`;
       axios
         .post(pathBackend + 'report.php', null, {params: sendOption})
         .then(response => {
-          state.commit('SET_JOIN_DOCUMENT_LIST', response.data);
+          state.commit('SET_LIST_REPORT_DOCUMENT', response.data);
+        })
+        .catch();
+    },
+
+    SET_LIST_REPORT_CRYPTOVPN_CL(state, option) {
+      let sendOption = option;
+      sendOption.function = 'getCryptoVpnClReport';
+      axios
+        .post(pathBackend + 'report.php', null, {params: sendOption})
+        .then(response => {
+          console.log(response.data);
+          state.commit('SET_LIST_REPORT_CL', response.data);
         })
         .catch();
     },
