@@ -1,7 +1,7 @@
 <template>
   <div class="catalog-control">
     <div class="catalog-control__title">Добавление записи</div>
-    <c-input class="catalog-control__input"
+    <c-input ref="documentName" class="catalog-control__input"
              :inValidation="validation"
              v-model="valueName"
              @keydown="() => { validation = false; }"><slot name="titleInput"></slot></c-input>
@@ -36,6 +36,7 @@ export default {
         return;
       }
       this.$emit('adding-item', this.valueName);
+      this.$refs.documentName.resetComponent();
     },
   }
 }

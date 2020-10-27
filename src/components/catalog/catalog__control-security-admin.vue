@@ -2,11 +2,11 @@
   <div class="catalog-control">
     <div class="catalog-control__title">Добавление записи</div>
     <div class="catalog-control__box">
-      <c-input class="catalog-control__input"
+      <c-input ref="valuseFioFull" class="catalog-control__input"
                v-model="valueFioFull"><slot>Фамилия Имя Отчество</slot></c-input>
-      <c-input class="catalog-control__input" 
+      <c-input ref="valueFioShort" class="catalog-control__input" 
                v-model="valueFioShort"><slot>Фамилия И. О.</slot></c-input>
-      <c-input class="catalog-control__input" 
+      <c-input ref="valueIp" class="catalog-control__input" 
                v-model="valueIp"><slot>IP - пользователя</slot></c-input>
     </div>
 
@@ -50,6 +50,9 @@ export default {
         return;
       }
       this.$emit('adding-item', this.valueFioFull, this.valueFioShort, this.valueIp, this.valueAccessLevel);
+      this.$refs.valueFioFull.resetComponent()
+      this.$refs.valueFioShort.resetComponent()
+      this.$refs.valueIp.resetComponent()
     },
   }
 

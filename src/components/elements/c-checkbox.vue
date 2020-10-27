@@ -30,8 +30,11 @@ export default {
   beforeUpdate() { this.setCheckboxValue() },
   methods: {
     setCheckboxValue() {
-      // console.log(this.checkedValue);
       this.$emit('change', this.checkedValue);
+    },
+    resetComponent() {
+      this.checkedValue = false;
+      this.setCheckboxValue();
     }
   }
 }
