@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 
 import sCatalog from './s-catalog';
 import sPerson from './s-person';
+import sReport from './s-report';
 
 Vue.use(Vuex)
 
@@ -33,5 +34,6 @@ export default new Vuex.Store({
   modules: {
     sCatalog,
     sPerson,
+    sReport,
   }
 })

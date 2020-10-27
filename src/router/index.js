@@ -72,6 +72,16 @@ Vue.use(VueRouter)
     ]
   },
   {
+    path: '/join-document-input',
+    name: 'join-document-input',
+    component: () => import('../views/report/join-document-input.vue')
+  },
+  {
+    path: '/join-document-output',
+    name: 'join-document-output',
+    component: () => import('../views/report/join-document-output.vue')
+  },
+  {
     path: '/report-week',
     name: 'report-week',
     component: () => import('../views/report/report-week.vue')
