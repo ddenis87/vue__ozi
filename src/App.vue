@@ -3,12 +3,9 @@
     <div class="app__head">
       <app-head></app-head>
     </div>
-    <div class="app__navigation">
+    <div class="app__navigation" :class="fullPage">
       <app-navigation></app-navigation>
     </div>
-    <!-- <div class="app__system-out">
-      <app-system-out></app-system-out>
-    </div> -->
     <div class="app__body">
       <router-view />
     </div>
@@ -32,6 +29,9 @@ export default {
     appNavigation,
     appSystemOut,
     appFooter,
+  },
+  computed: {
+    fullPage() { return (this.$route.meta.layout) ? `app__navigation_${this.$route.meta.layout}` : ''; },
   },
   created: function() {
     axios 
@@ -72,19 +72,24 @@ h3 {
   display: grid;
   grid-template-areas: "head head" 
                        "navigation body"
-                        
                        "footer footer";
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: auto 1fr;
   grid-template-rows: 80px auto 20px;
   width: 100%;
   min-width: $pageMinWidth;
   margin-left: auto;
   margin-right: auto;
+  
   &__head {
     grid-area: head;
   }
   &__navigation {
     grid-area: navigation;
+    width: 250px;
+    transition: width .5s;
+    &_full-page {
+      width: 40px;
+    }
   }
   &__system-out {
     grid-area: system-out;
@@ -103,4 +108,5 @@ h3 {
     grid-area: footer;
   }
 }
+
 </style>

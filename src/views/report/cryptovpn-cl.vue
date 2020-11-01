@@ -1,12 +1,14 @@
 <template>
   <div class="cryptovpn-cl">
     <h3 class="cryptovpn-cl__title">Журналы - Пользователи ViPNet Client</h3>
-    <div class="cryptovpn-cl__control">
-      <crypto-vpn-control></crypto-vpn-control>
-    </div>
-    <hr/>
-    <div class="cryptovpn-cl__list">
-      <crypto-vpn-list :listItem="listItem"></crypto-vpn-list>
+    <div class="cryptovpn-cl__body">
+      <div class="cryptovpn-cl__control">
+        <crypto-vpn-control></crypto-vpn-control>
+      </div>
+      <hr class="cryptovpn-cl__separator"/>
+      <div class="cryptovpn-cl__body-list">
+        <crypto-vpn-list :listItem="listItem"></crypto-vpn-list>
+      </div>
     </div>
   </div>
 </template>
