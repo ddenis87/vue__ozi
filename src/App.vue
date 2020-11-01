@@ -68,6 +68,11 @@ h3 {
   font-size: 16px;
 }
 
+a {
+  text-decoration: none;
+  color: darkslateblue;
+}
+
 .app {
   display: grid;
   grid-template-areas: "head head" 

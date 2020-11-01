@@ -3,18 +3,16 @@
     <div class="navigation-box">
       <ul class="navigation-list">
         <template v-for="(item, index) in listItem">
-          <li 
+          <li class="navigation-list__item"
               v-if="item.CURL" 
               :key="index">
-            <router-link class="navigation-list__item" :to="item.CURL">{{ item.CNAME }}</router-link>
+            <router-link :to="item.CURL">{{ item.CNAME }}</router-link>
           </li>
           <li v-else 
               :key="index"
               class="navigation-list__title">{{ item.CNAME }}</li>
         </template>
-        <li class="navigation-list__item" @click="() => {$router.push('/')}">
-          На главную
-        </li>
+        <li class="navigation-list__item" @click="() => {$router.push('/')}">На главную</li>
       </ul>
     </div>
     
