@@ -3,12 +3,13 @@
     <c-select class="cryptovpn-control__document"
               :inListItem="listItem"
               v-model="valueDistrictId">Территория</c-select>
+    <c-select class="cryptovpn-control__task"
+              :inListItem="listItemTask"
+              v-model="valueTask"
+              v-if="taskVisibility">Задача</c-select>
     <c-select class="cryptovpn-control__state"
               :inListItem="listItemState"
               v-model="valueState">Состояние</c-select>
-    <c-select class="cryptovpn-control__task"
-              :inListItem="listItemTask"
-              v-model="valueTask">Задача</c-select>
     <c-button @click="acceptFilter">Применить</c-button>
   </div>
 </template>
@@ -24,18 +25,19 @@ export default {
     cButton,
   },
   props: {
-    // listType: {type: String, default: 'CLIENT'} //?
+    controlType: String,
   },
   computed: {
-    listItem() { return this.$store.getters.GET_LIST_DISTRICT; }
+    listItem() { return this.$store.getters.GET_LIST_DISTRICT; },
+    taskVisibility() { return (this.controlType == 'CL') ? true : false; },
   },
   data() {
     return {
       valueDistrictId: "0",
-      valueState: "1",
-      valueTask: "1",
-      listItemTask: [{ID: '1', CNAME: 'Все'}, {ID: '2', CNAME: 'Client'}, {ID: '3', CNAME: 'Mail'}, {ID: '4', CNAME: 'Cryptoservice'}],
-      listItemState: [{ID: '1', CNAME: 'Все'}, {ID: '2', CNAME: 'Установлен'}, {ID: '3', CNAME: 'Удален'}],
+      valueState: "0",
+      valueTask: "0",
+      listItemTask: [{ID: '1', CNAME: 'Client'}, {ID: '2', CNAME: 'Mail'}, {ID: '3', CNAME: 'Cryptoservice'}],
+      listItemState: [{ID: '1', CNAME: 'Установлен'}, {ID: '2', CNAME: 'Удален'}],
     }
   },
   created() {

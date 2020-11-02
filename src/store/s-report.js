@@ -47,7 +47,6 @@ export default {
       axios
         .post(pathBackend + 'report.php', null, {params: sendOption})
         .then(response => {
-          console.log(response.data);
           state.commit('SET_LIST_REPORT_CL', response.data);
         })
         .catch();
@@ -58,7 +57,6 @@ export default {
       axios
         .post(pathBackend + 'report.php', null, {params: sendOption})
         .then(response => {
-          console.log(response.data);
           state.commit('SET_LIST_REPORT_CS', response.data);
         })
         .catch();

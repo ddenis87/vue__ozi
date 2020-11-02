@@ -6,12 +6,12 @@
           <th rowspan="2" class="cryptovpn-cl-list-table__head_column">№ п/п</th>
           <th rowspan="2" class="cryptovpn-cl-list-table__head_column">Территория установки</th>
           <th rowspan="2" class="cryptovpn-cl-list-table__head_column">Пользователь</th>
-          <th colspan="3" class="cryptovpn-cl-list-table__head_column">Задачи</th>
+          <th colspan="3" class="cryptovpn-cl-list-table__head_column" v-if="taskVisibility">Задачи</th>
           <th rowspan="2" class="cryptovpn-cl-list-table__head_column">Основание установки</th>
           <th rowspan="2" class="cryptovpn-cl-list-table__head_column">Основание удаления</th>
           <!-- <th rowspan="2" class="cryptovpn-cl-list-table__head_column cryptovpn-cl-list-table__head_column-action"></th> -->
         </tr>
-        <tr class="cryptovpn-cl-list-table__head_row">
+        <tr class="cryptovpn-cl-list-table__head_row" v-if="taskVisibility">
           <th class="cryptovpn-cl-list-table__head_column-task">З</th>
           <th class="cryptovpn-cl-list-table__head_column-task">ДП</th>
           <th class="cryptovpn-cl-list-table__head_column-task">К</th>
@@ -25,13 +25,13 @@
             <td class="cryptovpn-cl-list-table__body_column">{{ item.VFIO }}</td>
             <td class="cryptovpn-cl-list-table__body_column cryptovpn-cl-list-table__body_column-task" 
                 :class="{'cryptovpn-cl-list-table__body_column-task_yes': (item.VTASKCLIENT == 1) ? true : false }" 
-                @click="(event) => showDialogTask(event, item)"></td>
+                @click="(event) => showDialogTask(event, item)" v-if="taskVisibility"></td>
             <td class="cryptovpn-cl-list-table__body_column cryptovpn-cl-list-table__body_column-task" 
                 :class="{'cryptovpn-cl-list-table__body_column-task_yes': (item.VTASKMAIL == 1) ? true : false }" 
-                @click="(event) => showDialogTask(event, item)"></td>
+                @click="(event) => showDialogTask(event, item)" v-if="taskVisibility"></td>
             <td class="cryptovpn-cl-list-table__body_column cryptovpn-cl-list-table__body_column-task" 
                 :class="{'cryptovpn-cl-list-table__body_column-task_yes': (item.VTASKCS == 1) ? true : false }" 
-                @click="(event) => showDialogTask(event, item)"></td>
+                @click="(event) => showDialogTask(event, item)" v-if="taskVisibility"></td>
             <td class="cryptovpn-cl-list-table__body_column crypto-table__body_column-base">{{ item.VBASISINSTALL }}</td>
             <td class="cryptovpn-cl-list-table__body_column crypto-table__body_column-base">{{ item.VBASISUNISTALL }}</td>
             <!-- <td class="cryptovpn-cl-list-table__body_column">
@@ -51,7 +51,11 @@ export default {
   name: 'CryptoVpnClList',
   props: {
     listItem: Array,
-  }
+    listType: String
+  },
+  computed: {
+    taskVisibility() { return (this.listType == 'CL') ? true : false; },
+  },
 }
 </script>
 
@@ -64,6 +68,9 @@ export default {
     width: 100%;
     border-collapse: collapse;
     &__head {
+      &_row { 
+        border-bottom: 2px solid grey;
+      }
       &_column {
         padding: 3px;
         border-bottom: 2px solid grey;
