@@ -1,40 +1,40 @@
 <template>
-  <div class="cryptovpn-cl">
-    <table class="cryptovpn-cl-table">
-      <thead class="cryptovpn-cl-table__head">
-        <tr class="cryptovpn-cl-table__head_row">
-          <th rowspan="2" class="cryptovpn-cl-table__head_column">№ п/п</th>
-          <th rowspan="2" class="cryptovpn-cl-table__head_column">Территория</th>
-          <th rowspan="2" class="cryptovpn-cl-table__head_column">Пользователь</th>
-          <th colspan="3" class="cryptovpn-cl-table__head_column">Задачи</th>
-          <th rowspan="2" class="cryptovpn-cl-table__head_column">Основание установки</th>
-          <th rowspan="2" class="cryptovpn-cl-table__head_column">Основание установки</th>
-          <!-- <th rowspan="2" class="cryptovpn-cl-table__head_column cryptovpn-cl-table__head_column-action"></th> -->
+  <div class="cryptovpn-cl-list">
+    <table class="cryptovpn-cl-list-table">
+      <thead class="cryptovpn-cl-list-table__head">
+        <tr class="cryptovpn-cl-list-table__head_row">
+          <th rowspan="2" class="cryptovpn-cl-list-table__head_column">№ п/п</th>
+          <th rowspan="2" class="cryptovpn-cl-list-table__head_column">Территория установки</th>
+          <th rowspan="2" class="cryptovpn-cl-list-table__head_column">Пользователь</th>
+          <th colspan="3" class="cryptovpn-cl-list-table__head_column">Задачи</th>
+          <th rowspan="2" class="cryptovpn-cl-list-table__head_column">Основание установки</th>
+          <th rowspan="2" class="cryptovpn-cl-list-table__head_column">Основание удаления</th>
+          <!-- <th rowspan="2" class="cryptovpn-cl-list-table__head_column cryptovpn-cl-list-table__head_column-action"></th> -->
         </tr>
-        <tr class="cryptovpn-cl-table__head_row">
-          <th class="cryptovpn-cl-table__head_column-task">З</th>
-          <th class="cryptovpn-cl-table__head_column-task">ДП</th>
-          <th class="cryptovpn-cl-table__head_column-task">К</th>
+        <tr class="cryptovpn-cl-list-table__head_row">
+          <th class="cryptovpn-cl-list-table__head_column-task">З</th>
+          <th class="cryptovpn-cl-list-table__head_column-task">ДП</th>
+          <th class="cryptovpn-cl-list-table__head_column-task">К</th>
         </tr>
       </thead>
-      <tbody class="cryptovpn-cl-table__body">
+      <tbody class="cryptovpn-cl-list-table__body">
         <template v-for="(item, index) in listItem">
-          <tr class="cryptovpn-cl-table__body_row" :key="index + 1">
-            <td class="cryptovpn-cl-table__body_column">{{ index + 1 }}</td>
-            <td class="cryptovpn-cl-table__body_column">{{ item.VDISTRICTINSTALL }}</td>
-            <td class="cryptovpn-cl-table__body_column">{{ item.VFIO }}</td>
-            <td class="cryptovpn-cl-table__body_column cryptovpn-cl-table__body_column-task" 
-                :class="{'cryptovpn-cl-table__body_column-task_yes': (item.VTASKCLIENT == 1) ? true : false }" 
+          <tr class="cryptovpn-cl-list-table__body_row" :key="index + 1">
+            <td class="cryptovpn-cl-list-table__body_column">{{ index + 1 }}</td>
+            <td class="cryptovpn-cl-list-table__body_column">{{ item.VDISTRICTINSTALL }}</td>
+            <td class="cryptovpn-cl-list-table__body_column">{{ item.VFIO }}</td>
+            <td class="cryptovpn-cl-list-table__body_column cryptovpn-cl-list-table__body_column-task" 
+                :class="{'cryptovpn-cl-list-table__body_column-task_yes': (item.VTASKCLIENT == 1) ? true : false }" 
                 @click="(event) => showDialogTask(event, item)"></td>
-            <td class="cryptovpn-cl-table__body_column cryptovpn-cl-table__body_column-task" 
-                :class="{'cryptovpn-cl-table__body_column-task_yes': (item.VTASKMAIL == 1) ? true : false }" 
+            <td class="cryptovpn-cl-list-table__body_column cryptovpn-cl-list-table__body_column-task" 
+                :class="{'cryptovpn-cl-list-table__body_column-task_yes': (item.VTASKMAIL == 1) ? true : false }" 
                 @click="(event) => showDialogTask(event, item)"></td>
-            <td class="cryptovpn-cl-table__body_column cryptovpn-cl-table__body_column-task" 
-                :class="{'cryptovpn-cl-table__body_column-task_yes': (item.VTASKCS == 1) ? true : false }" 
+            <td class="cryptovpn-cl-list-table__body_column cryptovpn-cl-list-table__body_column-task" 
+                :class="{'cryptovpn-cl-list-table__body_column-task_yes': (item.VTASKCS == 1) ? true : false }" 
                 @click="(event) => showDialogTask(event, item)"></td>
-            <td class="cryptovpn-cl-table__body_column crypto-table__body_column-base"></td>
-            <td class="cryptovpn-cl-table__body_column crypto-table__body_column-base"></td>
-            <!-- <td class="cryptovpn-cl-table__body_column">
+            <td class="cryptovpn-cl-list-table__body_column crypto-table__body_column-base">{{ item.VBASISINSTALL }}</td>
+            <td class="cryptovpn-cl-list-table__body_column crypto-table__body_column-base">{{ item.VBASISUNISTALL }}</td>
+            <!-- <td class="cryptovpn-cl-list-table__body_column">
               <div class="control">
                 <button class="control__button control__button_delete-row" title="Удалить запись"></button>
               </div>
@@ -56,28 +56,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cryptovpn-cl {
+.cryptovpn-cl-list {
   margin-bottom: 20px;
   font-family: 'Open sans';
   font-size: 12px;
   &-table {
     width: 100%;
     border-collapse: collapse;
-    &__title {
-      text-align: left;
-      font-family: 'Montserrat';
-      font-size: 14px;
-      font-weight: bold;
-      border-bottom: 2px solid grey;
-    }
     &__head {
       &_column {
         padding: 3px;
         border-bottom: 2px solid grey;
         &:nth-child(1) { width: 42px; }
         &:nth-child(4) { border-left: 2px solid grey; border-right: 2px solid grey; }
-        // &:nth-child(5) { background-color: lightblue; }
-        // &:nth-child(6) { background-color: lightgreen; }
         &:nth-child(5), &:nth-child(6) { width: 230px; }
         &:nth-child(7) {
           width: 30px;
@@ -102,20 +93,9 @@ export default {
     &__body {
       &_row { 
         border-bottom: 1px solid grey;
-        // &:hover {
-        //   background-color:rgba(95, 158, 160, .3);
-        // }
       } 
       &_column {
-        padding: 3px 0px;
-       
-        // &-end {
-        //   border-bottom: 1px solid grey;
-        //   .note {
-        //     display: flex;
-        //     justify-content: space-between;
-        //   }
-        // }
+        padding: 3px 5px;
         &:nth-child(7) { background-color: rgba(173, 216, 230, .3); }
         &:nth-child(8) { background-color: rgba(144, 238, 144, .3); }
         &:nth-child(9) { background-color: #FF9200; }

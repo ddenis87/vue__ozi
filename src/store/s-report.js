@@ -5,16 +5,19 @@ export default {
     listReportDocument: [],
 
     listReportVpnCl: [],
+    listReportVpnCs: [],
   },
   getters: {
     GET_LIST_REPORT_DOCUMENT(state) { return state.listReportDocument; },
 
     GET_LIST_REPORT_CL(state) { return state.listReportVpnCl; },
+    GET_LIST_REPORT_CS(state) { return state.listReportVpnCs; },
   },
   mutations: {
     SET_LIST_REPORT_DOCUMENT(state, option) { state.listReportDocument = option; },
 
     SET_LIST_REPORT_CL(state, option) { state.listReportVpnCl = option },
+    SET_LIST_REPORT_CS(state, option) { state.listReportVpnCs = option },
   },
   actions: {
     SET_LIST_REPORT_DOCUMENT(state, option) {
@@ -49,5 +52,17 @@ export default {
         })
         .catch();
     },
+    SET_LIST_REPORT_CRYPTOVPN_CS(state, option) {
+      let sendOption = option;
+      sendOption.function = 'getCryptoVpnCsReport';
+      axios
+        .post(pathBackend + 'report.php', null, {params: sendOption})
+        .then(response => {
+          console.log(response.data);
+          state.commit('SET_LIST_REPORT_CS', response.data);
+        })
+        .catch();
+    },
+
   },
 }

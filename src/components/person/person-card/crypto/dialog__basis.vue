@@ -53,7 +53,7 @@ export default {
     inDialogProps: Object,
   },
   computed: {
-    listDocumentInput() { return this.$store.getters.PERSON_DOCUMENT_INPUT; },
+    listDocumentInput() { return this.$store.getters.GET_USER_DOCUMENT_INPUT; },
   },
   data() {
     return {

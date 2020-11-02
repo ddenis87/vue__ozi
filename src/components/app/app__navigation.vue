@@ -27,7 +27,7 @@ import axios from 'axios';
 export default {
   name: 'appNavigation',
   computed: {
-    fullPage() { console.log(this.$route.meta.layout); return (this.$route.meta.layout) ? `app-navigation_${this.$route.meta.layout}` : ''; },
+    fullPage() { return (this.$route.meta.layout) ? `app-navigation_${this.$route.meta.layout}` : ''; },
   },
   data: function() {
     return {

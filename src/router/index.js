@@ -60,6 +60,7 @@ Vue.use(VueRouter)
   { path: '/report/document-input', name: 'join-document-input', component: () => import('../views/report/document-input.vue') },
   { path: '/report/document-output', name: 'join-document-output', component: () => import('../views/report/document-output.vue') },
   { path: '/report/cryptovpn-cl', name: 'join-cryptovpn-cl', meta: {layout: 'full-page'}, component: () => import('../views/report/cryptovpn-cl.vue') },
+  { path: '/report/cryptovpn-cs', name: 'join-cryptovpn-cs', meta: {layout: 'full-page'}, component: () => import('../views/report/cryptovpn-cs.vue') },
   { path: '/report-week', name: 'report-week', component: () => import('../views/report/report-week.vue') },
 ]
 

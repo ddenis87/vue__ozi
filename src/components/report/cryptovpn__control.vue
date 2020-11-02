@@ -24,7 +24,7 @@ export default {
     cButton,
   },
   props: {
-    listType: {type: String, default: 'CLIENT'} //?
+    // listType: {type: String, default: 'CLIENT'} //?
   },
   computed: {
     listItem() { return this.$store.getters.GET_LIST_DISTRICT; }
