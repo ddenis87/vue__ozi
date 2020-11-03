@@ -23,10 +23,8 @@ export default {
     CryptoVpnControl,
     CryptoVpnList,
   },
-  data() {
-    return {
-      listItem: this.$store.getters.GET_LIST_REPORT_CL,
-    }
+  computed: {
+    listItem() { return this.$store.getters.GET_LIST_REPORT_CL; },
   },
   created() {
     let sendOption = {};
@@ -34,17 +32,7 @@ export default {
   },
   methods: {
     acceptFilter(option) {
-      this.listItem = this.$store.getters.GET_LIST_REPORT_CL;
-      if (option.valueDistrictId != '0') this.listItem = this.listItem.filter(item => item.VDISTRICTINSTALLID == option.valueDistrictId);
-      switch(option.valueTask) {
-        case '1': this.listItem = this.listItem.filter(item => item.VTASKCLIENT == '1'); break;
-        case '2': this.listItem = this.listItem.filter(item => item.VTASKMAIL == '1'); break;
-        case '3': this.listItem = this.listItem.filter(item => item.VTASKCS == '1'); break;
-      }
-      switch(option.valueState) {
-        case '1': this.listItem = this.listItem.filter(item => item.VBASISUNISTALL == null); break;
-        case '2': this.listItem = this.listItem.filter(item => item.VBASISUNISTALL != null); break;
-      }
+      this.$store.commit('SET_LIST_REPORT_CL_FILTER', option);
     }
   }
 }

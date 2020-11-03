@@ -54,6 +54,7 @@ export default {
     listType: String
   },
   computed: {
+    // watchListItem() { return this.listItem; },
     taskVisibility() { return (this.listType == 'CL') ? true : false; },
   },
 }

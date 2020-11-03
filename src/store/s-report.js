@@ -4,6 +4,7 @@ export default {
   state: {
     listReportDocument: [],
 
+    listReportVpnDefault: [],
     listReportVpnCl: [],
     listReportVpnCs: [],
   },
@@ -16,8 +17,30 @@ export default {
   mutations: {
     SET_LIST_REPORT_DOCUMENT(state, option) { state.listReportDocument = option; },
 
-    SET_LIST_REPORT_CL(state, option) { state.listReportVpnCl = option },
-    SET_LIST_REPORT_CS(state, option) { state.listReportVpnCs = option },
+    SET_LIST_REPORT_CL(state, option) { state.listReportVpnCl = option, state.listReportVpnDefault = option },
+    SET_LIST_REPORT_CL_FILTER(state, option) {
+      state.listReportVpnCl = state.listReportVpnDefault;
+      if (option.valueDistrictId != '0') state.listReportVpnCl = state.listReportVpnCl.filter(item => item.VDISTRICTINSTALLID == option.valueDistrictId);
+      switch(option.valueTask) {
+        case '1': state.listReportVpnCl = state.listReportVpnCl.filter(item => item.VTASKCLIENT == '1'); break;
+        case '2': state.listReportVpnCl = state.listReportVpnCl.filter(item => item.VTASKMAIL == '1'); break;
+        case '3': state.listReportVpnCl = state.listReportVpnCl.filter(item => item.VTASKCS == '1'); break;
+      }
+      switch(option.valueState) {
+        case '1': state.listReportVpnCl = state.listReportVpnCl.filter(item => item.VBASISUNISTALL == null); break;
+        case '2': state.listReportVpnCl = state.listReportVpnCl.filter(item => item.VBASISUNISTALL != null); break;
+      }
+    },
+
+    SET_LIST_REPORT_CS(state, option) { state.listReportVpnCs = option, state.listReportVpnDefault = option },
+    SET_LIST_REPORT_CS_FILTER(state, option) {
+      state.listReportVpnCs = state.listReportVpnDefault;
+      if (option.valueDistrictId != '0') state.listReportVpnCs = state.listReportVpnCs.filter(item => item.VDISTRICTINSTALLID == option.valueDistrictId);
+      switch(option.valueState) {
+        case '1': state.listReportVpnCs = state.listReportVpnCs.filter(item => item.VBASISUNISTALL == null); break;
+        case '2': state.listReportVpnCs = state.listReportVpnCs.filter(item => item.VBASISUNISTALL != null); break;
+      }
+    },
   },
   actions: {
     SET_LIST_REPORT_DOCUMENT(state, option) {
