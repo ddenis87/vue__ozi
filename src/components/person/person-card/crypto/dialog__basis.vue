@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody class="basis-table__body">
-          <template v-for="(item, index) in listDocumentInput">
+          <template v-for="(item, index) in listUserDocumentInput">
             <tr class="basis-table__body_row" :key="index">
               <td class="basis-table__body_column">
                 <input class="basis-table__body_column-radio" 
@@ -25,7 +25,7 @@
                        v-model="basisSelected"/>
               </td>
               <td class="basis-table__body_column">{{ item.VNUMBERDOC }}</td>
-              <td class="basis-table__body_column">{{ modDate(item.VDATE) }}</td>
+              <td class="basis-table__body_column">{{ item.VDATE }}</td>
               <td class="basis-table__body_column">{{ item.VNAME }}</td>
               <td class="basis-table__body_column">{{ item.VNOTE }}</td>
             </tr>
@@ -34,9 +34,9 @@
       </table>
     </div>
     <div class="vpn-dialog-basis__control">
-      <c-button class="vpn-dialog-basis__control_item" @click="accept">Применить</c-button>
-      <c-button class="vpn-dialog-basis__control_item" @click="accept(1)">Очистить основание</c-button>
-      <c-button class="vpn-dialog-basis__control_item" @click="$emit('cancel-close')">Отменить</c-button>
+      <c-button class="vpn-dialog-basis__control_item" @click="basisUpdate">Применить</c-button>
+      <c-button class="vpn-dialog-basis__control_item" @click="basisUpdate(1)">Очистить основание</c-button>
+      <c-button class="vpn-dialog-basis__control_item" @click="$emit('basis-cancel')">Отменить</c-button>
     </div>
   </div>
 </template>
@@ -45,38 +45,29 @@
 import cButton from '@/components/elements/c-button';
 
 export default {
-  name: 'dialogBasis',
+  name: 'DialogBasis',
   components: {
     cButton
   },
   props: {
-    inDialogProps: Object,
+    dialogProps: Object,
   },
   computed: {
-    listDocumentInput() { return this.$store.getters.GET_USER_DOCUMENT_INPUT; },
+    listUserDocumentInput() { return this.$store.getters.GET_USER_DOCUMENT_INPUT; },
   },
   data() {
     return {
-      arrMonth: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
-      basisSelected: this.inDialogProps.documentBasisId,
+      basisSelected: this.dialogProps.documentBasisId,
     }
   },
   methods: {
-    accept(clear) {
+    basisUpdate(clear) {
       let option = {
-        listItemId: this.inDialogProps.listItemId,
-        typeBasis: this.inDialogProps.typeBasis,
+        listItemId: this.dialogProps.listItemId,
+        typeBasis: this.dialogProps.typeBasis,
         documentBasisId: (clear) ? null : this.basisSelected
       }
-      this.$emit('update-basis', option);
-    },
-    modDate: function(val) {
-      let nVal = String(val);
-      let nDay = nVal.slice(0,2);
-      let nMonth = ((this.arrMonth.indexOf(nVal.slice(3,6)) + 1) < 10) ? '0' + String(this.arrMonth.indexOf(nVal.slice(3,6)) + 1) : String(this.arrMonth.indexOf(nVal.slice(3,6)) + 1);
-      let nYear = '20' + String(nVal.slice(7,9));
-      nVal = nDay + '.' + nMonth + '.' + nYear;
-      return nVal;
+      this.$emit('basis-update', option);
     },
   }
 }
@@ -107,7 +98,7 @@ $minWidth: 700px;
   }
   &__list {
     margin-bottom: 20px;
-    max-height: 300px;
+    max-height: 200px;
     overflow-y: scroll;
     .basis-table {
       width: calc(100% - 5px);

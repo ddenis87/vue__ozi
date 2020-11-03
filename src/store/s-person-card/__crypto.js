@@ -37,8 +37,7 @@ export default {
             };
             state.dispatch('SET_USER_VPN', dispatchOption);
           }
-          // console.log(response.data);
         })
-    }
+    },
   },
 }
