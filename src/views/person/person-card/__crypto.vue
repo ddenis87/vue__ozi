@@ -1,11 +1,8 @@
 <template>
   <div>
-    <crypto-vpn-cl-list v-if="(listCryptoVpnCL.length != 0)" 
-                        :inListItem="listCryptoVpnCL"
-                        @update-task="getListCryptoVpnCL"
-                        @update-basis="getListCryptoVpnCL">ViPNet</crypto-vpn-cl-list>
-    <crypto-vpn-cs-list v-if="(listCryptoVpnCS.length != 0)"
-                        :inListItem="listCryptoVpnCS"></crypto-vpn-cs-list>
+    <crypto-vpn-cl-list :inListItem="listVpnCl">ViPNet Client</crypto-vpn-cl-list>
+    <hr>
+    <crypto-vpn-cs-list :listItem="listVpnCs">ViPNet Cryptoservice</crypto-vpn-cs-list>
   </div>
 </template>
 
@@ -21,41 +18,14 @@ export default {
     cryptoVpnClList,
     cryptoVpnCsList,
   },
-  data() {
-    return {
-      personId: this.$store.getters.GET_PROFILE_USER_ID,
-      listCryptoVpnCL: [],
-      listCryptoVpnCS: [],
-    }
+  computed: {
+    listVpnCs() { return this.$store.getters.GET_USER_VPN_CS; },
+    listVpnCl() { return this.$store.getters.GET_USER_VPN_CL; },
+    valueUserId() { return this.$store.getters.GET_PROFILE_USER_ID; },
   },
   created() {
-    this.getListCryptoVpnCL();
-    this.getListCryptoVpnCS()
+    this.$store.dispatch('SET_USER_VPN', { valueUserId: this.valueUserId, keyType: 'cs' });
+    this.$store.dispatch('SET_USER_VPN', { valueUserId: this.valueUserId, keyType: 'cl' });
   },
-  methods: {
-    getListCryptoVpnCL() {
-      let option = {
-        function: 'getCryptoVpnClList',
-        personId: this.personId
-      }
-      axios
-        .post(pathBackend + 'person-card__crypto.php', null, {params: option})
-        .then(response => {
-          this.listCryptoVpnCL = response.data;
-        })
-    },
-    getListCryptoVpnCS() {
-      let option = {
-        function: 'getCryptoVpnCsList',
-        personId: this.personId
-      }
-      axios
-        .post(pathBackend + 'person-card__crypto.php', null, {params: option})
-        .then(response => {
-          this.listCryptoVpnCS = response.data;
-        })
-    }
-  }
-
 }
 </script>
