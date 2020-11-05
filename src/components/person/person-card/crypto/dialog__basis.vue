@@ -34,9 +34,9 @@
       </table>
     </div>
     <div class="vpn-dialog-basis__control">
-      <c-button class="vpn-dialog-basis__control_item" @click="basisUpdate">Применить</c-button>
-      <c-button class="vpn-dialog-basis__control_item" @click="basisUpdate(1)">Очистить основание</c-button>
-      <c-button class="vpn-dialog-basis__control_item" @click="$emit('basis-cancel')">Отменить</c-button>
+      <c-button class="vpn-dialog-basis__control_item" @click="updateBasis">Применить</c-button>
+      <c-button class="vpn-dialog-basis__control_item" @click="updateBasis(1)">Очистить основание</c-button>
+      <c-button class="vpn-dialog-basis__control_item" @click="$emit('cancel-update')">Отменить</c-button>
     </div>
   </div>
 </template>
@@ -57,17 +57,17 @@ export default {
   },
   data() {
     return {
-      basisSelected: this.dialogProps.documentBasisId,
+      basisSelected: this.dialogProps.valueDocumentId,
     }
   },
   methods: {
-    basisUpdate(clear) {
+    updateBasis(clear) {
       let option = {
-        listItemId: this.dialogProps.listItemId,
-        typeBasis: this.dialogProps.typeBasis,
-        documentBasisId: (clear) ? null : this.basisSelected
+        valueId: this.dialogProps.valueId,
+        valueType: this.dialogProps.valueType,
+        valueDocumentId: (clear) ? null : this.basisSelected,
       }
-      this.$emit('basis-update', option);
+      this.$emit('update-basis', option);
     },
   }
 }

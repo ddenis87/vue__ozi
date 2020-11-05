@@ -1,43 +1,36 @@
 <template>
-  <div class="vpn-dialog" :class="{'vpn-dialog_show': cShowDialog}" >
+  <div class="vpn-dialog" >
     <h3 class="vpn-dialog__title">Прикладные задачи</h3>
     <div class="vpn-dialog__checkbox">
       <c-checkbox class="vpn-dialog__checkbox_item" 
-                  :inInputChecked="cItemProps.VTASKCLIENT" 
-                  v-model="taskValue.client">Защита трафика</c-checkbox>
+                  :inInputChecked="dialogProps.valueClient" 
+                  v-model="taskValue.valueClient">Защита трафика</c-checkbox>
       <c-checkbox class="vpn-dialog__checkbox_item" 
-                  :inInputChecked="cItemProps.VTASKMAIL"  
-                  v-model="taskValue.mail">Деловая почта</c-checkbox>
+                  :inInputChecked="dialogProps.valueMail"  
+                  v-model="taskValue.valueMail">Деловая почта</c-checkbox>
       <c-checkbox class="vpn-dialog__checkbox_item" 
-                  :inInputChecked="cItemProps.VTASKCS" 
-                  v-model="taskValue.cs">Криптосервис</c-checkbox>
+                  :inInputChecked="dialogProps.valueCs" 
+                  v-model="taskValue.valueCs">Криптосервис</c-checkbox>
     </div>
     <div class="vpn-dialog__control">
-      <c-button class="vpn-dialog__control_item" @click="accept">Применить</c-button>
-      <c-button class="vpn-dialog__control_item" @click="$emit('cancel-close')">Отменить</c-button>
+      <c-button class="vpn-dialog__control_item" @click="updateTask">Применить</c-button>
+      <c-button class="vpn-dialog__control_item" @click="$emit('cancel-update')">Отменить</c-button>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 import cCheckbox from '@/components/elements/c-checkbox';
 import cButton from '@/components/elements/c-button';
 
 export default {
-  name: 'dialogTask',
+  name: 'DialogTask',
   components: {
     cCheckbox,
     cButton,
   },
   props: {
-    inShowDialog: false,
-    inItemProps: {}
-  },
-  computed: {
-    cShowDialog() { return this.inShowDialog; },
-    cItemProps() { return this.inItemProps; }
+    dialogProps: Object
   },
   data() {
     return {
@@ -45,21 +38,15 @@ export default {
     }
   },
   methods: {
-    accept() {
-      if (Object.keys(this.taskValue).length == 0) return;
+    updateTask() {
       let option = {
-        function: 'setCryptoVpnClTask',
-        itemId: this.cItemProps.VID,
-        client: (this.taskValue.client == true) ? '1' : '0',
-        mail: (this.taskValue.mail == true) ? '1' : '0',
-        cs: (this.taskValue.cs == true) ? '1' : '0',
+        valueId: this.dialogProps.valueId,
+        valueClient: (this.taskValue.valueClient == true) ? '1' : '0',
+        valueMail: (this.taskValue.valueMail == true) ? '1' : '0',
+        valueCs: (this.taskValue.valueCs == true) ? '1' : '0',
       }
-      axios
-       .post(pathBackend + 'person-card__crypto.php', null, {params: option})
-       .then(response => {
-         this.$emit('update-task', response.data);
-       })
-      
+      this.$store.dispatch('SET_VPN_TASK', option);
+      this.$emit('update-task');
     }
   }
 }
@@ -79,14 +66,8 @@ export default {
   border-radius: 3px;
   box-shadow: 1px 1px 1px black;
   background-color: white;
-  visibility: hidden;
-
   font-size: 12px;
   font-family: 'Montserrat';
-
-  &_show {
-    visibility: visible;
-  }
   &__title {
     color: black;
     margin-bottom: 10px;
@@ -95,16 +76,12 @@ export default {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    &_item {
-      padding: 5px;
-    }
+    &_item { padding: 5px; }
   }
   &__control {
     display: flex;
     justify-content: space-between;
-    &_item {
-      min-width: 100px;
-    }
+    &_item { min-width: 100px; }
   }
 }
 </style>
