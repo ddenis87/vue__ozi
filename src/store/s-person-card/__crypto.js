@@ -24,16 +24,46 @@ export default {
         })
         .catch();
     },
+    SET_VPN_TASK(state, option) {
+      let sendOption = option;
+      sendOption.function = `setVpnTask`;
+      axios
+        .post(pathBackend + 'person-card__crypto.php', null, {params: sendOption})
+        .then(response => {
+          if (response.data == '1') {
+            let dispatchOption = {
+              keyType: 'CL',
+              valueUserId: state.getters.GET_PROFILE_USER_ID,
+            };
+            state.dispatch('SET_USER_VPN', dispatchOption);
+          }
+        })
+    },
+    SET_VPN_BASIS_CL(state, option) {
+      let sendOption = option;
+      sendOption.function = `setVpnBasisCl${option.valueType.toUpperCase()}`;
+      axios
+        .post(pathBackend + 'person-card__crypto.php', null, {params: sendOption})
+        .then(response => {
+          if (response.data == '1') {
+            let dispatchOption = {
+              keyType: 'CL',
+              valueUserId: state.getters.GET_PROFILE_USER_ID,
+            };
+            state.dispatch('SET_USER_VPN', dispatchOption);
+          }
+        })
+    },
     SET_VPN_BASIS_CS(state, option) {
       let sendOption = option;
-      sendOption.function = `setVpnBasisCs${option.typeBasis.toUpperCase()}`;
+      sendOption.function = `setVpnBasisCs${option.valueType.toUpperCase()}`;
       axios
         .post(pathBackend + 'person-card__crypto.php', null, {params: sendOption})
         .then(response => {
           if (response.data == '1') {
             let dispatchOption = {
               keyType: 'CS',
-              valueUserId: state.getters.GET_PROFILE_USER_ID
+              valueUserId: state.getters.GET_PROFILE_USER_ID,
             };
             state.dispatch('SET_USER_VPN', dispatchOption);
           }
