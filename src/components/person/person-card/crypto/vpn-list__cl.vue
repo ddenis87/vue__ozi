@@ -79,13 +79,13 @@
 </template>
 
 <script>
-import ListControlFile from './list-control_file';
-import ListControlBasis from './list-control_basis';
-import DialogTask from './dialog__task';
-import DialogBasis from './dialog__basis';
+import ListControlFile from './vpn-list-control__file';
+import ListControlBasis from './vpn-list-control__basis';
+import DialogTask from './vpn-list-dialog__task';
+import DialogBasis from './vpn-list-dialog__basis';
 
 export default {
-  name: 'vpnClList',
+  name: 'vpnListCl',
   components: {
     DialogTask,
     ListControlFile,

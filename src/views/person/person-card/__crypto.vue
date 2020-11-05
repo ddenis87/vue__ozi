@@ -1,21 +1,21 @@
 <template>
   <div>
-    <crypto-vpn-cl-list :listItem="listVpnCl">ViPNet Client</crypto-vpn-cl-list>
+    <vpn-list-cl :listItem="listVpnCl">ViPNet Client</vpn-list-cl>
     <hr>
-    <crypto-vpn-cs-list :listItem="listVpnCs">ViPNet Cryptoservice</crypto-vpn-cs-list>
+    <vpn-list-cs :listItem="listVpnCs">ViPNet Cryptoservice</vpn-list-cs>
   </div>
 </template>
 
 <script>
 
-import cryptoVpnClList from '@/components/person/person-card/crypto/crypto__vpn-cl-list';
-import cryptoVpnCsList from '@/components/person/person-card/crypto/crypto__vpn-cs-list';
+import VpnListCl from '@/components/person/person-card/crypto/vpn-list__cl';
+import VpnListCs from '@/components/person/person-card/crypto/vpn-list__cs';
 
 export default {
   name: 'personCardCrypto',
   components: {
-    cryptoVpnClList,
-    cryptoVpnCsList,
+    VpnListCl,
+    VpnListCs,
   },
   computed: {
     listVpnCs() { return this.$store.getters.GET_USER_VPN_CS; },

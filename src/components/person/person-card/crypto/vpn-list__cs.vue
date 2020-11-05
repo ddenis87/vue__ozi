@@ -55,12 +55,12 @@
 </template>
 
 <script>
-import ListControlFile from './list-control_file';
-import ListControlBasis from './list-control_basis';
-import DialogBasis from './dialog__basis';
+import ListControlFile from './vpn-list-control__file';
+import ListControlBasis from './vpn-list-control__basis';
+import DialogBasis from './vpn-list-dialog__basis';
 
 export default {
-  name: 'vpnCsList',
+  name: 'vpnListCs',
   components: {
     ListControlFile,
     ListControlBasis,
