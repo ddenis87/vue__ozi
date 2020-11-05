@@ -19,17 +19,18 @@
             <td class="vpn-table-cs__body_column">{{ index + 1 }}</td>
             <td class="vpn-table-cs__body_column">{{ item.VNAME }}</td>
             <td class="vpn-table-cs__body_column vpn-table-cs__body_column-basis install">
-              <list-control-basis :basisProp="{...item, basisType: 'install'}"
-                                  @basis-update="basisUpdate"></list-control-basis>
+              <list-control-basis :basisProps="{ basisText: item.VINSTALLDOCNUMBER, basisDate: item.VINSTALLDOCDATE }"
+                                  @open-dialog-basis="openDialogBasis(item.VID, item.VINSTALLDOCID, 'install')"></list-control-basis>
             </td>
             <td class="vpn-table-cs__body_column vpn-table-cs__body_column-document install">
-              <crypto-vpn-list-control :upload="false"></crypto-vpn-list-control>
+              <list-control-file :upload="false"></list-control-file>
             </td>
             <td class="vpn-table-cs__body_column vpn-table-cs__body_column-basis unistall">
-              <!-- <list-control-basis :basisText="item.VUNISTALLDOCNUMBER" :basisDate="item.VUNISTALLDOCDATE" ></list-control-basis> -->
+              <list-control-basis :basisProps="{ basisText: item.VUNISTALLDOCNUMBER, basisDate: item.VUNISTALLDOCDATE }"
+                                  @open-dialog-basis="openDialogBasis(item.VID, item.VUNISTALLDOCID, 'unistall')"></list-control-basis>
             </td>
             <td class="vpn-table-cs__body_column vpn-table-cs__body_column-document unistall">
-              <crypto-vpn-list-control :upload="true"></crypto-vpn-list-control>
+              <list-control-file :upload="true"></list-control-file>
             </td>
             <td class="vpn-table-cs__body_column">
               <div class="control">
@@ -48,25 +49,43 @@
         </template>
       </tbody>
     </table>
+    <dialog-basis v-if="dialogPropsBasis.valueVisibility"
+                  :dialogProps="dialogPropsBasis"
+                  @cancel-update="() => { dialogPropsBasis.valueVisibility = false }"
+                  @update-basis="updateBasis">Документ основание</dialog-basis>
   </div>
 </template>
 
 <script>
-import CryptoVpnListControl from './list-control';
+import ListControlFile from './list-control_file';
 import ListControlBasis from './list-control_basis';
+import DialogBasis from './dialog__basis';
 
 export default {
   name: 'vpnCsList',
   components: {
-    CryptoVpnListControl,
+    ListControlFile,
     ListControlBasis,
+    DialogBasis,
   },
   props: {
     listItem: Array,
   },
+  data() {
+    return {
+      dialogPropsBasis: {
+        valueVisibility: false,
+      },
+    }
+  },
   methods: {
-    basisUpdate(option) {
+    updateBasis(option) {
       this.$store.dispatch('SET_VPN_BASIS_CS', option);
+      this.dialogPropsBasis = { valueVisibility: false, };
+    },
+    openDialogBasis(valueId, valueDocumentId, valueType) {
+      let valueVisibility = true;
+      this.dialogPropsBasis = { valueVisibility, valueId, valueDocumentId, valueType };
     },
   }
 }
@@ -96,7 +115,7 @@ export default {
         padding: 3px;
         border-bottom: 2px solid grey;
         &:first-child { width: 42px; }
-        &-basis {  width: 250px; }
+        &-basis { width: 250px; }
         &-document { width: 70px; border-right: 2px solid darkgray; border-left: 1px solid darkgray; }
         &:last-child {
           width: 30px;

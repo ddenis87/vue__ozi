@@ -1,13 +1,12 @@
 <template>
   <div>
-    <crypto-vpn-cl-list :inListItem="listVpnCl">ViPNet Client</crypto-vpn-cl-list>
+    <crypto-vpn-cl-list :listItem="listVpnCl">ViPNet Client</crypto-vpn-cl-list>
     <hr>
     <crypto-vpn-cs-list :listItem="listVpnCs">ViPNet Cryptoservice</crypto-vpn-cs-list>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
 
 import cryptoVpnClList from '@/components/person/person-card/crypto/crypto__vpn-cl-list';
 import cryptoVpnCsList from '@/components/person/person-card/crypto/crypto__vpn-cs-list';

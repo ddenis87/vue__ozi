@@ -26,46 +26,26 @@
             <td class="crypto-table__body_column">{{ item.VNAME }}</td>
             <td class="crypto-table__body_column crypto-table__body_column-task" 
                 :class="{'crypto-table__body_column-task_yes': (item.VTASKCLIENT == 1) ? true : false }" 
-                @click="(event) => showDialogTask(event, item)"></td>
+                @click="(event) => openDialogTask(event, item.VID, item.VTASKCLIENT, item.VTASKMAIL, item.VTASKCS )"></td>
             <td class="crypto-table__body_column crypto-table__body_column-task" 
                 :class="{'crypto-table__body_column-task_yes': (item.VTASKMAIL == 1) ? true : false }" 
-                @click="(event) => showDialogTask(event, item)"></td>
+                @click="(event) => openDialogTask(event, item.VID, item.VTASKCLIENT, item.VTASKMAIL, item.VTASKCS)"></td>
             <td class="crypto-table__body_column crypto-table__body_column-task" 
                 :class="{'crypto-table__body_column-task_yes': (item.VTASKCS == 1) ? true : false }" 
-                @click="(event) => showDialogTask(event, item)"></td>
+                @click="(event) => openDialogTask(event, item.VID, item.VTASKCLIENT, item.VTASKMAIL, item.VTASKCS)"></td>
             <td class="crypto-table__body_column crypto-table__body_column-base">
-              <span>{{ getFormatedDocumentBase(item.VINSTALLDOCNUMBER, item.VINSTALLDOCDATE) }}</span>
-              <div class="control">
-                <button class="control__button base-button" title="Выбрать" @click="showDialogBasis(item.VID, item.VINSTALLDOCID, 'install')">...</button>
-              </div>
+              <list-control-basis :basisProps="{ basisText: item.VINSTALLDOCNUMBER, basisDate: item.VINSTALLDOCDATE }"
+                                  @open-dialog-basis="openDialogBasis(item.VID, item.VINSTALLDOCID, 'install')"></list-control-basis>
             </td>
             <td class="crypto-table__body_column">
-              <div class="control">
-                <button class="control__button control__button_document"
-                        title="Показать документ"
-                        v-if="(item.VINSTALLPATH)"
-                        @click="documentOpen(item.VINSTALLPATH)"></button>
-                <button class="control__button control__button_document-create" title="Сформировать документ" v-else></button>
-                <button class="control__button control__button_document-delete" title="Удалить документ" v-if="(item.VINSTALLPATH)"></button>
-                <button class="control__button control__button_document-upload" title="Загрузить документ" v-else></button>
-              </div>
+              <list-control-file :upload="false"></list-control-file>
             </td>
             <td class="crypto-table__body_column crypto-table__body_column-base">
-              <span>{{ getFormatedDocumentBase(item.VUNISTALLDOCNUMBER, item.VUNISTALLDOCDATE) }}</span>
-              <div class="control">
-                <button class="control__button base-button" title="Выбрать" @click="showDialogBasis(item.VID, item.VUNISTALLDOCID, 'unistall')">...</button>
-              </div>
+              <list-control-basis :basisProps="{ basisText: item.VUNISTALLDOCNUMBER, basisDate: item.VUNISTALLDOCDATE }"
+                                  @open-dialog-basis="openDialogBasis(item.VID, item.VUNISTALLDOCID, 'unistall')"></list-control-basis>
             </td>
             <td class="crypto-table__body_column">
-              <div class="control">
-                <button class="control__button control__button_document"
-                        title="Показать документ" 
-                        v-if="(item.VUNISTALLPATH)"
-                        @click="documentOpen(item.VUNISTALLPATH)"></button>
-                <button class="control__button control__button_document-create" title="Сформировать документ" v-else></button>
-                <button class="control__button control__button_document-delete" title="Удалить документ" v-if="(item.VUNISTALLPATH)"></button>
-                <button class="control__button control__button_document-upload" title="Загрузить документ" v-else></button>
-              </div>
+              <list-control-file :upload="false"></list-control-file>
             </td>
             <td rowspan="2" class="crypto-table__body_column">
               <div class="control">
@@ -85,93 +65,70 @@
       </tbody>
     </table>
     <div class="crypto-dialog">
-      <dialog-task v-if="dialogTaskVisibility" 
-                   :style="{left: dialogTaskPosition.left + 'px', top: dialogTaskPosition.top + 'px'}"
-                   :inShowDialog="dialogTaskVisibility"
-                   :inItemProps="dialogItemProps"
-                   @cancel-close="() => {dialogTaskVisibility = false}"
-                   @update-task="() => {$emit('update-task'); dialogTaskVisibility = false;}"
-                   tabindex='1'></dialog-task>
-      <dialog-basis v-if="dialogPropsBasis.visibility"
-                    :inDialogProps="dialogPropsBasis"
-                    @cancel-close="() => { dialogPropsBasis.visibility = false }"
-                    @update-basis="updateBasisDocument">Документ основание</dialog-basis>
+      <dialog-task v-if="dialogPropsTask.valueVisibility" 
+                   :style="{left: dialogPropsTask.posLeft + 'px', top: dialogPropsTask.posTop + 'px'}"
+                   :dialogProps="dialogPropsTask"
+                   @cancel-update="() => { dialogPropsTask.valueVisibility = false; }"
+                   @update-task="() => { dialogPropsTask.valueVisibility = false; }"></dialog-task>
+      <dialog-basis v-if="dialogPropsBasis.valueVisibility"
+                    :dialogProps="dialogPropsBasis"
+                    @cancel-update="() => { dialogPropsBasis.valueVisibility = false }"
+                    @update-basis="updateBasis">Документ основание</dialog-basis>
     </div>
     <div class="crypto__blocked-content"
-         v-if="(dialogTaskVisibility || dialogPropsBasis.visibility)"></div>
+         v-if="(dialogPropsTask.valueVisibility || dialogPropsBasis.valueVisibility)"></div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import dialogTask from '@/components/person/person-card/crypto/dialog__task';
-import dialogBasis from '@/components/person/person-card/crypto/dialog__basis';
+import ListControlFile from './list-control_file';
+import ListControlBasis from './list-control_basis';
+import DialogTask from './dialog__task';
+import DialogBasis from './dialog__basis';
 
 export default {
   name: 'vpnClList',
   components: {
-    dialogTask,
-    dialogBasis
+    DialogTask,
+    ListControlFile,
+    ListControlBasis,
+    DialogBasis,
   },
   props: {
-    inListItem: Array,
-  },
-  computed: {
-    listItem() { return this.inListItem; }
+    listItem: Array,
   },
   data() {
     return {
-      dialogTaskPosition: {left: 0, top: 0},
-      dialogTaskVisibility: false,
-      dialogPropsBasis: {
-        visibility: false,
-        listItemId: null,
-        documentBasisId: null,
-        typeBasis: null,
+      dialogPropsTask: {
+        posLeft: 0,
+        posTop: 0,
+        valueVisibility: false,
       },
-      dialogItemProps: {}
+      dialogPropsBasis: {
+        valueVisibility: false,
+      },
     }
   },
   methods: {
-    updateBasisDocument(inOption) {
-      let option = {
-        function: null,
-        listItemId: inOption.listItemId,
-        documentBasisId: inOption.documentBasisId
+    updateBasis(option) {
+      this.$store.dispatch('SET_VPN_BASIS_CL', option);
+      this.dialogPropsBasis = { valueVisibility: false, };
+    },
+    openDialogBasis(valueId, valueDocumentId, valueType) {
+      let valueVisibility = true;
+      this.dialogPropsBasis = { valueVisibility, valueId, valueDocumentId, valueType };
+    },
+    openDialogTask(event, valueId, valueClient, valueMail, valueCs ) {
+      this.dialogPropsTask = {
+        valueVisibility: true,
+        posLeft: event.x + 15,
+        posTop: event.y + 15,
+        valueId,
+        valueClient,
+        valueMail,
+        valueCs
       }
-      switch(inOption.typeBasis) {
-        case 'install': option.function = 'setCryptoVpnClBasisInstall'; break;
-        case 'unistall': option.function = 'setCryptoVpnClBasisUnistall'; break;
-      }
-      axios
-       .post(pathBackend + 'person-card__crypto.php', null, {params: option})
-       .then(response => {
-         if (response.data == '1') this.$emit('update-basis');
-         this.dialogPropsBasis.visibility = false;
-       })
-      // console.log(option);
     },
-    showDialogBasis(listItemId, documentBasisId, typeBasis) {
-      this.dialogPropsBasis.visibility = true;
-      this.dialogPropsBasis.documentBasisId = documentBasisId;
-      this.dialogPropsBasis.listItemId = listItemId;
-      this.dialogPropsBasis.typeBasis = typeBasis;
-    },
-    showDialogTask(event, item) {
-      console.log(item);
-      this.dialogItemProps = item;
-      this.dialogTaskPosition.left = event.x + 15;
-      this.dialogTaskPosition.top = event.y + 15;
-      this.dialogTaskVisibility = true;
-    },
-    documentOpen(documentPath) {
-      alert('Open ' + documentPath);
-      window.open(pathDocument + documentPath);
-    },
-    getFormatedDocumentBase(docNumber, docDate) {
-      if (docNumber == null) return '---';
-      return `Заявка № ${docNumber} от ${docDate}`;
-    }
   }
 }
 </script>
@@ -198,7 +155,7 @@ export default {
         border-bottom: 2px solid grey;
         &:nth-child(1) { width: 42px; }
         &:nth-child(3) { border-left: 2px solid grey; border-right: 2px solid grey; }
-        &:nth-child(5), &:nth-child(7) { width: 60px; border-left: 2px solid darkgray; }
+        &:nth-child(5), &:nth-child(7) { width: 70px; border-right: 2px solid darkgray; border-left: 1px solid darkgray; }
         &:nth-child(4), &:nth-child(6) { width: 230px; }
         &:nth-child(4), &:nth-child(5) { background-color: lightblue; }
         &:nth-child(6), &:nth-child(7) { background-color: lightgreen; }
@@ -232,40 +189,11 @@ export default {
             justify-content: space-between;
           }
         }
+        &:nth-child(7), &:nth-child(9) { border-right: 2px solid darkgray; border-left: 1px solid darkgray; }
         &:nth-child(6), &:nth-child(7) { background-color: rgba(173, 216, 230, .3); }
         &:nth-child(8), &:nth-child(9) { background-color: rgba(144, 238, 144, .3); }
         &:nth-child(10) { background-color: #FF9200; }
-        .control {
-          display: flex;
-          justify-content: space-around;
-          &__button {
-            width: 20px;
-            height: 20px;
-            border: 0px solid darkcyan;
-            background-color: transparent;
-            background-repeat: no-repeat;
-            outline: none;
-            cursor: pointer;
-            &_document { background-image: url('~@/assets/images/control/button_document.png'); background-size: contain; }
-            &_document-create { background-image: url('~@/assets/images/control/button_document-create.png'); background-size: contain; }
-            &_document-delete { background-image: url('~@/assets/images/control/button_delete_file.png'); background-size: contain; }
-            &_document-upload { background-image: url('~@/assets/images/control/button_upload_file.png'); background-size: contain; }
-            &_delete-row { background-image: url('~@/assets/images/control/button_delete.png'); background-size: contain; }
-          }
-        }
-        &-base {
-          display: flex;
-          justify-content: space-between;
-          .base-button {
-            width: 20px;
-            height: 20px;
-            padding: 0px;
-            font-weight: bold;
-            cursor: pointer;
-            border: 1px solid black;
-            background-color: transparent;
-          }
-        }
+        &-base { width: 250px; }
         &-task {
           text-align: center;
           background-image: url('~@/assets/images/view/no.png');
