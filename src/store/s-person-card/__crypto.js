@@ -20,6 +20,7 @@ export default {
       axios
         .get(pathBackend + 'person-card__crypto.php', {params: sendOption})
         .then(response => {
+          console.log(response.data);
           state.commit(`SET_USER_VPN_${option.keyType.toUpperCase()}`, response.data);
         })
         .catch();

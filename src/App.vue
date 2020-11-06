@@ -113,5 +113,18 @@ a {
     grid-area: footer;
   }
 }
-
+@media print {
+  .app {
+    grid-template-areas: "body";
+    grid-template-columns: 700px;
+    grid-template-rows: auto;
+    &__head { display: none; }
+    &__navigation { display: none; }
+    &__footer { display: none; }
+    &__body {
+      min-height: auto;
+      height: auto;
+    }
+  }
+}
 </style>

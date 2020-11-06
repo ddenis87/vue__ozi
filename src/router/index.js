@@ -62,6 +62,9 @@ Vue.use(VueRouter)
   { path: '/report/cryptovpn-cl', name: 'join-cryptovpn-cl', meta: {layout: 'full-page'}, component: () => import('../views/report/cryptovpn-cl.vue') },
   { path: '/report/cryptovpn-cs', name: 'join-cryptovpn-cs', meta: {layout: 'full-page'}, component: () => import('../views/report/cryptovpn-cs.vue') },
   { path: '/report-week', name: 'report-week', component: () => import('../views/report/report-week.vue') },
+
+  //--FILE
+  // { path: '/person-card/__crypto-file', name: '__crypto-file', component: () => import('../views/person/person-card/__crypto-file') },
 ]
 
 const router = new VueRouter({

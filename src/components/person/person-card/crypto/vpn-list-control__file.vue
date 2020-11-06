@@ -1,7 +1,7 @@
 <template>
   <div class="crypto-vpn-list-control">
     <button class="crypto-vpn-list-control__button crypto-vpn-list-control__button_view" title="Показать документ" v-if="upload"></button>
-    <button class="crypto-vpn-list-control__button crypto-vpn-list-control__button_create" title="Сформировать документ" v-else></button>
+    <button class="crypto-vpn-list-control__button crypto-vpn-list-control__button_create" title="Сформировать документ" v-else @click="createDocument"></button>
     <button class="crypto-vpn-list-control__button crypto-vpn-list-control__button_delete" title="Удалить документ" v-if="upload"></button>
     <button class="crypto-vpn-list-control__button crypto-vpn-list-control__button_upload" title="Загрузить документ" v-else></button>
   </div>  
@@ -15,6 +15,9 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  methods: {
+
   }
 }
 </script>

@@ -23,14 +23,14 @@
                                   @open-dialog-basis="openDialogBasis(item.VID, item.VINSTALLDOCID, 'install')"></list-control-basis>
             </td>
             <td class="vpn-table__body-column vpn-table__body-column_document install">
-              <list-control-file :upload="false"></list-control-file>
+              <list-control-file :upload="(item.VINSTALLPATH) ? true : false"></list-control-file>
             </td>
             <td class="vpn-table__body-column vpn-table__body-column_basis unistall">
               <list-control-basis :basisProps="{ basisText: item.VUNISTALLDOCNUMBER, basisDate: item.VUNISTALLDOCDATE }"
                                   @open-dialog-basis="openDialogBasis(item.VID, item.VUNISTALLDOCID, 'unistall')"></list-control-basis>
             </td>
             <td class="vpn-table__body-column vpn-table__body-column_document unistall">
-              <list-control-file :upload="true"></list-control-file>
+              <list-control-file :upload="(item.VINSTALLPATH) ? true : false"></list-control-file>
             </td>
             <td rowspan="2" class="vpn-table__body-column">
                 <button class="button_delete" title="Удалить запись"></button>
